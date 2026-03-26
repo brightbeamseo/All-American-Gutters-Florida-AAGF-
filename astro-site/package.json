@@ -12,7 +12,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "gen:index": "python3 ../scripts/gen-astro-index.py",
-    "sync:media": "rm -rf public/'Media (SGT)' && cp -R ../'Media (SGT)' public/"
+    "sync:media": "rm -rf public/'Media (SLG)' && cp -R ../'Media (SLG)' public/"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
