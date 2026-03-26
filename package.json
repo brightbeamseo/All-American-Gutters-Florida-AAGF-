@@ -1,0 +1,8 @@
+{
+  "name": "sunlife-gutters-tampa",
+  "private": true,
+  "workspaces": ["astro-site"],
+  "scripts": {
+    "build": "npm run build -w astro-site"
+  }
+}

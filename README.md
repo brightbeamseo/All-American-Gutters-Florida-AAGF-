@@ -1,4 +1,4 @@
-# SunLife Gutters Tampa (SLG)
+# SunLife Gutters Tampa (SGT)
 
 This is a standalone clone of the Mile High Gutter website stack, prepared for a separate brand/site launch.
 
@@ -8,7 +8,22 @@ This is a standalone clone of the Mile High Gutter website stack, prepared for a
 - `sanity-studio/` - content studio (Sanity)
 - `styles.css` - site styling used by Astro layout import
 - `api/lead.js` - serverless lead endpoint
-- `Media (SLG)/` - copied media assets
+- `Media (SGT)/` - copied media assets
+
+## Vercel (Git repo root = this folder)
+
+If the GitHub repo contains **both** `astro-site/` and `sanity-studio/` (no app at the repository root), Vercel must know where the website lives.
+
+**Option A (recommended):** In the Vercel project: **Settings → General → Root Directory** = `astro-site`. Then leave **Output Directory** empty (Astro preset uses `dist`) or set **`dist`**. **Framework Preset:** Astro.
+
+**Option B:** Leave **Root Directory** empty (repo root). This repo now has a root `package.json` with an npm workspace so `npm install` / `npm run build` at the root install and build the Astro app. Set:
+
+- **Framework Preset:** Astro (or Other)
+- **Build Command:** `npm run build` (default)
+- **Output Directory:** `astro-site/dist`
+- **Install Command:** `npm install` (default)
+
+Redeploy after changing these. If the root URL still shows Vercel’s plain `404 NOT_FOUND`, the deployment output is still not pointing at `astro-site/dist`.
 
 ## Required setup before first run
 
