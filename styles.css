@@ -521,8 +521,8 @@ a.btn-primary[href^="tel:"] {
 }
 
 a.btn-primary[href^="tel:"]:hover {
-  background: #35a77c;
-  border-color: #35a77c;
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
 }
 
 .btn-dark {
@@ -752,8 +752,8 @@ a.btn-primary[href^="tel:"]:hover {
 }
 
 .hero-actions .cta1-primary-call:hover {
-  background: #35a77c;
-  border-color: #35a77c;
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
 }
 
 .hero-actions .btn-dark,
@@ -1321,7 +1321,8 @@ a.btn-primary[href^="tel:"]:hover {
 }
 
 .about-list li::before {
-  content: "â";
+  /* U+2713 CHECK MARK — use escape so encoding can’t corrupt the glyph */
+  content: "\2713";
   position: absolute;
   left: 0;
   color: var(--color-accent);
