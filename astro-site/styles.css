@@ -1,4 +1,4 @@
-/* SunLife Gutters Tampa â Branding Board (Dark Blue #143980, Light Blue #527BBD, Dark Grey Azure #384555) + Kitchor-inspired */
+/* SunLife Gutters Tampa Ã¢ÂÂ Branding Board (Dark Blue #143980, Light Blue #527BBD, Dark Grey Azure #384555) + Kitchor-inspired */
 :root {
   --color-bg: #fafbfc;
   --color-bg-alt: #f2f4f8;
@@ -66,7 +66,7 @@ img {
   will-change: opacity, transform;
 }
 
-/* Use transform: none (not translateY(0)) so ancestors donât establish a containing block for position:fixed modals */
+/* Use transform: none (not translateY(0)) so ancestors donÃ¢ÂÂt establish a containing block for position:fixed modals */
 .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: none;
@@ -240,7 +240,7 @@ a:hover {
   min-width: auto;
 }
 
-/* Nav dropdowns (Services, About Us â parent is a button, not a page link) */
+/* Nav dropdowns (Services, About Us Ã¢ÂÂ parent is a button, not a page link) */
 .nav-dropdown {
   position: relative;
 }
@@ -286,7 +286,7 @@ a:hover {
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
   position: absolute;
-  /* Flush under the toggle â any gap breaks :hover before you reach the menu */
+  /* Flush under the toggle Ã¢ÂÂ any gap breaks :hover before you reach the menu */
   top: 100%;
   left: 0;
   z-index: 200;
@@ -307,7 +307,7 @@ a:hover {
 }
 
 @media (min-width: 1121px) {
-  /* Invisible âbridgeâ so moving from the button to the menu doesnât leave :hover */
+  /* Invisible Ã¢ÂÂbridgeÃ¢ÂÂ so moving from the button to the menu doesnÃ¢ÂÂt leave :hover */
   .nav-dropdown::before {
     content: "";
     position: absolute;
@@ -402,7 +402,7 @@ a:hover {
     font-size: 1rem;
   }
 
-  /* Compact pill â full-width bar felt awkward on tablet / wide phones */
+  /* Compact pill Ã¢ÂÂ full-width bar felt awkward on tablet / wide phones */
   .nav.is-open a.btn {
     width: auto;
     max-width: 100%;
@@ -633,7 +633,7 @@ a.btn-primary[href^="tel:"]:hover {
   color: var(--color-accent);
 }
 
-/* Drone CTA â right after hero (adapted from previous site layout) */
+/* Drone CTA Ã¢ÂÂ right after hero (adapted from previous site layout) */
 .drone-cta {
   padding: var(--space-4xl) var(--space-xl);
   background: var(--color-surface);
@@ -1120,7 +1120,7 @@ a.btn-primary[href^="tel:"]:hover {
   line-height: 1.6;
 }
 
-/* Sections â Kitchor-inspired generous spacing */
+/* Sections Ã¢ÂÂ Kitchor-inspired generous spacing */
 .section {
   padding: var(--space-5xl) var(--space-xl);
 }
@@ -1321,7 +1321,7 @@ a.btn-primary[href^="tel:"]:hover {
 }
 
 .about-list li::before {
-  content: "â";
+  content: "Ã¢ÂÂ";
   position: absolute;
   left: 0;
   color: var(--color-accent);
@@ -1645,7 +1645,7 @@ a.btn-primary[href^="tel:"]:hover {
   color: #fff;
 }
 
-/* Lead forms (hero + footer) â Zapier via /api/lead */
+/* Lead forms (hero + footer) Ã¢ÂÂ Zapier via /api/lead */
 .lead-form-honeypot-wrap {
   position: absolute;
   width: 1px;
@@ -2245,7 +2245,7 @@ form[data-lead-form] button[type="submit"].is-busy {
   white-space: nowrap;
 }
 
-/* Projects page â gallery grid + lightbox */
+/* Projects page Ã¢ÂÂ gallery grid + lightbox */
 .projects-gallery-hint {
   margin: 0 0 var(--space-lg);
   font-size: 0.95rem;
@@ -2675,7 +2675,7 @@ form[data-lead-form] button[type="submit"].is-busy {
   position: absolute;
   left: 0;
   bottom: 0;
-  background: rgba(68, 189, 237, 0.94);
+  background: var(--color-accent);
   color: #fff;
   padding: 0.85rem 1rem;
   border-top-right-radius: 10px;
@@ -2834,7 +2834,7 @@ form[data-lead-form] button[type="submit"].is-busy {
   align-items: center;
   justify-content: center;
   padding: var(--space-lg) var(--space-xl);
-  /* Cover 1px hairline vs section above (subpixel seams) â margin shifts strip, not padding */
+  /* Cover 1px hairline vs section above (subpixel seams) Ã¢ÂÂ margin shifts strip, not padding */
   margin-top: -1px;
   box-shadow: 0 -1px 0 0 var(--color-dark);
 }
@@ -3260,7 +3260,7 @@ form[data-lead-form] button[type="submit"].is-busy {
   color: var(--color-text-muted);
 }
 
-/* FAQ â one panel box + accordion rows (site typography & colors) */
+/* FAQ Ã¢ÂÂ one panel box + accordion rows (site typography & colors) */
 .faq-section {
   background: var(--color-bg-alt);
 }
@@ -3657,7 +3657,7 @@ form[data-lead-form] button[type="submit"].is-busy {
 }
 
 /* --------------------------------------------------------------------------
-   Blog posts (root /slug/ â content + author card + global footer)
+   Blog posts (root /slug/ Ã¢ÂÂ content + author card + global footer)
    -------------------------------------------------------------------------- */
 .blog-post-updated {
   font-family: var(--font-body);
@@ -3770,7 +3770,7 @@ form[data-lead-form] button[type="submit"].is-busy {
 }
 
 /* --------------------------------------------------------------------------
-   Blog index (/blog/) â card grid, scrollable list region, pagination
+   Blog index (/blog/) Ã¢ÂÂ card grid, scrollable list region, pagination
    -------------------------------------------------------------------------- */
 .blog-index-section {
   padding-top: var(--space-3xl);
