@@ -177,28 +177,63 @@ export async function getSiteSettings() {
 }
 
 /**
- * Canonical Home page document — same `_id` as Studio (`sanity.config.ts` → `homePageSingleton`).
- * Prefer that doc; if it is missing or not yet published / incomplete, fall back to any other
- * `homePage` (legacy import) so builds do not fail. Publish `homePageSingleton` so the site matches Studio.
+ * Home page: Studio edits `homePageSingleton`. Older imports may have a second `homePage` doc.
+ * Merge **legacy ∪ singleton** so non-empty fields on the singleton win; legacy fills gaps
+ * (e.g. empty hero image in Studio still shows legacy background until you set it).
+ * Without merge, an incomplete singleton caused the site to use *only* legacy — Studio looked wrong vs live.
  */
 let homePageCache = null
 
-function homePageHasLayoutHero(hp) {
-  return Boolean(hp?.layoutBackgrounds?.hero?.imageSrc)
+/**
+ * Deep merge: `incoming` overwrites `base` only for non-empty strings / non-empty arrays / objects.
+ * Empty strings on the singleton do not wipe legacy values.
+ * @param {Record<string, unknown> | null | undefined} base
+ * @param {Record<string, unknown> | null | undefined} incoming
+ */
+function mergeObjectsPreferNonEmpty(base, incoming) {
+  if (!incoming || typeof incoming !== 'object' || Array.isArray(incoming)) {
+    return base ?? incoming
+  }
+  if (!base || typeof base !== 'object' || Array.isArray(base)) {
+    return incoming
+  }
+  const out = { ...base }
+  for (const [k, v] of Object.entries(incoming)) {
+    if (v == null) continue
+    if (Array.isArray(v)) {
+      if (v.length > 0) out[k] = v
+      continue
+    }
+    if (typeof v === 'object') {
+      if (Object.keys(v).length === 0) continue
+      out[k] = mergeObjectsPreferNonEmpty(
+        /** @type {Record<string, unknown>} */ (base[k]),
+        /** @type {Record<string, unknown>} */ (v),
+      )
+      continue
+    }
+    if (typeof v === 'string' && v.trim() === '') continue
+    out[k] = v
+  }
+  return out
 }
 
 export async function getHomePage() {
   if (homePageCache) {
     return homePageCache
   }
-  const singleton = await sanity.fetch(`*[_id == "homePageSingleton"][0]`)
-  if (singleton && homePageHasLayoutHero(singleton)) {
+  const [singleton, legacy] = await Promise.all([
+    sanity.fetch(`*[_id == "homePageSingleton"][0]`),
+    sanity.fetch(`*[_type == "homePage" && _id != "homePageSingleton"] | order(_updatedAt desc)[0]`),
+  ])
+  if (!singleton) {
+    homePageCache = legacy ?? null
+    return homePageCache
+  }
+  if (!legacy) {
     homePageCache = singleton
     return homePageCache
   }
-  const legacy = await sanity.fetch(
-    `*[_type == "homePage" && _id != "homePageSingleton"] | order(_updatedAt desc)[0]`,
-  )
-  homePageCache = legacy ?? singleton ?? null
+  homePageCache = mergeObjectsPreferNonEmpty(legacy, singleton)
   return homePageCache
 }
