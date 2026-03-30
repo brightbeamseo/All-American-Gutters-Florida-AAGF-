@@ -136,9 +136,18 @@ export function assertSanityHomepage(settings, homePage) {
   }
 
   const layoutBg = reqObj('homePage.layoutBackgrounds', homePage.layoutBackgrounds)
-  reqStr('homePage.layoutBackgrounds.hero.imageSrc', layoutBg.hero?.imageSrc)
-  reqStr('homePage.layoutBackgrounds.services.imageSrc', layoutBg.services?.imageSrc)
-  reqStr('homePage.layoutBackgrounds.uniquePoints.imageSrc', layoutBg.uniquePoints?.imageSrc)
+  reqStr(
+    'homePage.layoutBackgrounds.hero.imageSrc (Studio: Home page → Layout backgrounds → Hero → Image path; document homePageSingleton)',
+    layoutBg.hero?.imageSrc,
+  )
+  reqStr(
+    'homePage.layoutBackgrounds.services.imageSrc (Studio: … → Services → Image path)',
+    layoutBg.services?.imageSrc,
+  )
+  reqStr(
+    'homePage.layoutBackgrounds.uniquePoints.imageSrc (Studio: … → Unique points → Image path)',
+    layoutBg.uniquePoints?.imageSrc,
+  )
 
   const headerSource = homePage.header ?? settings.header
   const headerSourcePath = homePage.header ? 'homePage.header' : 'siteSettings.header'
