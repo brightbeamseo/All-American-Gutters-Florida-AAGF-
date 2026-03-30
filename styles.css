@@ -1424,7 +1424,7 @@ a.btn-primary[href^="tel:"]:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0.75rem;
+  padding: 0.65rem 1rem;
   border-radius: var(--radius-md);
   max-width: 100%;
 }
@@ -1436,9 +1436,9 @@ a.btn-primary[href^="tel:"]:hover {
 
 .about-badge-img {
   display: block;
-  max-height: 52px;
+  max-height: 84px;
   width: auto;
-  max-width: min(200px, 100%);
+  max-width: min(300px, 100%);
   height: auto;
   object-fit: contain;
 }
