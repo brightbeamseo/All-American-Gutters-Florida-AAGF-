@@ -58,228 +58,8 @@
       "permanent": true
     },
     {
-      "source": "/seamless-gutters/",
-      "destination": "/services/seamless-gutters-tampa-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/soffit-and-fascias/",
-      "destination": "/services/soffit-fascia-repair-tampa-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/super-gutters/",
-      "destination": "/services/super-gutters-tampa-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/screen-rooms-and-lanais/",
-      "destination": "/services/screen-rooms-lanais-tampa-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/underground-drainage/",
-      "destination": "/services/underground-drainage-tampa-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/siding/",
-      "destination": "/services/siding-tampa-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/siding-services-in-central-florida/",
-      "destination": "/services/siding-tampa-fl/",
-      "permanent": true
-    },
-    {
       "source": "/products-services/:slug/",
       "destination": "/services/:slug/",
-      "permanent": true
-    },
-    {
-      "source": "/anna-maria-island-florida/",
-      "destination": "/locations/anna-maria-island-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/apollo-beach-fl/",
-      "destination": "/locations/apollo-beach-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/bradenton-florida/",
-      "destination": "/locations/bradenton-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/brandon-florida/",
-      "destination": "/locations/brandon-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/clearwater-florida/",
-      "destination": "/locations/gutters-clearwater-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-clearwater-fl/",
-      "destination": "/locations/gutters-clearwater-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/locations/clearwater-florida/",
-      "destination": "/locations/gutters-clearwater-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/cortez-florida/",
-      "destination": "/locations/cortez-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/dade-city-florida/",
-      "destination": "/locations/dade-city-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/dover-florida/",
-      "destination": "/locations/dover-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/ellenton-florida/",
-      "destination": "/locations/ellenton-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/gibsonton-florida/",
-      "destination": "/locations/gibsonton-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/lakewood-ranch-florida/",
-      "destination": "/locations/lakewood-ranch-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/land-o-lakes-florida/",
-      "destination": "/locations/land-o-lakes-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/largo-florida/",
-      "destination": "/locations/gutters-largo-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-largo-fl/",
-      "destination": "/locations/gutters-largo-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/locations/largo-florida/",
-      "destination": "/locations/gutters-largo-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/lithia-florida/",
-      "destination": "/locations/lithia-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/longboat-key-florida/",
-      "destination": "/locations/longboat-key-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/lutz-florida/",
-      "destination": "/locations/lutz-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-mulberry-florida/",
-      "destination": "/locations/gutters-mulberry-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-odessa-fl/",
-      "destination": "/locations/gutters-odessa-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/parrish-florida/",
-      "destination": "/locations/parrish-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-plant-city-fl/",
-      "destination": "/locations/gutters-plant-city-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-riverview-florida/",
-      "destination": "/locations/gutters-riverview-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-ruskin-fl/",
-      "destination": "/locations/gutters-ruskin-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-saint-petersburg-fl/",
-      "destination": "/locations/gutters-saint-petersburg-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-san-antonio-fl/",
-      "destination": "/locations/gutters-san-antonio-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/sarasota-fl/",
-      "destination": "/locations/sarasota-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-seffner-fl/",
-      "destination": "/locations/gutters-seffner-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-sun-city-center-fl/",
-      "destination": "/locations/gutters-sun-city-center-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/tampa-florida/",
-      "destination": "/locations/tampa-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-thonotosassa-fl/",
-      "destination": "/locations/gutters-thonotosassa-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-valrico-fl/",
-      "destination": "/locations/gutters-valrico-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/wesley-chapel-florida/",
-      "destination": "/locations/wesley-chapel-florida/",
-      "permanent": true
-    },
-    {
-      "source": "/gutters-wimauma-fl/",
-      "destination": "/locations/gutters-wimauma-fl/",
-      "permanent": true
-    },
-    {
-      "source": "/zephyrhills-florida/",
-      "destination": "/locations/zephyrhills-florida/",
       "permanent": true
     },
     {
@@ -287,6 +67,52 @@
       "destination": "/:path/",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    { "source": "/seamless-gutters/", "destination": "/services/seamless-gutters-tampa-fl/" },
+    { "source": "/soffit-and-fascias/", "destination": "/services/soffit-fascia-repair-tampa-fl/" },
+    { "source": "/super-gutters/", "destination": "/services/super-gutters-tampa-fl/" },
+    { "source": "/screen-rooms-and-lanais/", "destination": "/services/screen-rooms-lanais-tampa-fl/" },
+    { "source": "/underground-drainage/", "destination": "/services/underground-drainage-tampa-fl/" },
+    { "source": "/siding/", "destination": "/services/siding-tampa-fl/" },
+    { "source": "/siding-services-in-central-florida/", "destination": "/services/siding-tampa-fl/" },
+    { "source": "/anna-maria-island-florida/", "destination": "/locations/anna-maria-island-florida/" },
+    { "source": "/apollo-beach-fl/", "destination": "/locations/apollo-beach-fl/" },
+    { "source": "/bradenton-florida/", "destination": "/locations/bradenton-florida/" },
+    { "source": "/brandon-florida/", "destination": "/locations/brandon-florida/" },
+    { "source": "/clearwater-florida/", "destination": "/locations/gutters-clearwater-fl/" },
+    { "source": "/gutters-clearwater-fl/", "destination": "/locations/gutters-clearwater-fl/" },
+    { "source": "/locations/clearwater-florida/", "destination": "/locations/gutters-clearwater-fl/" },
+    { "source": "/cortez-florida/", "destination": "/locations/cortez-florida/" },
+    { "source": "/dade-city-florida/", "destination": "/locations/dade-city-florida/" },
+    { "source": "/dover-florida/", "destination": "/locations/dover-florida/" },
+    { "source": "/ellenton-florida/", "destination": "/locations/ellenton-florida/" },
+    { "source": "/gibsonton-florida/", "destination": "/locations/gibsonton-florida/" },
+    { "source": "/lakewood-ranch-florida/", "destination": "/locations/lakewood-ranch-florida/" },
+    { "source": "/land-o-lakes-florida/", "destination": "/locations/land-o-lakes-florida/" },
+    { "source": "/largo-florida/", "destination": "/locations/gutters-largo-fl/" },
+    { "source": "/gutters-largo-fl/", "destination": "/locations/gutters-largo-fl/" },
+    { "source": "/locations/largo-florida/", "destination": "/locations/gutters-largo-fl/" },
+    { "source": "/lithia-florida/", "destination": "/locations/lithia-florida/" },
+    { "source": "/longboat-key-florida/", "destination": "/locations/longboat-key-florida/" },
+    { "source": "/lutz-florida/", "destination": "/locations/lutz-florida/" },
+    { "source": "/gutters-mulberry-florida/", "destination": "/locations/gutters-mulberry-florida/" },
+    { "source": "/gutters-odessa-fl/", "destination": "/locations/gutters-odessa-fl/" },
+    { "source": "/parrish-florida/", "destination": "/locations/parrish-florida/" },
+    { "source": "/gutters-plant-city-fl/", "destination": "/locations/gutters-plant-city-fl/" },
+    { "source": "/gutters-riverview-florida/", "destination": "/locations/gutters-riverview-florida/" },
+    { "source": "/gutters-ruskin-fl/", "destination": "/locations/gutters-ruskin-fl/" },
+    { "source": "/gutters-saint-petersburg-fl/", "destination": "/locations/gutters-saint-petersburg-fl/" },
+    { "source": "/gutters-san-antonio-fl/", "destination": "/locations/gutters-san-antonio-fl/" },
+    { "source": "/sarasota-fl/", "destination": "/locations/sarasota-fl/" },
+    { "source": "/gutters-seffner-fl/", "destination": "/locations/gutters-seffner-fl/" },
+    { "source": "/gutters-sun-city-center-fl/", "destination": "/locations/gutters-sun-city-center-fl/" },
+    { "source": "/tampa-florida/", "destination": "/locations/tampa-florida/" },
+    { "source": "/gutters-thonotosassa-fl/", "destination": "/locations/gutters-thonotosassa-fl/" },
+    { "source": "/gutters-valrico-fl/", "destination": "/locations/gutters-valrico-fl/" },
+    { "source": "/wesley-chapel-florida/", "destination": "/locations/wesley-chapel-florida/" },
+    { "source": "/gutters-wimauma-fl/", "destination": "/locations/gutters-wimauma-fl/" },
+    { "source": "/zephyrhills-florida/", "destination": "/locations/zephyrhills-florida/" }
   ],
   "functions": {
     "api/lead.js": {
