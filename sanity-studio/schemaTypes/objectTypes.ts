@@ -89,12 +89,14 @@ export const themeColors = defineType({
       name: 'formButtonBg',
       type: 'string',
       title: 'Form submit background → --color-form-button-bg',
-      description: 'Hero + footer lead form submit buttons.',
+      description: 'Hero + footer lead form submit buttons. Often matches Theme → primary.',
     }),
     defineField({
       name: 'formButtonHover',
       type: 'string',
       title: 'Form submit hover → --color-form-button-hover',
+      description:
+        'Hover background for hero/footer submit buttons. Use a gray slightly lighter than the button color (e.g. #404040 on #2D2D2D)—not the accent/blue.',
     }),
     defineField({
       name: 'formButtonText',

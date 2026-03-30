@@ -15,7 +15,8 @@
   --color-secondary-cta-hover-bg: var(--color-dark);
   --color-secondary-cta-hover-text: #fff;
   --color-form-button-bg: var(--color-dark);
-  --color-form-button-hover: #102f6d;
+  /* Default hover: slightly lighter charcoal (Sanity theme.formButtonHover overrides) */
+  --color-form-button-hover: #404040;
   --color-form-button-text: #fff;
   --color-border: #e2e6ee;
   --font-heading: "Poppins", system-ui, sans-serif;
