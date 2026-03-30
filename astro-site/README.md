@@ -1,6 +1,6 @@
 # SunLife Gutters Tampa — Astro site
 
-- **`src/pages/index.astro`** — homepage content comes from Sanity via **`getSiteSettings()`** (prefers **`siteSettingsSingleton`**) and **`getHomePage()`**. **`getHomePage()`** loads **`homePageSingleton`** and merges it with any legacy **`homePage`** doc: **non-empty fields on the singleton win**; legacy only fills gaps (so an empty hero image in Studio does not throw away the rest of your singleton edits). **`assertSanityHomepage()`** validates the merged result. **`siteSettings.forms.submitPath`** is required for the lead form.
+- **`src/pages/index.astro`** — homepage content comes from Sanity via **`getSiteSettings()`** (prefers **`siteSettingsSingleton`**) and **`getHomePage()`** (**only** `homePageSingleton`; no fallback/merge). If required fields are missing on the singleton, **`assertSanityHomepage()`** fails the build. **`siteSettings.forms.submitPath`** is required for the lead form.
 - **Regenerate markup from static HTML (optional):** from repo root, `python3 scripts/gen-astro-index.py` (or `npm run gen:index` from `astro-site/`).
 - **Styles:** `BaseLayout.astro` imports the repo-root `styles.css`. Theme overrides use **`siteSettings.theme`** only (no default palette merge). **Scripts:** `public/script.js`.
 - **Images:** run `npm run sync:media` so `Media (SLG)/` exists under `public/` (matches `/Media%20(SLG)/…` URLs).
