@@ -58,6 +58,36 @@
       "permanent": true
     },
     {
+      "source": "/seamless-gutters/",
+      "destination": "/services/seamless-gutters-tampa-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/soffit-and-fascias/",
+      "destination": "/services/soffit-fascia-repair-tampa-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/super-gutters/",
+      "destination": "/services/super-gutters-tampa-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/screen-rooms-and-lanais/",
+      "destination": "/services/screen-rooms-lanais-tampa-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/underground-drainage/",
+      "destination": "/services/underground-drainage-tampa-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/products-services/:slug/",
+      "destination": "/services/:slug/",
+      "permanent": true
+    },
+    {
       "source": "/:path((?!api/)(?!.*\\.).*[^/])",
       "destination": "/:path/",
       "permanent": true
