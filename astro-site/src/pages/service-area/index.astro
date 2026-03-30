@@ -8,6 +8,9 @@ import { googleBusinessProfileUrl, isContactFooterColumnHeading } from '../../li
 import { getSiteSettings, getHomePage, mergeHeaderFromSettings } from '../../lib/site-settings.js'
 import { asStr, applyTemplate, mediaUrl } from '../../lib/sanity-strings.js'
 
+const serviceAreaFigureSrc =
+  'Media (SGT)/Images (SGT)/sunlife-gutters-valrico-fl-two-story-gutter-installation.webp'
+
 let settings = {}
 let homePage = {}
 try {
@@ -141,6 +144,26 @@ const serviceCities = Array.isArray(serviceArea?.cities) ? serviceArea.cities : 
         <p class="section-lead service-area-intro">
           {asStr(serviceArea?.intro) || 'We serve homeowners and businesses throughout the Tampa metro area.'}
         </p>
+        <div class="page-split page-split--media-end" style="margin-top: var(--space-xl);">
+          <div class="secondary-prose">
+            <p>
+              Our crews travel from Seffner daily to Tampa, Brandon, Riverview, Clearwater, St. Petersburg, and the surrounding communities listed below. If you are just outside the usual radius—Pasco, southern Polk, or a Gulf beach community—call us anyway; we often extend routes when scheduling allows.
+            </p>
+            <p>
+              Each city page on this site describes local weather patterns, common roof types, and services we recommend for that area. Use them for ideas, then call for a site-specific walkthrough and estimate.
+            </p>
+          </div>
+          <figure class="page-split__media">
+            <img
+              src={mediaUrl(serviceAreaFigureSrc)}
+              alt="Two-story home with new gutters installed in Valrico, Florida"
+              width="640"
+              height="480"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
         <div class="cities-list">
           <p class="cities-label">{asStr(serviceArea?.citiesLabel) || 'Service areas'}</p>
           <nav class="cities-nav" aria-label={asStr(serviceArea?.citiesNavAriaLabel) || 'Cities we serve'}>
@@ -157,7 +180,7 @@ const serviceCities = Array.isArray(serviceArea?.cities) ? serviceArea.cities : 
             ) : null}
           </nav>
         </div>
-        <div class="map-wrap" style="margin-top:1.5rem;">
+        <div class="map-wrap">
           <iframe
             src={mapEmbedUrl}
             width="600"

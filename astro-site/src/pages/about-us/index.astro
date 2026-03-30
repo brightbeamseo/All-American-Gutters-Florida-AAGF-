@@ -153,12 +153,34 @@ const universalRequiredIndicator = asStr(formsCfg?.requiredIndicator) || '*'
           <div class="about-eyebrow">{asStr(about?.eyebrow)}</div>
           <h2 class="section-title">{asStr(about?.headline)}</h2>
           <p class="about-lead">{asStr(about?.lead)}</p>
+          <div class="about-body-copy">
+            <p>
+              SunLife Gutters Tampa is a family-owned exterior contractor focused on gutters, soffit and fascia, screen rooms, and drainage solutions that stand up to Gulf Coast rain and wind. Every crew is trained to measure rooflines carefully, fabricate seamless aluminum on-site when it fits the job, and leave your landscaping tidier than we found it.
+            </p>
+            <p>
+              We answer the phone, show up when we say we will, and explain options in plain language—no high-pressure sales, just line-item estimates you can compare with confidence. Whether you are replacing failing sections after a storm or upgrading guards before the next rainy season, we treat your home like our own.
+            </p>
+            <p>
+              From Seffner we dispatch across Hillsborough, Pinellas, and neighboring counties. If your city is not listed on our service map, call anyway—many projects along I-275, the Veterans Expressway, and the Gulf beaches still fall within our regular routes.
+            </p>
+          </div>
           <ul class="about-list">
             {asStrArray(about?.bullets).map((line) => (
               <li>{line}</li>
             ))}
           </ul>
         </div>
+        <figure class="about-visual about-body-figure">
+          <img
+            src={mediaUrl('Media (SGT)/Images (SGT)/sunlife-gutters-brandon-fl-gutter-system-home.webp')}
+            alt="Seamless gutters and downspouts on a Brandon, FL home roofline"
+            width="640"
+            height="480"
+            loading="lazy"
+            decoding="async"
+            class="about-img"
+          />
+        </figure>
       </div>
     </section>
   </main>

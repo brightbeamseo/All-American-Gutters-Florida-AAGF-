@@ -121,7 +121,15 @@ const introText =
   <section class="section blog-index-section" id="articles">
     <div class="container">
       <h2 class="section-title section-title-secondary blog-index-heading">All articles</h2>
-      <p class="blog-index-intro">{introText}</p>
+      <div class="blog-index-intro-block">
+        <p>{introText}</p>
+        <p>
+          Posts cover seamless installation, gutter guards, soffit and fascia, storm prep, and cost factors specific to Florida homes. Bookmark this page or subscribe to updates from your reader—new guides publish as seasons and products change.
+        </p>
+        <p>
+          Have a topic you do not see here? Mention it when you request an estimate; customer questions often become the next article.
+        </p>
+      </div>
       <BlogPostGrid posts={posts} currentPage={currentPage} totalPages={totalPages} />
     </div>
   </section>

@@ -156,15 +156,49 @@ const universalRequiredIndicator = asStr(formsCfg?.requiredIndicator) || '*'
       </div>
     </section>
 
-    <section class="section">
+    <section class="section secondary-page-section" aria-labelledby="gallery-story-heading">
+      <div class="container page-split page-split--media-end">
+        <div class="secondary-prose">
+          <h2 class="section-title section-title-secondary" id="gallery-story-heading">Real installs, real homes</h2>
+          <p>
+            This gallery highlights recent gutter, downspout, and drainage work from Hillsborough to Pinellas—everything from coastal elevations to inland ranch homes. Each photo was taken after cleanup so you can see the finished profile, not a messy job site.
+          </p>
+          <p>
+            Looking for a specific color, profile, or guard style? Compare rooflines similar to yours, then mention the photo when you request an estimate—we can often match material and detail on your home.
+          </p>
+          <p>
+            Prefer a full-screen view? Visit our <a href="/projects/">Projects</a> page for the same collection with a larger lightbox viewer.
+          </p>
+        </div>
+        <figure class="page-split__media">
+          <img
+            src={mediaUrl('Media (SGT)/Images (SGT)/sunlife-gutters-clearwater-fl-front-home-gutters.webp')}
+            alt="Front home with new gutters and downspouts in Clearwater, Florida"
+            width="640"
+            height="480"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section secondary-page-section secondary-page-section--alt">
       <div class="container">
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+        <div class="gallery-page-grid">
           {images.length > 0 ? (
             images.map((img) => (
-              <article style="background:#fff; border-radius:12px; overflow:hidden; box-shadow: var(--shadow);">
-                <img src={mediaUrl(asStr(img.imageSrc))} alt={asStr(img.imageAlt) || 'Project photo'} style="width:100%; display:block; aspect-ratio: 4 / 3; object-fit: cover;" />
-                <p style="margin: .75rem 1rem 1rem; color: var(--color-text-muted);">{asStr(img.location) || 'Tampa Metro'}</p>
-              </article>
+              <figure class="gallery-page-card">
+                <img
+                  src={mediaUrl(asStr(img.imageSrc))}
+                  alt={asStr(img.imageAlt) || 'Project photo'}
+                  loading="lazy"
+                  decoding="async"
+                  width="640"
+                  height="480"
+                />
+                <figcaption class="gallery-page-caption">{asStr(img.location) || 'Tampa Bay area'}</figcaption>
+              </figure>
             ))
           ) : (
             <p>No gallery images added yet.</p>

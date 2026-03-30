@@ -153,6 +153,33 @@ const universalRequiredIndicator = asStr(formsCfg?.requiredIndicator) || '*'
       </div>
     </section>
 
+    <section class="section secondary-page-section reviews-page-intro" aria-labelledby="reviews-intro-heading">
+      <div class="container page-split page-split--media-end">
+        <div class="secondary-prose">
+          <h2 class="section-title section-title-secondary" id="reviews-intro-heading">Why homeowners leave five stars</h2>
+          <p>
+            Most of our reviews mention the same things: clear communication on scheduling, crews who arrive on time, and workmanship that looks finished from the street. We are proud of that pattern—it reflects how we train installers and how we follow up after the job.
+          </p>
+          <p>
+            Ratings below reflect feedback from Google Business Profile and other public sources. They are snapshots, not paid endorsements; we never incentivize reviews, and we invite honest feedback so we can keep improving.
+          </p>
+          <p>
+            After your own install, consider sharing your experience online—it helps neighbors find a trustworthy contractor when storms roll through Tampa Bay.
+          </p>
+        </div>
+        <figure class="page-split__media">
+          <img
+            src={mediaUrl('Media (SGT)/Images (SGT)/sunlife-gutters-tampa-townhome-gutter-install.webp')}
+            alt="Townhome roofline with new gutters in Tampa, Florida"
+            width="640"
+            height="480"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
+    </section>
+
     <section class="section google-reviews">
       <div class="container">
         <h2 class="section-title reviews-title">{asStr(reviewsData?.headline) || 'Customer Reviews'}</h2>
