@@ -20,7 +20,7 @@ export async function getStaticPaths() {
       .filter(Boolean)
       .map((slug) => ({ params: { slug } }))
   } catch (err) {
-    console.warn('[products-services/[slug]] Failed to load city service slugs.', err)
+    console.warn('[services/[slug]] Failed to load city service slugs.', err)
     return []
   }
 }
@@ -38,7 +38,7 @@ try {
     sanity.fetch(`*[_type == "cityServicePage" && slug.current == $slug][0]`, { slug }),
   ])
 } catch (err) {
-  console.warn(`[products-services/${slug}] Sanity fetch failed; using fallback placeholders.`, err)
+  console.warn(`[services/${slug}] Sanity fetch failed; using fallback placeholders.`, err)
 }
 
 const business = settings?.business ?? {}
