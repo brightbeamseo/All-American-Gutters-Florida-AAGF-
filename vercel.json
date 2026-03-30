@@ -108,6 +108,21 @@
       "permanent": true
     },
     {
+      "source": "/clearwater-florida/",
+      "destination": "/locations/gutters-clearwater-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/gutters-clearwater-fl/",
+      "destination": "/locations/gutters-clearwater-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/locations/clearwater-florida/",
+      "destination": "/locations/gutters-clearwater-fl/",
+      "permanent": true
+    },
+    {
       "source": "/cortez-florida/",
       "destination": "/locations/cortez-florida/",
       "permanent": true
@@ -140,6 +155,21 @@
     {
       "source": "/land-o-lakes-florida/",
       "destination": "/locations/land-o-lakes-florida/",
+      "permanent": true
+    },
+    {
+      "source": "/largo-florida/",
+      "destination": "/locations/gutters-largo-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/gutters-largo-fl/",
+      "destination": "/locations/gutters-largo-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/locations/largo-florida/",
+      "destination": "/locations/gutters-largo-fl/",
       "permanent": true
     },
     {
