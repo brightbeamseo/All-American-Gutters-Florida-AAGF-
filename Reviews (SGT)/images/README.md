@@ -4,7 +4,7 @@ Save each reviewer’s **profile photo** from Google here so paths in `Reviews (
 
 **Suggested naming**
 
-- `reviewer-01.jpg` … `reviewer-05.jpg` — matches **`reviews-export-template.csv`** and **`astro-site/public/Media (SGT)/Reviews (SGT)/`** (copy the same files here so the repo stays in sync).
+- `Harold Swanson.png`, `Joshua Hurst.png`, etc., or standardized **`reviewer-01.png` … `reviewer-05.png`** — matches **`reviews-export-template.csv`** and **`astro-site/public/Media (SGT)/Reviews (SGT)/`** (keep copies in sync).
 
 **How to get images (manual, from GBP)**
 
