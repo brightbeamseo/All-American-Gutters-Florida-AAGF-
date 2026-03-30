@@ -187,5 +187,10 @@ export async function getHomePage() {
     return homePageCache
   }
   homePageCache = await sanity.fetch(`*[_id == "homePageSingleton"][0]`)
+  if (!homePageCache) {
+    throw new Error(
+      'Sanity: no published document with _id "homePageSingleton". In Studio open Content → Home page, then Publish.',
+    )
+  }
   return homePageCache
 }
