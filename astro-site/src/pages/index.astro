@@ -135,23 +135,23 @@ const serviceHref = (svc) => {
   const explicit = asStr(svc?.href)
   if (explicit) return explicit
   const title = asStr(svc?.title).toLowerCase().trim()
-  if (!title) return '/services/'
+  if (!title) return '/seamless-gutters/'
   const knownSlugs = {
-    'gutter installation': 'gutter-installation-tampa-fl',
-    'gutter repair': 'gutter-repair-tampa-fl',
-    'gutter cleaning': 'gutter-cleaning-tampa-fl',
-    'gutter guards': 'gutter-guards-tampa-fl',
-    'custom gutters': 'custom-gutters-tampa-fl',
-    'heated gutters': 'custom-gutters-tampa-fl',
-    'soffit & fascia': 'soffit-fascia-repair-tampa-fl',
-    'soffit and fascia': 'soffit-fascia-repair-tampa-fl',
+    'seamless gutters': 'seamless-gutters',
+    'soffit & fascia': 'soffit-and-fascias',
+    'soffit and fascia': 'soffit-and-fascias',
+    'super gutters': 'super-gutters',
+    'screen rooms & lanais': 'screen-rooms-and-lanais',
+    'screen rooms and lanais': 'screen-rooms-and-lanais',
+    'underground drainage': 'underground-drainage',
+    siding: 'siding',
   }
-  if (knownSlugs[title]) return `/services/${knownSlugs[title]}/`
+  if (knownSlugs[title]) return `/${knownSlugs[title]}/`
   const slug = title
     .replace(/&/g, ' and ')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-  return `/services/${slug}-tampa-fl/`
+  return `/${slug}/`
 }
 ---
 
