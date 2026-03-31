@@ -69,7 +69,7 @@ const testimonials = homepageTestimonials.length > 0
 const reviewRating = statLookup(reviewValues, reviewSummary?.ratingValueKey)
 const reviewCount = statLookup(reviewValues, reviewSummary?.reviewCountKey)
 const reviewCountDisplay = `${asStr(reviewSummary?.reviewCountPrefix)}${reviewCount}${asStr(reviewSummary?.reviewCountSuffix)}`
-const reviewsCtaHref = asStr(reviewSummary?.ctaHref) || '/reviews/'
+const reviewsCtaHref = '#contact'
 
 const universalFormFields = footerEstimateFields
 const universalFormAction = asStr(formsCfg?.submitPath) || asStr(footerEstimate?.formAction) || '#'
@@ -186,7 +186,7 @@ const universalRequiredIndicator = asStr(formsCfg?.requiredIndicator) || '*'
             </p>
           </div>
           <a href={reviewsCtaHref} class="btn btn-primary reviews-summary-cta" {...externalLinkAttrs(reviewsCtaHref)}>
-            {asStr(reviewSummary?.ctaText)}
+            Schedule an Estimate
           </a>
         </div>
         <div class="testimonials-grid">
