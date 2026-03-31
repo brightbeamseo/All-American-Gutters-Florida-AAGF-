@@ -58,9 +58,13 @@ const heroBgStyle = heroBgSrc
   ? `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
   : undefined
 
-const reviewsData = settings?.reviews ?? reviewsPage?.reviews ?? homePage?.reviews ?? {}
-const reviewSummary = reviewsData?.summary ?? {}
-const testimonials = Array.isArray(reviewsData?.testimonials) ? reviewsData.testimonials : []
+const homepageReviews = homePage?.reviews ?? {}
+const reviewsData = settings?.reviews ?? reviewsPage?.reviews ?? homepageReviews ?? {}
+const reviewSummary = reviewsData?.summary ?? homepageReviews?.summary ?? {}
+const homepageTestimonials = Array.isArray(homepageReviews?.testimonials) ? homepageReviews.testimonials : []
+const testimonials = homepageTestimonials.length > 0
+  ? homepageTestimonials.slice(0, 4)
+  : (Array.isArray(reviewsData?.testimonials) ? reviewsData.testimonials.slice(0, 4) : [])
 
 const universalFormFields = footerEstimateFields
 const universalFormAction = asStr(formsCfg?.submitPath) || asStr(footerEstimate?.formAction) || '#'
