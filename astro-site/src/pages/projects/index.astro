@@ -58,7 +58,16 @@ const pageDescription = asStr(galleryPage?.lead) || 'Project gallery from SGT.'
 const heroEyebrow = 'Projects'
 const heroHeadline = asStr(galleryPage?.headline) || 'Recent Jobs'
 const heroLead = asStr(galleryPage?.lead) || 'Simple gallery of completed gutter work.'
-const images = Array.isArray(galleryPage?.images) ? galleryPage.images : []
+const galleryImages = Array.isArray(galleryPage?.images) ? galleryPage.images : []
+const homeProjectSlides = Array.isArray(homePage?.projects?.slides) ? homePage.projects.slides : []
+const allProjectImages = [...galleryImages, ...homeProjectSlides]
+const seenImageSrc = new Set()
+const images = allProjectImages.filter((img) => {
+  const src = asStr(img?.imageSrc)
+  if (!src || seenImageSrc.has(src)) return false
+  seenImageSrc.add(src)
+  return true
+})
 
 /** Client-side lightbox (serialized in page script) */
 const galleryItems = images.map((img) => ({
