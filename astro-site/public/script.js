@@ -600,6 +600,10 @@
     return persisted;
   }
 
+  // Persist UTMs on every page load (even pages without forms),
+  // so attribution survives navigation until form submit.
+  getPersistedUtmParams();
+
   function setFieldLabelText(input, text) {
     if (!input || !input.id) return;
     var label = document.querySelector('label[for="' + input.id + '"]');
@@ -796,8 +800,6 @@
     var endpoint = cfg.submitPath.indexOf('/') === 0 ? cfg.submitPath : '/' + cfg.submitPath;
     var recaptchaSiteKey = cfg.recaptchaSiteKey || '';
     var mapboxToken = cfg.mapboxToken || '';
-    var persistedUtm = getPersistedUtmParams();
-
     leadForms.forEach(function (form) {
       var nameInput = form.querySelector('input[name="name"]');
       if (nameInput && !form.querySelector('input[name="firstName"]')) {
@@ -883,6 +885,11 @@
 
         var fd = new FormData(form);
         var payload = {
+          // Re-read at submit time so newest UTMs are always sent.
+          // Covers users who land with UTMs, navigate, then submit later.
+          utm_source: getPersistedUtmParams().utm_source || '',
+          utm_medium: getPersistedUtmParams().utm_medium || '',
+          utm_campaign: getPersistedUtmParams().utm_campaign || '',
           formSource: form.getAttribute('data-lead-form') || 'unknown',
           name: ((fd.get('firstName') || '').toString().trim() + ' ' + (fd.get('lastName') || '').toString().trim()).trim(),
           firstName: (fd.get('firstName') || '').toString().trim(),
@@ -893,10 +900,7 @@
           location: (fd.get('address') || '').toString().trim(),
           message: (fd.get('message') || '').toString().trim(),
           website: (fd.get('website') || '').toString().trim(),
-          pageUrl: typeof window.location.href === 'string' ? window.location.href : '',
-          utm_source: persistedUtm.utm_source || '',
-          utm_medium: persistedUtm.utm_medium || '',
-          utm_campaign: persistedUtm.utm_campaign || ''
+          pageUrl: typeof window.location.href === 'string' ? window.location.href : ''
         };
 
         var runSend = function () {
