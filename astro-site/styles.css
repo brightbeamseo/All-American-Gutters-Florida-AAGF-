@@ -1223,6 +1223,7 @@ a.btn-primary[href^="tel:"]:hover {
   transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
   display: flex;
   flex-direction: column;
+  height: 100%;
   gap: 0;
   overflow: hidden; /* ensures full-bleed image stays clipped to rounded corners */
 }
@@ -1252,6 +1253,8 @@ a.btn-primary[href^="tel:"]:hover {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  height: 100%;
+  box-sizing: border-box;
   background: #fff;
   padding: var(--space-lg) var(--space-xl) var(--space-lg);
   /* Rounded top, squared bottom so it visually "joins" the card */
