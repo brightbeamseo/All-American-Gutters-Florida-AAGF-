@@ -542,6 +542,64 @@
     if (kind === 'success') el.classList.add('is-success');
   }
 
+  function parseDocumentCookies() {
+    var out = {};
+    var raw = String(document.cookie || '');
+    if (!raw) return out;
+    raw.split(';').forEach(function (part) {
+      var seg = String(part || '').trim();
+      if (!seg) return;
+      var eq = seg.indexOf('=');
+      if (eq <= 0) return;
+      var key = decodeURIComponent(seg.slice(0, eq).trim());
+      var val = decodeURIComponent(seg.slice(eq + 1).trim());
+      out[key] = val;
+    });
+    return out;
+  }
+
+  function setCookie(name, value, days) {
+    if (!name) return;
+    var maxAge = Math.max(0, Math.floor(Number(days || 90) * 24 * 60 * 60));
+    document.cookie =
+      encodeURIComponent(name) +
+      '=' +
+      encodeURIComponent(String(value || '')) +
+      '; path=/; max-age=' +
+      String(maxAge) +
+      '; samesite=lax';
+  }
+
+  function getCookie(name) {
+    var all = parseDocumentCookies();
+    return all[name] || '';
+  }
+
+  function getPersistedUtmParams() {
+    var keys = ['utm_source', 'utm_medium', 'utm_campaign'];
+    var qs = new URLSearchParams(window.location.search || '');
+    var persisted = {
+      utm_source: '',
+      utm_medium: '',
+      utm_campaign: ''
+    };
+
+    keys.forEach(function (key) {
+      var fromQuery = (qs.get(key) || '').trim();
+      if (fromQuery) {
+        persisted[key] = fromQuery.slice(0, 200);
+        setCookie('sgt_' + key, persisted[key], 90);
+        return;
+      }
+      var fromCookie = getCookie('sgt_' + key).trim();
+      if (fromCookie) {
+        persisted[key] = fromCookie.slice(0, 200);
+      }
+    });
+
+    return persisted;
+  }
+
   function setFieldLabelText(input, text) {
     if (!input || !input.id) return;
     var label = document.querySelector('label[for="' + input.id + '"]');
@@ -738,6 +796,7 @@
     var endpoint = cfg.submitPath.indexOf('/') === 0 ? cfg.submitPath : '/' + cfg.submitPath;
     var recaptchaSiteKey = cfg.recaptchaSiteKey || '';
     var mapboxToken = cfg.mapboxToken || '';
+    var persistedUtm = getPersistedUtmParams();
 
     leadForms.forEach(function (form) {
       var nameInput = form.querySelector('input[name="name"]');
@@ -834,7 +893,10 @@
           location: (fd.get('address') || '').toString().trim(),
           message: (fd.get('message') || '').toString().trim(),
           website: (fd.get('website') || '').toString().trim(),
-          pageUrl: typeof window.location.href === 'string' ? window.location.href : ''
+          pageUrl: typeof window.location.href === 'string' ? window.location.href : '',
+          utm_source: persistedUtm.utm_source || '',
+          utm_medium: persistedUtm.utm_medium || '',
+          utm_campaign: persistedUtm.utm_campaign || ''
         };
 
         var runSend = function () {

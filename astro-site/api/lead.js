@@ -131,6 +131,9 @@ export default {
     const message = String(body.message || '').trim().slice(0, 5000);
     const formSource = String(body.formSource || 'unknown').trim().slice(0, 80);
     const pageUrl = String(body.pageUrl || '').trim().slice(0, 2000);
+    const utm_source = String(body.utm_source || '').trim().slice(0, 200);
+    const utm_medium = String(body.utm_medium || '').trim().slice(0, 200);
+    const utm_campaign = String(body.utm_campaign || '').trim().slice(0, 200);
 
     if (!name || !email || !phone) {
       return jsonResponse({ ok: false, error: 'missing_fields' }, 400);
@@ -148,6 +151,9 @@ export default {
       message,
       submittedAt: new Date().toISOString(),
       pageUrl,
+      utm_source,
+      utm_medium,
+      utm_campaign,
     };
 
     let zRes;
