@@ -1621,14 +1621,14 @@ a.btn-primary[href^="tel:"]:hover {
 }
 
 /* Static / simple estimate column: linked address without icon row */
-.footer-estimate .contact-details a.contact-address--link {
+.footer-estimate .contact-details:not(.contact-details--with-icons) a.contact-address--link {
   color: var(--color-text-muted);
   font-size: 0.9375rem;
   line-height: 1.5;
   text-decoration: none;
 }
 
-.footer-estimate .contact-details a.contact-address--link:hover {
+.footer-estimate .contact-details:not(.contact-details--with-icons) a.contact-address--link:hover {
   color: var(--color-accent);
 }
 
