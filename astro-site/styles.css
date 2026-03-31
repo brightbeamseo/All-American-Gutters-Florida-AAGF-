@@ -1573,16 +1573,7 @@ a.btn-primary[href^="tel:"]:hover {
   text-decoration: none;
 }
 
-.contact-details--with-icons .contact-detail-line:hover {
-  color: var(--color-accent);
-}
-
-.contact-details--with-icons .footer-item-icon {
-  color: rgba(68, 189, 237, 0.95);
-  flex-shrink: 0;
-}
-
-.contact-details--with-icons .contact-address-row {
+.contact-details--with-icons .contact-address.contact-address-row {
   display: inline-flex;
   align-items: flex-start;
   gap: 0.5rem;
@@ -1594,15 +1585,21 @@ a.btn-primary[href^="tel:"]:hover {
   text-decoration: none;
 }
 
-.contact-details--with-icons .contact-address-row > span:last-child {
+.contact-details--with-icons .contact-detail-line:hover {
+  color: var(--color-accent);
+}
+
+.contact-details--with-icons .footer-item-icon {
+  color: rgba(68, 189, 237, 0.95);
+  flex-shrink: 0;
+}
+
+.contact-details--with-icons .contact-address.contact-address-row > span:last-child {
   max-width: 28ch;
 }
 
 .contact-details--with-icons .contact-address.contact-address-row {
-  font-weight: 600;
   color: var(--color-dark);
-  font-size: 1.125rem;
-  line-height: 1.45;
 }
 
 .contact-details--with-icons .contact-address.contact-address-row > span:last-child {
