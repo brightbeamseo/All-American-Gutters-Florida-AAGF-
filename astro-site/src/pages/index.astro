@@ -534,7 +534,11 @@ const serviceHref = (svc) => {
               <span>{reviewCountDisplay}</span>
             </p>
           </div>
-          <a href={reviewsCtaHref} class="btn btn-primary reviews-summary-cta" {...externalLinkAttrs(reviewsCtaHref)}>
+          <a
+            href={reviewsCtaHref}
+            class="btn btn-outline btn-lg request-estimate reviews-summary-cta"
+            {...externalLinkAttrs(reviewsCtaHref)}
+          >
             {asStr(reviewsSummary?.ctaText)}
           </a>
         </div>
