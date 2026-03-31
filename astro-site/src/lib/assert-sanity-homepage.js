@@ -362,7 +362,10 @@ export function assertSanityHomepage(settings, homePage) {
     : 'siteSettings.footerEstimate'
   const fe = reqObj(footerEstimatePath, footerEstimateSource)
   reqStr(`${footerEstimatePath}.headline`, fe.headline)
-  reqStr(`${footerEstimatePath}.intro`, fe.intro)
+  // Intro is optional; some pages intentionally hide this line.
+  if (fe.intro != null && String(fe.intro).trim()) {
+    reqStr(`${footerEstimatePath}.intro`, fe.intro)
+  }
   reqStr(`${footerEstimatePath}.formAction`, fe.formAction)
   reqStr(`${footerEstimatePath}.formMethod`, fe.formMethod)
   const fef = reqObj(`${footerEstimatePath}.formFields`, fe.formFields)
