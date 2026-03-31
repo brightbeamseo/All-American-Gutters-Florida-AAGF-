@@ -193,21 +193,12 @@ export async function getSiteSettings() {
   return siteSettingsCache
 }
 
-/**
- * Canonical Home page document for SGT.
- * No fallback / merge: this must match the Studio singleton exactly.
- */
-let homePageCache = null
-
 export async function getHomePage() {
-  if (homePageCache) {
-    return homePageCache
-  }
-  homePageCache = await sanity.fetch(`*[_id == "homePageSingleton"][0]`)
-  if (!homePageCache) {
+  const homePage = await sanity.fetch(`*[_id == "homePageSingleton"][0]`)
+  if (!homePage) {
     throw new Error(
       'Sanity: no published document with _id "homePageSingleton". In Studio open Content → Home page, then Publish.',
     )
   }
-  return homePageCache
+  return homePage
 }
