@@ -12,12 +12,19 @@ import { asStr, applyTemplate, mediaUrl } from '../../lib/sanity-strings.js'
 
 let settings = {}
 let homePage = {}
-let galleryPage = {}
+let galleryPages = []
 try {
-  ;[settings, homePage, galleryPage] = await Promise.all([
+  ;[settings, homePage, galleryPages] = await Promise.all([
     getSiteSettings(),
     getHomePage(),
-    sanity.fetch(`*[_type == "galleryPage" && slug.current == "gallery"][0]`),
+    sanity.fetch(
+      `*[_type == "galleryPage"]{
+        headline,
+        lead,
+        "slug": slug.current,
+        images
+      }`
+    ),
   ])
 } catch (err) {
   console.warn('[projects] Sanity fetch failed; using fallback placeholders.', err)
@@ -53,12 +60,19 @@ const heroBgStyle = heroBgSrc
   ? `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
   : undefined
 
-const pageTitle = asStr(galleryPage?.headline) || 'Projects | SGT'
-const pageDescription = asStr(galleryPage?.lead) || 'Project gallery from SGT.'
+const allGalleryPages = Array.isArray(galleryPages) ? galleryPages : []
+const primaryGalleryPage =
+  allGalleryPages.find((p) => asStr(p?.slug) === 'gallery') ??
+  allGalleryPages.find((p) => asStr(p?.slug) === 'projects') ??
+  allGalleryPages[0] ??
+  {}
+
+const pageTitle = asStr(primaryGalleryPage?.headline) || 'Projects | SGT'
+const pageDescription = asStr(primaryGalleryPage?.lead) || 'Project gallery from SGT.'
 const heroEyebrow = 'Projects'
-const heroHeadline = asStr(galleryPage?.headline) || 'Recent Jobs'
-const heroLead = asStr(galleryPage?.lead) || 'Simple gallery of completed gutter work.'
-const galleryImages = Array.isArray(galleryPage?.images) ? galleryPage.images : []
+const heroHeadline = asStr(primaryGalleryPage?.headline) || 'Recent Jobs'
+const heroLead = asStr(primaryGalleryPage?.lead) || 'Simple gallery of completed gutter work.'
+const galleryImages = allGalleryPages.flatMap((p) => (Array.isArray(p?.images) ? p.images : []))
 const homeProjectSlides = Array.isArray(homePage?.projects?.slides) ? homePage.projects.slides : []
 const allProjectImages = [...galleryImages, ...homeProjectSlides]
 const seenImageSrc = new Set()

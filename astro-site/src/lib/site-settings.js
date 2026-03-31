@@ -41,28 +41,72 @@ function normalizeAboutHref(label, href) {
   return href
 }
 
+function isInvalidNavHref(href) {
+  if (typeof href !== 'string') return true
+  const trimmed = href.trim()
+  return !trimmed || trimmed.startsWith('#')
+}
+
+function buildAboutDropdownLinks() {
+  return [
+    { label: 'About Us', href: '/about-us/' },
+    { label: 'FAQ', href: '/faqs/' },
+    { label: 'Contact Us', href: '/contact-us/' },
+  ]
+}
+
 function normalizeHeader(header) {
   if (!header || typeof header !== 'object') return header
-  const navItems = Array.isArray(header.navItems)
-    ? header.navItems.map((item) => ({
-        ...item,
-        label: normalizeLabel(item?.label),
-        href: normalizeAboutHref(
-          item?.label,
-          normalizeReviewHref(item?.label, normalizeProjectsHref(item?.label, normalizeHref(item?.href)))
-        ),
-        dropdown: Array.isArray(item?.dropdown)
-          ? item.dropdown.map((link) => ({
-              ...link,
-              label: normalizeLabel(link?.label),
-              href: normalizeAboutHref(
-                link?.label,
-                normalizeReviewHref(link?.label, normalizeProjectsHref(link?.label, normalizeHref(link?.href)))
-              ),
-            }))
-          : item?.dropdown,
-      }))
+  let navItems = Array.isArray(header.navItems)
+    ? header.navItems
+        .map((item) => {
+          const label = normalizeLabel(item?.label)
+          const href = normalizeAboutHref(
+            item?.label,
+            normalizeReviewHref(item?.label, normalizeProjectsHref(item?.label, normalizeHref(item?.href)))
+          )
+          const dropdown = Array.isArray(item?.dropdown)
+            ? item.dropdown
+                .map((link) => ({
+                  ...link,
+                  label: normalizeLabel(link?.label),
+                  href: normalizeAboutHref(
+                    link?.label,
+                    normalizeReviewHref(link?.label, normalizeProjectsHref(link?.label, normalizeHref(link?.href)))
+                  ),
+                }))
+                .filter((link) => !isInvalidNavHref(link?.href))
+            : item?.dropdown
+          return { ...item, label, href, dropdown }
+        })
+        .filter((item) => {
+          const hasDropdown = Array.isArray(item?.dropdown) && item.dropdown.length > 0
+          if (hasDropdown) return true
+          return !isInvalidNavHref(item?.href)
+        })
     : header.navItems
+
+  if (Array.isArray(navItems)) {
+    const aboutIdx = navItems.findIndex((item) => {
+      const label = String(item?.label || '').trim().toLowerCase()
+      return label === 'about us' || label === 'our team'
+    })
+
+    if (aboutIdx >= 0) {
+      navItems[aboutIdx] = {
+        ...navItems[aboutIdx],
+        label: 'About Us',
+        href: '/about-us/',
+        dropdown: buildAboutDropdownLinks(),
+      }
+    } else {
+      navItems.push({
+        label: 'About Us',
+        href: '/about-us/',
+        dropdown: buildAboutDropdownLinks(),
+      })
+    }
+  }
   return { ...header, navItems }
 }
 
