@@ -1598,6 +1598,17 @@ a.btn-primary[href^="tel:"]:hover {
   max-width: 28ch;
 }
 
+.contact-details--with-icons .contact-address.contact-address-row {
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 1.125rem;
+  line-height: 1.45;
+}
+
+.contact-details--with-icons .contact-address.contact-address-row > span:last-child {
+  max-width: 28ch;
+}
+
 .contact-details--with-icons .contact-address-row .footer-item-icon {
   margin-top: 0.12em;
 }
