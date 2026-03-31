@@ -105,23 +105,23 @@ const serviceHref = (svc) => {
   const explicit = asStr(svc?.href)
   if (explicit) return explicit
   const title = asStr(svc?.title).toLowerCase().trim()
-  if (!title) return '/seamless-gutters/'
+  if (!title) return '/services/seamless-gutters-tampa-fl/'
   const knownSlugs = {
-    'seamless gutters': 'seamless-gutters',
-    'soffit & fascia': 'soffit-and-fascias',
-    'soffit and fascia': 'soffit-and-fascias',
-    'super gutters': 'super-gutters',
-    'screen rooms & lanais': 'screen-rooms-and-lanais',
-    'screen rooms and lanais': 'screen-rooms-and-lanais',
-    'underground drainage': 'underground-drainage',
-    siding: 'siding',
+    'seamless gutters': 'seamless-gutters-tampa-fl',
+    'soffit & fascia': 'soffit-fascia-repair-tampa-fl',
+    'soffit and fascia': 'soffit-fascia-repair-tampa-fl',
+    'super gutters': 'super-gutters-tampa-fl',
+    'screen rooms & lanais': 'screen-rooms-lanais-tampa-fl',
+    'screen rooms and lanais': 'screen-rooms-lanais-tampa-fl',
+    'underground drainage': 'underground-drainage-tampa-fl',
+    siding: 'siding-tampa-fl',
   }
-  if (knownSlugs[title]) return `/${knownSlugs[title]}/`
+  if (knownSlugs[title]) return `/services/${knownSlugs[title]}/`
   const generated = title
     .replace(/&/g, ' and ')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-  return `/${generated}/`
+  return `/services/${generated}/`
 }
 ---
 
@@ -202,7 +202,7 @@ const serviceHref = (svc) => {
           ) : (
             <>
               <a href="/">Home</a>
-              <a href="/seamless-gutters/">Products & Services</a>
+              <a href="/services/">Products & Services</a>
             </>
           )}
           <a href={`tel:${phoneTel}`} class="btn btn-primary btn-lg">{callLabelNav}</a>

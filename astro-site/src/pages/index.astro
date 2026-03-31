@@ -136,23 +136,23 @@ const serviceHref = (svc) => {
   const explicit = asStr(svc?.href)
   if (explicit) return explicit
   const title = asStr(svc?.title).toLowerCase().trim()
-  if (!title) return '/seamless-gutters/'
+  if (!title) return '/services/seamless-gutters-tampa-fl/'
   const knownSlugs = {
-    'seamless gutters': 'seamless-gutters',
-    'soffit & fascia': 'soffit-and-fascias',
-    'soffit and fascia': 'soffit-and-fascias',
-    'super gutters': 'super-gutters',
-    'screen rooms & lanais': 'screen-rooms-and-lanais',
-    'screen rooms and lanais': 'screen-rooms-and-lanais',
-    'underground drainage': 'underground-drainage',
-    siding: 'siding',
+    'seamless gutters': 'seamless-gutters-tampa-fl',
+    'soffit & fascia': 'soffit-fascia-repair-tampa-fl',
+    'soffit and fascia': 'soffit-fascia-repair-tampa-fl',
+    'super gutters': 'super-gutters-tampa-fl',
+    'screen rooms & lanais': 'screen-rooms-lanais-tampa-fl',
+    'screen rooms and lanais': 'screen-rooms-lanais-tampa-fl',
+    'underground drainage': 'underground-drainage-tampa-fl',
+    siding: 'siding-tampa-fl',
   }
-  if (knownSlugs[title]) return `/${knownSlugs[title]}/`
+  if (knownSlugs[title]) return `/services/${knownSlugs[title]}/`
   const slug = title
     .replace(/&/g, ' and ')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-  return `/${slug}/`
+  return `/services/${slug}/`
 }
 ---
 
@@ -162,6 +162,7 @@ const serviceHref = (svc) => {
   theme={settings.theme}
   forms={{ submitPath: asStr(settings.forms?.submitPath) }}
   homeRevealAnimations
+  preloadImageHref={mediaUrl(heroBgSrc)}
 >
   <header class="header">
     <div class="offer-bar">
@@ -184,7 +185,7 @@ const serviceHref = (svc) => {
     <div class="header-nav">
       <div class="header-inner">
         <a href="/" class="logo" aria-label={logoAriaLabel}>
-          <img src={mediaUrl(logoBlack)} alt={companyName} class="logo-img" />
+          <img src={mediaUrl(logoBlack)} alt={companyName} class="logo-img" width="300" height="72" />
         </a>
         <button class="nav-toggle" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -337,7 +338,14 @@ const serviceHref = (svc) => {
           const label = `${asStr(slide.imageAlt)} — ${loc}`
           return (
             <article class="project-slide" data-location={loc} aria-label={label}>
-              <img src={mediaUrl(asStr(slide.imageSrc))} alt={asStr(slide.imageAlt)} />
+              <img
+                src={mediaUrl(asStr(slide.imageSrc))}
+                alt={asStr(slide.imageAlt)}
+                width="1200"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              />
               <div class="project-meta">
                 <span class="project-pin" aria-hidden="true">📍</span>{' '}
                 <span class="project-location-label">{loc}</span>
@@ -363,6 +371,10 @@ const serviceHref = (svc) => {
             src={mediaUrl(asStr(whyChoose?.imageSrc))}
             alt={asStr(whyChoose?.imageAlt)}
             class="why-choose-image"
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
           />
           <div class="why-choose-stamp">
             <strong>{homesCountDisplay}</strong>
@@ -503,7 +515,15 @@ const serviceHref = (svc) => {
           <p class="section-lead">{asStr(contactBanner?.paragraph2)}</p>
           <div class="contact-banner-actions">
             <a href={telLink} class="contact-banner-phone">
-              <img src={mediaUrl(asStr(contactBanner?.phoneIconSrc))} alt="" aria-hidden="true" />
+              <img
+                src={mediaUrl(asStr(contactBanner?.phoneIconSrc))}
+                alt=""
+                aria-hidden="true"
+                width="20"
+                height="20"
+                loading="lazy"
+                decoding="async"
+              />
               <span class="contact-banner-phone-number">{phoneDisplay}</span>
             </a>
           </div>
@@ -521,6 +541,10 @@ const serviceHref = (svc) => {
                 src={mediaUrl(asStr(reviewsSummary?.googleIconSrc))}
                 alt={asStr(reviewsSummary?.brandLabel)}
                 class="google-logo"
+                width="20"
+                height="20"
+                loading="lazy"
+                decoding="async"
               />
               <span>{asStr(reviewsSummary?.brandLabel)}</span>
             </p>
@@ -530,6 +554,10 @@ const serviceHref = (svc) => {
                 src={mediaUrl(asStr(reviewsSummary?.starsImageSrc))}
                 alt={asStr(reviewsSummary?.starsImageAlt)}
                 class="review-stars review-stars-inline"
+                width="96"
+                height="18"
+                loading="lazy"
+                decoding="async"
               />
               <span>{reviewCountDisplay}</span>
             </p>
@@ -546,7 +574,15 @@ const serviceHref = (svc) => {
           {reviews?.testimonials?.map((t) => (
             <blockquote class="testimonial">
               <div class="review-brand review-brand-top">
-                <img src={mediaUrl(asStr(t.avatarSrc))} alt={asStr(t.author)} class="review-avatar" />
+                <img
+                  src={mediaUrl(asStr(t.avatarSrc))}
+                  alt={asStr(t.author)}
+                  class="review-avatar"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div class="review-meta">
                   <strong>{asStr(t.author)}</strong>
                   <span class="review-time">{asStr(t.timeAgo)}</span>
@@ -556,6 +592,10 @@ const serviceHref = (svc) => {
                 src={mediaUrl(asStr(reviewsSummary?.starsImageSrc))}
                 alt={asStr(reviewsSummary?.starsImageAlt)}
                 class="review-stars"
+                width="96"
+                height="18"
+                loading="lazy"
+                decoding="async"
               />
               <p>&quot;{asStr(t.quote)}&quot;</p>
               <div class="review-posted-on">
@@ -563,6 +603,10 @@ const serviceHref = (svc) => {
                   src={mediaUrl(asStr(reviewsSummary?.googleIconSrc))}
                   alt={asStr(reviewsSummary?.brandLabel)}
                   class="google-logo"
+                  width="20"
+                  height="20"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <span>{asStr(reviews?.postedOnLabel)}</span>
               </div>
@@ -610,7 +654,14 @@ const serviceHref = (svc) => {
         <div class="team-grid">
           {team?.members?.map((m) => (
             <article class="team-card">
-              <img src={mediaUrl(asStr(m.imageSrc))} alt={asStr(m.imageAlt)} />
+              <img
+                src={mediaUrl(asStr(m.imageSrc))}
+                alt={asStr(m.imageAlt)}
+                width="640"
+                height="480"
+                loading="lazy"
+                decoding="async"
+              />
               <h3>{asStr(m.name)}</h3>
               <p>{asStr(m.bio)}</p>
             </article>
@@ -736,7 +787,7 @@ const serviceHref = (svc) => {
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand-block footer-col">
-          <img src={mediaUrl(logoWhite)} alt={companyName} class="footer-logo" />
+          <img src={mediaUrl(logoWhite)} alt={companyName} class="footer-logo" width="380" height="78" loading="lazy" decoding="async" />
           <p class="footer-address">{descriptionShort}</p>
           <div class="footer-social" aria-label={asStr(footerBrand?.socialAriaLabel)}>
             {footerBrand?.socialLinks?.map((s) => (
