@@ -37,7 +37,7 @@ const productsServicesIntro = asStr(settings?.productsServicesIntro)
           items.map((item) => (
             <article style="padding:1rem 1.25rem; border:1px solid rgba(0,0,0,0.08); border-radius:12px;">
               <h2 style="margin:0 0 .5rem;">
-                <a href={`/services/${asStr(item.slug)}/`}>
+                <a href={`/${asStr(item.slug)}/`}>
                   {asStr(item.title) || asStr(item.headline) || asStr(item.slug)}
                 </a>
               </h2>

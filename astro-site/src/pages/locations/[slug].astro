@@ -105,12 +105,12 @@ const normalizeServiceCardHref = (href) => {
   const value = asStr(href).trim()
   if (!value) return ''
   const legacyMap = {
-    '/seamless-gutters/': '/services/seamless-gutters-tampa-fl/',
-    '/soffit-and-fascias/': '/services/soffit-fascia-repair-tampa-fl/',
-    '/super-gutters/': '/services/super-gutters-tampa-fl/',
-    '/screen-rooms-and-lanais/': '/services/screen-rooms-lanais-tampa-fl/',
-    '/underground-drainage/': '/services/underground-drainage-tampa-fl/',
-    '/siding/': '/services/siding-tampa-fl/',
+    '/seamless-gutters/': '/seamless-gutters-tampa-fl/',
+    '/soffit-and-fascias/': '/soffit-fascia-repair-tampa-fl/',
+    '/super-gutters/': '/super-gutters-tampa-fl/',
+    '/screen-rooms-and-lanais/': '/screen-rooms-lanais-tampa-fl/',
+    '/underground-drainage/': '/underground-drainage-tampa-fl/',
+    '/siding/': '/siding-tampa-fl/',
   }
   return legacyMap[value] || value
 }
@@ -119,7 +119,7 @@ const serviceHref = (svc) => {
   const explicit = normalizeServiceCardHref(svc?.href)
   if (explicit) return explicit
   const title = asStr(svc?.title).toLowerCase().trim()
-  if (!title) return '/services/seamless-gutters-tampa-fl/'
+  if (!title) return '/seamless-gutters-tampa-fl/'
   const knownSlugs = {
     'seamless gutters': 'seamless-gutters-tampa-fl',
     'soffit & fascia': 'soffit-fascia-repair-tampa-fl',
@@ -130,12 +130,12 @@ const serviceHref = (svc) => {
     'underground drainage': 'underground-drainage-tampa-fl',
     siding: 'siding-tampa-fl',
   }
-  if (knownSlugs[title]) return `/services/${knownSlugs[title]}/`
+  if (knownSlugs[title]) return `/${knownSlugs[title]}/`
   const generated = title
     .replace(/&/g, ' and ')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-  return `/services/${generated}/`
+  return `/${generated}/`
 }
 ---
 

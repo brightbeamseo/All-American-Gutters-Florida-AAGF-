@@ -15,12 +15,17 @@
     },
     {
       "source": "/city-service-base/",
-      "destination": "/services/gutter-repair-tampa-fl/",
+      "destination": "/gutter-repair-tampa-fl/",
       "permanent": true
     },
     {
       "source": "/services/snow-ice-solutions-heat-tape-tampa-fl/",
-      "destination": "/services/custom-gutters-tampa-fl/",
+      "destination": "/custom-gutters-tampa-fl/",
+      "permanent": true
+    },
+    {
+      "source": "/services/:slug/",
+      "destination": "/:slug/",
       "permanent": true
     },
     {
@@ -55,7 +60,7 @@
     },
     {
       "source": "/products-services/:slug/",
-      "destination": "/services/:slug/",
+      "destination": "/:slug/",
       "permanent": true
     },
     {
@@ -65,13 +70,13 @@
     }
   ],
   "rewrites": [
-    { "source": "/seamless-gutters/", "destination": "/services/seamless-gutters-tampa-fl/" },
-    { "source": "/soffit-and-fascias/", "destination": "/services/soffit-fascia-repair-tampa-fl/" },
-    { "source": "/super-gutters/", "destination": "/services/super-gutters-tampa-fl/" },
-    { "source": "/screen-rooms-and-lanais/", "destination": "/services/screen-rooms-lanais-tampa-fl/" },
-    { "source": "/underground-drainage/", "destination": "/services/underground-drainage-tampa-fl/" },
-    { "source": "/siding/", "destination": "/services/siding-tampa-fl/" },
-    { "source": "/siding-services-in-central-florida/", "destination": "/services/siding-tampa-fl/" },
+    { "source": "/seamless-gutters/", "destination": "/seamless-gutters-tampa-fl/" },
+    { "source": "/soffit-and-fascias/", "destination": "/soffit-fascia-repair-tampa-fl/" },
+    { "source": "/super-gutters/", "destination": "/super-gutters-tampa-fl/" },
+    { "source": "/screen-rooms-and-lanais/", "destination": "/screen-rooms-lanais-tampa-fl/" },
+    { "source": "/underground-drainage/", "destination": "/underground-drainage-tampa-fl/" },
+    { "source": "/siding/", "destination": "/siding-tampa-fl/" },
+    { "source": "/siding-services-in-central-florida/", "destination": "/siding-tampa-fl/" },
     { "source": "/anna-maria-island-florida/", "destination": "/locations/anna-maria-island-florida/" },
     { "source": "/apollo-beach-fl/", "destination": "/locations/apollo-beach-fl/" },
     { "source": "/bradenton-florida/", "destination": "/locations/bradenton-florida/" },

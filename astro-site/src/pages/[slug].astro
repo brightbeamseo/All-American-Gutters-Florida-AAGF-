@@ -4,6 +4,7 @@
  * Only generates paths for Sanity `blogPost` documents — static routes (about-us, contact-us, …) win.
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
+import CityServicePage from '../components/CityServicePage.astro'
 import FooterSocialIcon from '../components/FooterSocialIcon.astro'
 import FooterContactInfo from '../components/FooterContactInfo.astro'
 import FooterHoursRow from '../components/FooterHoursRow.astro'
@@ -17,11 +18,20 @@ import { asStr, applyTemplate, mediaUrl } from '../lib/sanity-strings.js'
 
 export async function getStaticPaths() {
   try {
-    const rows = await sanity.fetch(`*[_type == "blogPost" && defined(slug.current)]{"slug": slug.current}`)
-    const slugs = (Array.isArray(rows) ? rows : []).map((r) => asStr(r?.slug)).filter(Boolean)
+    const [blogRows, serviceRows] = await Promise.all([
+      sanity.fetch(`*[_type == "blogPost" && defined(slug.current)]{"slug": slug.current}`),
+      sanity.fetch(`*[_type == "cityServicePage" && defined(slug.current)]{"slug": slug.current}`),
+    ])
+    const slugs = Array.from(
+      new Set(
+        [...(Array.isArray(blogRows) ? blogRows : []), ...(Array.isArray(serviceRows) ? serviceRows : [])]
+          .map((r) => asStr(r?.slug))
+          .filter(Boolean)
+      )
+    )
     return slugs.map((slug) => ({ params: { slug } }))
   } catch (err) {
-    console.warn('[blog slug] Failed to load blog post slugs.', err)
+    console.warn('[slug] Failed to load root slugs.', err)
     return []
   }
 }
@@ -31,18 +41,20 @@ const slug = asStr(Astro.params?.slug)
 let settings = {}
 let homePage = {}
 let post = null
+let cityPage = null
 try {
-  ;[settings, homePage, post] = await Promise.all([
+  ;[settings, homePage, post, cityPage] = await Promise.all([
     getSiteSettings(),
     getHomePage(),
     sanity.fetch(`*[_type == "blogPost" && slug.current == $slug][0]`, { slug }),
+    sanity.fetch(`*[_type == "cityServicePage" && slug.current == $slug][0]`, { slug }),
   ])
 } catch (err) {
-  console.warn(`[blog/${slug}] Sanity fetch failed.`, err)
+  console.warn(`[slug/${slug}] Sanity fetch failed.`, err)
 }
 
-if (!post) {
-  throw new Error(`[blog] Missing blogPost for slug "${slug}"`)
+if (!post && !cityPage) {
+  throw new Error(`[slug] Missing blogPost or cityServicePage for slug "${slug}"`)
 }
 
 const business = settings?.business ?? {}
@@ -109,6 +121,9 @@ const blogAuthorBio =
 const idPrefix = `blog-${slug.replace(/[^a-z0-9-]/gi, '_')}`
 ---
 
+{cityPage ? (
+  <CityServicePage slug={slug} settings={settings} homePage={homePage} cityPage={cityPage} />
+) : (
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
@@ -398,3 +413,4 @@ const idPrefix = `blog-${slug.replace(/[^a-z0-9-]/gi, '_')}`
     </div>
   </div>
 </BaseLayout>
+)}

@@ -68,6 +68,12 @@ const looksLegacyColorado = (value) => {
   )
 }
 
+const isSunLifeProjectImage = (src) => {
+  const value = asStr(src).toLowerCase()
+  if (!value) return false
+  return value.includes('/images (sgt)/') || value.includes('media (sgt)/images (sgt)/') || value.includes('sunlife-')
+}
+
 const cleanProjectText = (value, fallback = '') => {
   const text = asStr(value).trim()
   if (!text) return fallback
@@ -107,6 +113,7 @@ const images = allProjectImages.filter((img) => {
   const alt = asStr(img?.imageAlt)
   const location = asStr(img?.location)
   if (!src || seenImageSrc.has(src)) return false
+  if (!isSunLifeProjectImage(src)) return false
   if (looksLegacyColorado(src) || looksLegacyColorado(alt) || looksLegacyColorado(location)) return false
   seenImageSrc.add(src)
   return true

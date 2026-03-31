@@ -4,12 +4,12 @@ function normalizeHref(href) {
   if (typeof href !== 'string') return href
   const trimmed = href.trim()
   const legacyServiceHrefMap = {
-    '/seamless-gutters/': '/services/seamless-gutters-tampa-fl/',
-    '/soffit-and-fascias/': '/services/soffit-fascia-repair-tampa-fl/',
-    '/super-gutters/': '/services/super-gutters-tampa-fl/',
-    '/screen-rooms-and-lanais/': '/services/screen-rooms-lanais-tampa-fl/',
-    '/underground-drainage/': '/services/underground-drainage-tampa-fl/',
-    '/siding/': '/services/siding-tampa-fl/',
+    '/seamless-gutters/': '/seamless-gutters-tampa-fl/',
+    '/soffit-and-fascias/': '/soffit-fascia-repair-tampa-fl/',
+    '/super-gutters/': '/super-gutters-tampa-fl/',
+    '/screen-rooms-and-lanais/': '/screen-rooms-lanais-tampa-fl/',
+    '/underground-drainage/': '/underground-drainage-tampa-fl/',
+    '/siding/': '/siding-tampa-fl/',
   }
   const legacyLocationHrefMap = {
     '/tampa-florida/': '/locations/tampa-florida/',
@@ -24,6 +24,8 @@ function normalizeHref(href) {
   }
   if (legacyServiceHrefMap[trimmed]) return legacyServiceHrefMap[trimmed]
   if (legacyLocationHrefMap[trimmed]) return legacyLocationHrefMap[trimmed]
+  const servicesPrefixMatch = trimmed.match(/^\/services\/([^/]+)\/?$/)
+  if (servicesPrefixMatch) return `/${servicesPrefixMatch[1]}/`
   if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return href
   }
