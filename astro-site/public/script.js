@@ -601,28 +601,23 @@
     input.setAttribute('spellcheck', 'false');
 
     var suggestTimer = null;
-    var suggestionsByLabel = {};
-    var sessionToken = createSessionToken();
 
     function runSuggest(query) {
       var url =
-        'https://api.mapbox.com/search/searchbox/v1/suggest?q=' +
+        'https://api.mapbox.com/geocoding/v5/mapbox.places/' +
         encodeURIComponent(query) +
-        '&country=US&language=en&types=address&limit=5&session_token=' +
-        encodeURIComponent(sessionToken) +
+        '.json?autocomplete=true&country=US&types=address&limit=5&language=en' +
         '&access_token=' +
         encodeURIComponent(accessToken);
 
       fetch(url)
         .then(function (res) { return res.ok ? res.json() : null; })
         .then(function (data) {
-          if (!data || !Array.isArray(data.suggestions)) return;
-          suggestionsByLabel = {};
+          if (!data || !Array.isArray(data.features)) return;
           listEl.innerHTML = '';
-          data.suggestions.forEach(function (item) {
-            var label = (item && (item.full_address || item.name || item.place_formatted)) ? (item.full_address || item.name || item.place_formatted) : '';
+          data.features.forEach(function (item) {
+            var label = item && item.place_name ? item.place_name : '';
             if (!label) return;
-            suggestionsByLabel[label] = item.mapbox_id || '';
             var opt = document.createElement('option');
             opt.value = label;
             listEl.appendChild(opt);
@@ -633,41 +628,12 @@
         });
     }
 
-    function normalizeSelection() {
-      var chosen = String(input.value || '').trim();
-      var id = suggestionsByLabel[chosen];
-      if (!id) return;
-      var url =
-        'https://api.mapbox.com/search/searchbox/v1/retrieve/' +
-        encodeURIComponent(id) +
-        '?session_token=' +
-        encodeURIComponent(sessionToken) +
-        '&access_token=' +
-        encodeURIComponent(accessToken);
-      fetch(url)
-        .then(function (res) { return res.ok ? res.json() : null; })
-        .then(function (data) {
-          var feature = data && Array.isArray(data.features) ? data.features[0] : null;
-          var props = feature && feature.properties ? feature.properties : null;
-          var fullAddress = props && props.full_address ? props.full_address : '';
-          if (fullAddress) input.value = fullAddress;
-        })
-        .catch(function () {
-          /* keep user-entered value */
-        })
-        .finally(function () {
-          sessionToken = createSessionToken();
-        });
-    }
-
     input.addEventListener('input', function () {
       var q = String(input.value || '').trim();
       if (q.length < 3) return;
       if (suggestTimer) clearTimeout(suggestTimer);
       suggestTimer = setTimeout(function () { runSuggest(q); }, 220);
     });
-    input.addEventListener('change', normalizeSelection);
-    input.addEventListener('blur', normalizeSelection);
   }
 
   if (leadForms.length) {
