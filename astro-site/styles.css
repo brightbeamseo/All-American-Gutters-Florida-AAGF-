@@ -1848,9 +1848,9 @@ form[data-lead-form] button[type="submit"].is-busy {
 }
 
 .footer-logo {
-  height: 58px;
+  height: 78px;
   width: auto;
-  max-width: 300px;
+  max-width: 380px;
   object-fit: contain;
   margin: 0;
   padding: 0;

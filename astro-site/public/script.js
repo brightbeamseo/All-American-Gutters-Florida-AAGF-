@@ -740,9 +740,6 @@
     var mapboxToken = cfg.mapboxToken || '';
 
     leadForms.forEach(function (form) {
-      // Prevent password managers from hijacking lead-form fields.
-      form.setAttribute('autocomplete', 'off');
-
       var nameInput = form.querySelector('input[name="name"]');
       if (nameInput && !form.querySelector('input[name="firstName"]')) {
         var nameFieldWrap = nameInput.closest('.hero-form-field, .contact-form-field');
@@ -770,9 +767,6 @@
         firstInput.type = 'text';
         firstInput.required = true;
         firstInput.autocomplete = 'given-name';
-        firstInput.setAttribute('data-lpignore', 'true');
-        firstInput.setAttribute('data-1p-ignore', 'true');
-        firstInput.setAttribute('data-form-type', 'other');
 
         var lastInput = document.createElement('input');
         lastInput.id = lastId;
@@ -780,9 +774,6 @@
         lastInput.type = 'text';
         lastInput.required = true;
         lastInput.autocomplete = 'family-name';
-        lastInput.setAttribute('data-lpignore', 'true');
-        lastInput.setAttribute('data-1p-ignore', 'true');
-        lastInput.setAttribute('data-form-type', 'other');
 
         firstWrap.appendChild(buildFieldLabel(firstId, 'First name', requiredMarkText));
         firstWrap.appendChild(firstInput);
@@ -801,9 +792,6 @@
       if (phoneInput) {
         phoneInput.setAttribute('maxlength', '12');
         phoneInput.setAttribute('autocomplete', 'tel');
-        phoneInput.setAttribute('data-lpignore', 'true');
-        phoneInput.setAttribute('data-1p-ignore', 'true');
-        phoneInput.setAttribute('data-form-type', 'other');
         phoneInput.addEventListener('input', function () {
           formatPhoneInputLive(phoneInput);
         });
@@ -817,28 +805,9 @@
         locationInput.setAttribute('name', 'address');
         locationInput.setAttribute('id', locationInput.id || (form.getAttribute('data-lead-form') || 'lead') + '-address');
         locationInput.removeAttribute('required');
-        locationInput.setAttribute('data-lpignore', 'true');
-        locationInput.setAttribute('data-1p-ignore', 'true');
-        locationInput.setAttribute('data-form-type', 'other');
         setFieldLabelText(locationInput, 'Address');
         makeAddressFieldFullWidth(locationInput);
         setupMapboxAddressAutofill(locationInput, mapboxToken);
-      }
-
-      var emailInput = form.querySelector('input[name="email"]');
-      if (emailInput) {
-        emailInput.setAttribute('autocomplete', 'email');
-        emailInput.setAttribute('data-lpignore', 'true');
-        emailInput.setAttribute('data-1p-ignore', 'true');
-        emailInput.setAttribute('data-form-type', 'other');
-      }
-
-      var messageInput = form.querySelector('textarea[name="message"]');
-      if (messageInput) {
-        messageInput.setAttribute('autocomplete', 'off');
-        messageInput.setAttribute('data-lpignore', 'true');
-        messageInput.setAttribute('data-1p-ignore', 'true');
-        messageInput.setAttribute('data-form-type', 'other');
       }
 
       form.addEventListener('submit', function (event) {
