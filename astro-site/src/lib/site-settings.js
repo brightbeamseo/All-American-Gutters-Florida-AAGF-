@@ -24,6 +24,7 @@ function normalizeHref(href) {
   }
   if (legacyServiceHrefMap[trimmed]) return legacyServiceHrefMap[trimmed]
   if (legacyLocationHrefMap[trimmed]) return legacyLocationHrefMap[trimmed]
+  if (trimmed === '/services/' || trimmed === '/services') return '/seamless-gutters-tampa-fl/'
   const servicesPrefixMatch = trimmed.match(/^\/services\/([^/]+)\/?$/)
   if (servicesPrefixMatch) return `/${servicesPrefixMatch[1]}/`
   if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
