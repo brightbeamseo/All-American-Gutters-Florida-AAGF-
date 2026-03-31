@@ -55,6 +55,26 @@ const heroCallLabel = applyTemplate(asStr(homePage?.hero?.callCtaTemplate), { ph
 const logoAriaLabel = applyTemplate(asStr(header.logoAriaLabelTemplate), { companyName }) || companyName
 const navItems = Array.isArray(header.navItems) ? header.navItems : []
 
+const looksLegacyColorado = (value) => {
+  const text = asStr(value).toLowerCase()
+  if (!text) return false
+  return (
+    text.includes('mile high') ||
+    text.includes('denver') ||
+    text.includes('colorado') ||
+    text.includes(', co') ||
+    text.includes('-co-') ||
+    text.includes('/images (mile high)/')
+  )
+}
+
+const cleanProjectText = (value, fallback = '') => {
+  const text = asStr(value).trim()
+  if (!text) return fallback
+  if (!looksLegacyColorado(text)) return text
+  return fallback
+}
+
 const heroBgSrc = heroBackgroundFor('projects')
 const heroBgStyle = heroBgSrc
   ? `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
@@ -67,18 +87,27 @@ const primaryGalleryPage =
   allGalleryPages[0] ??
   {}
 
-const pageTitle = asStr(primaryGalleryPage?.headline) || 'Projects | SGT'
-const pageDescription = asStr(primaryGalleryPage?.lead) || 'Project gallery from SGT.'
+const pageTitle = cleanProjectText(primaryGalleryPage?.headline, 'Projects | SGT')
+const pageDescription = cleanProjectText(
+  primaryGalleryPage?.lead,
+  'Project gallery of completed gutter work across Tampa Bay.'
+)
 const heroEyebrow = 'Projects'
-const heroHeadline = asStr(primaryGalleryPage?.headline) || 'Recent Jobs'
-const heroLead = asStr(primaryGalleryPage?.lead) || 'Simple gallery of completed gutter work.'
+const heroHeadline = cleanProjectText(primaryGalleryPage?.headline, 'Recent Jobs')
+const heroLead = cleanProjectText(
+  primaryGalleryPage?.lead,
+  'Simple gallery of completed gutter work across Tampa Bay.'
+)
 const galleryImages = allGalleryPages.flatMap((p) => (Array.isArray(p?.images) ? p.images : []))
 const homeProjectSlides = Array.isArray(homePage?.projects?.slides) ? homePage.projects.slides : []
 const allProjectImages = [...galleryImages, ...homeProjectSlides]
 const seenImageSrc = new Set()
 const images = allProjectImages.filter((img) => {
   const src = asStr(img?.imageSrc)
+  const alt = asStr(img?.imageAlt)
+  const location = asStr(img?.location)
   if (!src || seenImageSrc.has(src)) return false
+  if (looksLegacyColorado(src) || looksLegacyColorado(alt) || looksLegacyColorado(location)) return false
   seenImageSrc.add(src)
   return true
 })
@@ -86,8 +115,8 @@ const images = allProjectImages.filter((img) => {
 /** Client-side lightbox (serialized in page script) */
 const galleryItems = images.map((img) => ({
   src: mediaUrl(asStr(img.imageSrc)),
-  alt: asStr(img.imageAlt) || 'Project photo',
-  caption: asStr(img.location) || 'Tampa Metro',
+  alt: cleanProjectText(img.imageAlt, 'Project photo'),
+  caption: cleanProjectText(img.location, 'Tampa Bay area'),
 }))
 
 const universalFormFields = footerEstimateFields
