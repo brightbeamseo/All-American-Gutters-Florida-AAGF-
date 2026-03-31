@@ -39,6 +39,12 @@
   --transition-slow: 0.4s ease;
 }
 
+/* Global rule: any eyebrow UI label renders in all caps */
+[class$="eyebrow"],
+[class*=" eyebrow"] {
+  text-transform: uppercase;
+}
+
 *,
 *::before,
 *::after {
