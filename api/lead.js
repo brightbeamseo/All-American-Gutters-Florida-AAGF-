@@ -134,6 +134,7 @@ export default {
     const utm_source = String(body.utm_source || '').trim().slice(0, 200);
     const utm_medium = String(body.utm_medium || '').trim().slice(0, 200);
     const utm_campaign = String(body.utm_campaign || '').trim().slice(0, 200);
+    const utm_term = String(body.utm_term || '').trim().slice(0, 200);
 
     if (!name || !email || !phone) {
       return jsonResponse({ ok: false, error: 'missing_fields' }, 400);
@@ -154,6 +155,7 @@ export default {
       utm_source,
       utm_medium,
       utm_campaign,
+      utm_term,
     };
 
     let zRes;

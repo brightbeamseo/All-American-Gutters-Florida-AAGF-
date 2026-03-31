@@ -576,12 +576,13 @@
   }
 
   function getPersistedUtmParams() {
-    var keys = ['utm_source', 'utm_medium', 'utm_campaign'];
+    var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term'];
     var qs = new URLSearchParams(window.location.search || '');
     var persisted = {
       utm_source: '',
       utm_medium: '',
-      utm_campaign: ''
+      utm_campaign: '',
+      utm_term: ''
     };
 
     keys.forEach(function (key) {
@@ -890,6 +891,7 @@
           utm_source: getPersistedUtmParams().utm_source || '',
           utm_medium: getPersistedUtmParams().utm_medium || '',
           utm_campaign: getPersistedUtmParams().utm_campaign || '',
+          utm_term: getPersistedUtmParams().utm_term || '',
           formSource: form.getAttribute('data-lead-form') || 'unknown',
           name: ((fd.get('firstName') || '').toString().trim() + ' ' + (fd.get('lastName') || '').toString().trim()).trim(),
           firstName: (fd.get('firstName') || '').toString().trim(),
