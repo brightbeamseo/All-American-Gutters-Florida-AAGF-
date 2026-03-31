@@ -5,6 +5,7 @@ import FooterContactInfo from '../../components/FooterContactInfo.astro'
 import FooterHoursRow from '../../components/FooterHoursRow.astro'
 import { externalLinkAttrs } from '../../lib/external-link.js'
 import { googleBusinessProfileUrl, isContactFooterColumnHeading } from '../../lib/footer-contact-heading.js'
+import { sanity } from '../../lib/sanity.js'
 import { getSiteSettings, getHomePage, mergeHeaderFromSettings } from '../../lib/site-settings.js'
 import { asStr, applyTemplate, mediaUrl } from '../../lib/sanity-strings.js'
 
@@ -13,8 +14,21 @@ const serviceAreaFigureSrc =
 
 let settings = {}
 let homePage = {}
+let locationPages = []
 try {
-  ;[settings, homePage] = await Promise.all([getSiteSettings(), getHomePage()])
+  ;[settings, homePage, locationPages] = await Promise.all([
+    getSiteSettings(),
+    getHomePage(),
+    sanity.fetch(
+      `*[_type == "locationPage" && defined(slug.current)]{
+        title,
+        headline,
+        county,
+        countyName,
+        "slug": slug.current
+      } | order(title asc)`
+    ),
+  ])
 } catch (err) {
   console.warn('[service-area] Sanity fetch failed; using fallback placeholders.', err)
 }
@@ -56,6 +70,83 @@ const mapIframeTitle =
   applyTemplate(asStr(serviceArea?.mapIframeTitleTemplate), { companyName }) || `${companyName} service area map`
 
 const serviceCities = Array.isArray(serviceArea?.cities) ? serviceArea.cities : []
+const locationRows = Array.isArray(locationPages) ? locationPages : []
+
+const countyBySlug = {
+  'anna-maria-island-florida': 'Manatee County',
+  'apollo-beach-fl': 'Hillsborough County',
+  'bradenton-florida': 'Manatee County',
+  'brandon-florida': 'Hillsborough County',
+  'cortez-florida': 'Manatee County',
+  'dade-city-florida': 'Pasco County',
+  'dover-florida': 'Hillsborough County',
+  'ellenton-florida': 'Manatee County',
+  'gibsonton-florida': 'Hillsborough County',
+  'gutters-clearwater-fl': 'Pinellas County',
+  'gutters-largo-fl': 'Pinellas County',
+  'gutters-odessa-fl': 'Hillsborough County',
+  'gutters-plant-city-fl': 'Hillsborough County',
+  'gutters-riverview-florida': 'Hillsborough County',
+  'gutters-ruskin-fl': 'Hillsborough County',
+  'gutters-saint-petersburg-fl': 'Pinellas County',
+  'gutters-san-antonio-fl': 'Pasco County',
+  'gutters-seffner-fl': 'Hillsborough County',
+  'gutters-sun-city-center-fl': 'Hillsborough County',
+  'gutters-thonotosassa-fl': 'Hillsborough County',
+  'gutters-valrico-fl': 'Hillsborough County',
+  'gutters-wimauma-fl': 'Hillsborough County',
+  'lakewood-ranch-florida': 'Manatee County',
+  'land-o-lakes-florida': 'Pasco County',
+  'lithia-florida': 'Hillsborough County',
+  'longboat-key-florida': 'Sarasota County',
+  'lutz-florida': 'Hillsborough County',
+  'parrish-florida': 'Manatee County',
+  'sarasota-fl': 'Sarasota County',
+  'tampa-florida': 'Hillsborough County',
+  'wesley-chapel-florida': 'Pasco County',
+  'zephyrhills-florida': 'Pasco County',
+  'gutters-mulberry-florida': 'Polk County',
+}
+
+function slugToCityName(slug) {
+  const raw = asStr(slug)
+  if (!raw) return ''
+  return raw
+    .replace(/^gutters-/, '')
+    .replace(/-florida$/, '')
+    .replace(/-fl$/, '')
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ')
+}
+
+function countyForLocation(row) {
+  const explicit = asStr(row?.countyName) || asStr(row?.county)
+  if (explicit) return explicit
+  const slug = asStr(row?.slug)
+  return countyBySlug[slug] || ''
+}
+
+const cityPages = locationRows
+  .map((row) => {
+    const slug = asStr(row?.slug)
+    const name = asStr(row?.title) || asStr(row?.headline) || slugToCityName(slug)
+    if (!slug || !name) return null
+    return {
+      name,
+      href: `/locations/${slug}/`,
+      county: countyForLocation(row),
+    }
+  })
+  .filter(Boolean)
+  .sort((a, b) => a.name.localeCompare(b.name))
+
+const counties = Array.from(
+  new Set(cityPages.map((row) => row.county).filter(Boolean))
+).sort((a, b) => a.localeCompare(b))
+
+const cityLinks = cityPages.length > 0 ? cityPages : serviceCities
 ---
 
 <BaseLayout
@@ -165,19 +256,23 @@ const serviceCities = Array.isArray(serviceArea?.cities) ? serviceArea.cities : 
           </figure>
         </div>
         <div class="cities-list">
-          <p class="cities-label">{asStr(serviceArea?.citiesLabel) || 'Service areas'}</p>
+          <p class="cities-label">{asStr(serviceArea?.citiesLabel) || 'Cities we serve'}</p>
           <nav class="cities-nav" aria-label={asStr(serviceArea?.citiesNavAriaLabel) || 'Cities we serve'}>
-            {serviceCities.map((city, i) => (
+            {cityLinks.map((city, i) => (
               <span>
                 {i > 0 ? <span aria-hidden="true">, </span> : null}
-                <a href={asStr(city?.href) || '#'}>{asStr(city?.name)}</a>
+                <a href={asStr(city?.href)}>{asStr(city?.name)}</a>
               </span>
             ))}
-            {serviceCities.length > 0 ? (
+          </nav>
+          <p class="cities-label" style="margin-top:1rem;">Counties we cover</p>
+          <nav class="cities-nav" aria-label="Counties we serve">
+            {counties.map((county, i) => (
               <span>
-                <span aria-hidden="true">, </span>and more.
+                {i > 0 ? <span aria-hidden="true">, </span> : null}
+                <span>{county}</span>
               </span>
-            ) : null}
+            ))}
           </nav>
         </div>
         <div class="map-wrap">
