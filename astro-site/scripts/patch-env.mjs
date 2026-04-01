@@ -62,3 +62,22 @@ export function getSanityPatchCredentials() {
   ).trim()
   return { projectId, dataset, token }
 }
+
+/**
+ * If a `drafts.{id}` exists after a patch, publish it so the CDN / public API see changes.
+ * @param {import('@sanity/client').SanityClient} client
+ * @param {string} publishedId Document id without `drafts.` (e.g. `siteSettingsSingleton`)
+ * @returns {Promise<boolean>} true if a draft was published
+ */
+export async function tryPublishDraft(client, publishedId) {
+  const pubId = publishedId.replace(/^drafts\./, '')
+  const draftId = `drafts.${pubId}`
+  const count = await client.fetch(`count(*[_id == $draftId])`, { draftId })
+  if (typeof count !== 'number' || count < 1) return false
+  await client.action({
+    actionType: 'sanity.action.document.publish',
+    draftId,
+    publishedId: pubId,
+  })
+  return true
+}

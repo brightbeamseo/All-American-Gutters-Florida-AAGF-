@@ -16,7 +16,7 @@
 import { createClient } from '@sanity/client'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getSanityPatchCredentials, loadPatchDotEnv } from './patch-env.mjs'
+import { getSanityPatchCredentials, loadPatchDotEnv, tryPublishDraft } from './patch-env.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dirname, '..')
@@ -103,7 +103,11 @@ async function main() {
   await client.patch(documentId).set(patch).commit()
 
   console.log(`Patched ${documentId} with AAGF business, meta, keywords, GBP link, and mapEmbedUrl.`)
-  console.log('Publish Site settings in Studio if a draft was created.')
+  if (await tryPublishDraft(client, documentId)) {
+    console.log(`Published ${documentId} (draft → live).`)
+  } else {
+    console.log(`No draft for ${documentId}; public API already had this revision or patch applied in place.`)
+  }
 }
 
 main().catch((err) => {

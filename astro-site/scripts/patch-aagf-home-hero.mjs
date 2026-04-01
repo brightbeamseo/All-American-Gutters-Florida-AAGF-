@@ -10,7 +10,7 @@
 import { createClient } from '@sanity/client'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getSanityPatchCredentials, loadPatchDotEnv } from './patch-env.mjs'
+import { getSanityPatchCredentials, loadPatchDotEnv, tryPublishDraft } from './patch-env.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dirname, '..')
@@ -58,7 +58,13 @@ async function main() {
   await client.patch('siteSettingsSingleton').set({ 'header.callCtaTemplate': CALL_CTA_TEMPLATE }).commit()
   console.log('Patched siteSettingsSingleton → header.callCtaTemplate (nav call button).')
 
-  console.log('Publish Home page + Site settings in Studio if drafts were created.')
+  for (const id of ['homePageSingleton', 'siteSettingsSingleton']) {
+    if (await tryPublishDraft(client, id)) {
+      console.log(`Published ${id} (draft → live).`)
+    } else {
+      console.log(`No draft for ${id}; public API already had this revision or patch applied in place.`)
+    }
+  }
 }
 
 main().catch((err) => {
