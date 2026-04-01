@@ -30,7 +30,7 @@ const meta = settings.meta
 const statsValues = settings.statsValues
 const mapEmbedUrl = asStr(settings.mapEmbedUrl)
 
-const companyName = 'All American Gutters'
+const companyName = asStr(business?.companyName) || 'All American Gutters'
 const phoneDisplay = asStr(business?.phoneDisplay)
 const tel = asStr(business?.phoneTel)
 const email = asStr(business?.email)
