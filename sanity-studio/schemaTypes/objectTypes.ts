@@ -287,7 +287,11 @@ export const header = defineType({
   fields: [
     defineField({ name: 'offerBar', type: 'offerBar' }),
     defineField({ name: 'navItems', type: 'array', of: [{ type: 'navItem' }] }),
-    defineField({ name: 'callCtaTemplate', type: 'string' }),
+    defineField({
+      name: 'callCtaTemplate',
+      type: 'string',
+      description: 'Phone button label. Use exactly: Call: {{phoneDisplay}} — spelling and braces matter.',
+    }),
     defineField({ name: 'logoAriaLabelTemplate', type: 'string' }),
   ],
 })
@@ -314,7 +318,11 @@ export const hero = defineType({
     defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'headline', type: 'string' }),
     defineField({ name: 'lead', type: 'text', rows: 3 }),
-    defineField({ name: 'callCtaTemplate', type: 'string' }),
+    defineField({
+      name: 'callCtaTemplate',
+      type: 'string',
+      description: 'Hero phone button. Use exactly: Call: {{phoneDisplay}} (not phoneDisplav / ohone, etc.).',
+    }),
     defineField({ name: 'formAriaLabel', type: 'string' }),
     defineField({ name: 'formKicker', type: 'string' }),
     defineField({ name: 'formHeadline', type: 'string' }),

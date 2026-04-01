@@ -8,8 +8,9 @@
  *   PUBLIC_SANITY_DATASET (optional, default production)
  *   SANITY_API_WRITE_TOKEN
  *
- * Run: cd astro-site && npm run content:aagf
- * Then Studio → Site settings → Publish if needed.
+ * Run: cd astro-site && npm run content:aagf (also runs patch-aagf-home-hero.mjs for Tampa/typo fixes)
+ * Or this file only: node scripts/patch-aagf-business.mjs
+ * Then Studio → Publish Site settings (+ Home page if hero was patched).
  */
 
 import { createClient } from '@sanity/client'
