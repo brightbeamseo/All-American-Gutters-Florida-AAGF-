@@ -2775,6 +2775,7 @@ form[data-lead-form] button[type="submit"].is-busy {
 }
 
 .media-video video,
+.media-video img,
 .media-image img {
   display: block;
   width: 100%;
