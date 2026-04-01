@@ -593,7 +593,7 @@ a.btn-primary[href^="tel:"]:hover {
   inset: 0;
   background-image:
     linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%),
-    url("/Media%20(SGT)/Images%20(SGT)/sunlife-gutters-tampa-copper-gutter-front-home.webp");
+    url("/Media%20(AAGF)/Images%20(AAGF)/sunlife-gutters-tampa-copper-gutter-front-home.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1179,7 +1179,7 @@ a.btn-primary[href^="tel:"]:hover {
   background-color: #1A5DB5;
   background-image:
     linear-gradient(135deg, rgba(26, 93, 181, 0.94) 0%, rgba(68, 189, 237, 0.80) 100%),
-    url("/Media%20(SGT)/Images%20(SGT)/sunlife-gutters-lakeland-fl-roof-gutter-system.webp");
+    url("/Media%20(AAGF)/Images%20(AAGF)/sunlife-gutters-lakeland-fl-roof-gutter-system.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -2810,7 +2810,7 @@ form[data-lead-form] button[type="submit"].is-busy {
 .unique-points {
   position: relative;
   background: var(--color-surface);
-  background-image: url("/Media%20(SGT)/Images%20(SGT)/sunlife-gutters-tampa-residential-gutter-install.webp");
+  background-image: url("/Media%20(AAGF)/Images%20(AAGF)/sunlife-gutters-tampa-residential-gutter-install.webp");
   background-size: cover;
   background-position: center;
 }

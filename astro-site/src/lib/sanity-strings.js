@@ -35,9 +35,13 @@ export function applyTemplate(template, vars) {
 export function mediaUrl(relPath) {
   if (relPath == null || relPath === '') return ''
   let p = String(relPath).trim()
-  // Legacy paths from the Mile High template pointed at Media (MHG)/…; assets now live under Media (SGT)/…
+  // Legacy paths from the Mile High template pointed at Media (MHG)/…; assets now live under Media (AAGF)/…
   if (p.startsWith('Media (MHG)/')) {
-    p = `Media (SGT)/${p.slice('Media (MHG)/'.length)}`
+    p = `Media (AAGF)/${p.slice('Media (MHG)/'.length)}`
+  }
+  // CMS may still store pre-rename paths until content is republished
+  if (p.includes('(SGT)')) {
+    p = p.replace(/\(SGT\)/g, '(AAGF)')
   }
   return '/' + p.split('/').map(encodeURIComponent).join('/')
 }

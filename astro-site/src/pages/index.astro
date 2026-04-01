@@ -15,6 +15,7 @@ import {
   mediaUrl,
   statLookup,
 } from '../lib/sanity-strings.js'
+import { aagfSiteLogoUrl } from '../lib/brand-logos.js'
 import { assertSanityHomepage } from '../lib/assert-sanity-homepage.js'
 import { sanitizeCmsHtml } from '../lib/sanitize-cms-html.js'
 import { southFloridaCopy, isHomeGuttersServiceItem } from '../lib/south-florida-home-copy.js'
@@ -37,8 +38,7 @@ const sfq = (v) => southFloridaCopy(v, address)
 const addressHref = googleBusinessProfileUrl(settings)
 const descriptionShort = asStr(business?.descriptionShort)
 const copyrightHref = asStr(business?.copyrightSiteUrl)
-const logoBlack = asStr(business?.logoHorizontalBlack)
-const logoWhite = asStr(business?.logoHorizontalWhite)
+const siteLogoUrl = aagfSiteLogoUrl()
 
 const pageTitle = asStr(meta?.title)
 const pageDescription = asStr(meta?.description)
@@ -243,7 +243,7 @@ const serviceHref = (svc) => {
     <div class="header-nav">
       <div class="header-inner">
         <a href="/" class="logo" aria-label={logoAriaLabel}>
-          <img src={mediaUrl(logoBlack)} alt={companyName} class="logo-img" width="300" height="72" />
+          <img src={siteLogoUrl} alt={companyName} class="logo-img" width="300" height="72" />
         </a>
         <button class="nav-toggle" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -750,7 +750,7 @@ const serviceHref = (svc) => {
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand-block footer-col">
-          <img src={mediaUrl(logoWhite)} alt={companyName} class="footer-logo" width="380" height="78" loading="lazy" decoding="async" />
+          <img src={siteLogoUrl} alt={companyName} class="footer-logo" width="380" height="78" loading="lazy" decoding="async" />
           <p class="footer-address">{descriptionShort}</p>
           <div class="footer-social" aria-label={asStr(footerBrand?.socialAriaLabel)}>
             {footerBrand?.socialLinks?.map((s) => (

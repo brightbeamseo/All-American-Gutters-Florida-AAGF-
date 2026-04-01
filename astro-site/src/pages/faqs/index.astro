@@ -9,6 +9,7 @@ import { sanity } from '../../lib/sanity.js'
 import { getSiteSettings, getHomePage, mergeHeaderFromSettings } from '../../lib/site-settings.js'
 import { heroBackgroundFor } from '../../lib/hero-backgrounds.js'
 import { sanitizeCmsHtml } from '../../lib/sanitize-cms-html.js'
+import { aagfSiteLogoUrl } from '../../lib/brand-logos.js'
 import { asStr, applyTemplate, mediaUrl } from '../../lib/sanity-strings.js'
 
 let settings = {}
@@ -40,9 +41,8 @@ const email = asStr(business.email) || 'hello@example.com'
 const address = asStr(business.addressShort) || 'Tampa, Colorado'
 const addressHref = googleBusinessProfileUrl(settings)
 const descriptionShort = asStr(business.descriptionShort)
-const logoWhite = asStr(business.logoHorizontalWhite)
-const logoBlack = asStr(business.logoHorizontalBlack)
 const copyrightHref = asStr(business.copyrightSiteUrl) || '#'
+const siteLogoUrl = aagfSiteLogoUrl()
 
 const pageTitle = 'Gutter FAQs Tampa | SGT'
 const pageDescription = 'Simple answers to common gutter pricing, repairs, and service questions.'
@@ -104,11 +104,7 @@ const faqItems = Array.isArray(faqData?.items)
     <div class="header-nav">
       <div class="header-inner">
         <a href="/" class="logo" aria-label={logoAriaLabel}>
-          {logoBlack ? (
-            <img src={mediaUrl(logoBlack)} alt={companyName} class="logo-img" />
-          ) : (
-            <span class="section-title" style="margin:0; font-size: 1.25rem;">{companyName}</span>
-          )}
+          <img src={siteLogoUrl} alt={companyName} class="logo-img" />
         </a>
         <button class="nav-toggle" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -236,7 +232,7 @@ const faqItems = Array.isArray(faqData?.items)
         </div>
         <figure class="page-split__media">
           <img
-            src={mediaUrl('Media (SGT)/Images (SGT)/sunlife-gutters-plant-city-fl-gutter-corner-drainage.webp')}
+            src={mediaUrl('Media (AAGF)/Images (AAGF)/sunlife-gutters-plant-city-fl-gutter-corner-drainage.webp')}
             alt="Corner downspout and drainage detail on a Plant City gutter installation"
             width="640"
             height="480"
@@ -347,7 +343,7 @@ const faqItems = Array.isArray(faqData?.items)
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand-block footer-col">
-          {logoWhite ? <img src={mediaUrl(logoWhite)} alt={companyName} class="footer-logo" /> : null}
+          <img src={siteLogoUrl} alt={companyName} class="footer-logo" />
           <p class="footer-address">{descriptionShort}</p>
           <div class="footer-social" aria-label={asStr(footerBrand?.socialAriaLabel)}>
             {footerBrand?.socialLinks?.map((s) => (

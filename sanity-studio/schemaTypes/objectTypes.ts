@@ -448,7 +448,7 @@ export const aboutVideo = defineType({
       type: 'string',
       title: 'Video file path',
       description:
-        'Path under /public after sync, e.g. Media (SGT)/Videos (SGT)/your-video.mp4 — run `npm run sync:media` in astro-site.',
+        'Path under /public after sync, e.g. Media (AAGF)/Videos (AAGF)/your-video.mp4 — run `npm run sync:media` in astro-site.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -462,7 +462,7 @@ export const aboutVideo = defineType({
       name: 'posterSrc',
       type: 'string',
       title: 'Poster image path (optional)',
-      description: 'Still frame shown before play; optional. e.g. Media (SGT)/Images (SGT)/still.webp',
+      description: 'Still frame shown before play; optional. e.g. Media (AAGF)/Images (AAGF)/still.webp',
     }),
     defineField({ name: 'posterLocation', type: 'string', title: 'Poster note (internal)' }),
   ],
@@ -477,7 +477,7 @@ export const aboutBadgeItem = defineType({
       name: 'imageSrc',
       type: 'string',
       title: 'Badge image path',
-      description: 'e.g. Media (SGT)/Badges (SGT)/Best-of-Florida-2023-1.png',
+      description: 'e.g. Media (AAGF)/Badges (AAGF)/Best-of-Florida-2023-1.png',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

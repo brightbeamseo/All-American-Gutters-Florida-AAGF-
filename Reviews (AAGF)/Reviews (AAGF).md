@@ -1,4 +1,4 @@
-# Reviews (SGT)
+# Reviews (AAGF)
 
 **Business:** SunLife Gutters Tampa (Google listing may still show legacy name “SunLife Gutters & Homes”)  
 **Google Business Profile (Maps):** https://maps.app.goo.gl/zPRAe4qAJ4sntCNh8  
@@ -10,7 +10,7 @@
 
 | Item | Role |
 |------|------|
-| **`Reviews (SGT).md`** (this file) | Human-readable master list with quick links to each photo |
+| **`Reviews (AAGF).md`** (this file) | Human-readable master list with quick links to each photo |
 | **`images/`** | Reviewer profile images saved from Google (see `images/README.md`) |
 | **`reviews-export-template.csv`** | Same columns as a spreadsheet for sorting/filtering |
 
@@ -88,7 +88,7 @@ These match **`homePageSingleton` → `reviews.testimonials`** (used on the live
 
 ## Legacy archive — five 5★ reviews (text only, from `Reviews (MHG).rtf`)
 
-Source file in repo: `astro-site/public/Media (SGT)/Reviews (MHG)/Reviews (MHG).rtf`  
+Source file in repo: `astro-site/public/Media (AAGF)/Reviews (MHG)/Reviews (MHG).rtf`  
 These lines are **not** pulled live from Google; they are legacy marketing copy. **Relative dates** were not in the RTF — add them when you verify each review on GBP. **Profile photos** are not in this repo; save into `images/reviewer-05.jpg` … `reviewer-09.jpg` when you have them.
 
 ### 05 — Shane White

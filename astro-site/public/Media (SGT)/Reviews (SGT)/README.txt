@@ -6,6 +6,6 @@ Place reviewer avatar images here using the same filenames as the CSV:
   reviewer-04.png  Bradley Tayloe   (also on homepage)
   reviewer-05.png  Joe Eppich     (CSV / archive only)
 
-Source copies (named by reviewer) live in repo: Reviews (SGT)/images/
+Source copies (named by reviewer) live in repo: Reviews (AAGF)/images/
 
-Sanity references: Media (SGT)/Reviews (SGT)/reviewer-NN.png
+Sanity references: Media (AAGF)/Reviews (AAGF)/reviewer-NN.png

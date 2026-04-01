@@ -8,6 +8,7 @@ import { googleBusinessProfileUrl, isContactFooterColumnHeading } from '../lib/f
 import { mergeHeaderFromSettings } from '../lib/site-settings.js'
 import { heroBackgroundFor } from '../lib/hero-backgrounds.js'
 import { sanitizeCmsHtml } from '../lib/sanitize-cms-html.js'
+import { aagfSiteLogoUrl } from '../lib/brand-logos.js'
 import { asStr, applyTemplate, mediaUrl } from '../lib/sanity-strings.js'
 
 /**
@@ -42,9 +43,8 @@ const email = asStr(business.email) || 'hello@example.com'
 const address = asStr(business.addressShort) || 'Tampa, Colorado'
 const addressHref = googleBusinessProfileUrl(settings)
 const descriptionShort = asStr(business.descriptionShort)
-const logoWhite = asStr(business.logoHorizontalWhite)
 const copyrightHref = asStr(business.copyrightSiteUrl) || '#'
-const logoBlack = asStr(business.logoHorizontalBlack)
+const siteLogoUrl = aagfSiteLogoUrl()
 
 const callLabelNav = applyTemplate(asStr(header.callCtaTemplate), { phoneDisplay }) || phoneDisplay
 const logoAriaLabel = applyTemplate(asStr(header.logoAriaLabelTemplate), { companyName }) || companyName
@@ -139,11 +139,7 @@ const serviceHref = (svc) => {
     <div class="header-nav">
       <div class="header-inner">
         <a href="/" class="logo" aria-label={logoAriaLabel}>
-          {logoBlack ? (
-            <img src={mediaUrl(logoBlack)} alt={companyName} class="logo-img" />
-          ) : (
-            <span class="section-title" style="margin:0; font-size: 1.25rem;">{companyName}</span>
-          )}
+          <img src={siteLogoUrl} alt={companyName} class="logo-img" />
         </a>
         <button class="nav-toggle" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -495,7 +491,7 @@ const serviceHref = (svc) => {
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand-block footer-col">
-          {logoWhite ? <img src={mediaUrl(logoWhite)} alt={companyName} class="footer-logo" /> : null}
+          <img src={siteLogoUrl} alt={companyName} class="footer-logo" />
           <p class="footer-address">{descriptionShort}</p>
           <div class="footer-social" aria-label={asStr(footerBrand?.socialAriaLabel)}>
             {footerBrand?.socialLinks?.map((s) => (

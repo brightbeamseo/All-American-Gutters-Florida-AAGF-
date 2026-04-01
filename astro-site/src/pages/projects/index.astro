@@ -71,7 +71,13 @@ const looksLegacyColorado = (value) => {
 const isSunLifeProjectImage = (src) => {
   const value = asStr(src).toLowerCase()
   if (!value) return false
-  return value.includes('/images (sgt)/') || value.includes('media (sgt)/images (sgt)/') || value.includes('sunlife-')
+  return (
+    value.includes('/images (aagf)/') ||
+    value.includes('media (aagf)/images (aagf)/') ||
+    value.includes('/images (sgt)/') ||
+    value.includes('media (sgt)/images (sgt)/') ||
+    value.includes('sunlife-')
+  )
 }
 
 const cleanProjectText = (value, fallback = '') => {
@@ -238,7 +244,7 @@ const universalRequiredIndicator = asStr(formsCfg?.requiredIndicator) || '*'
         </div>
         <figure class="page-split__media">
           <img
-            src={mediaUrl('Media (SGT)/Images (SGT)/sunlife-gutters-brandon-fl-front-entry-gutters.webp')}
+            src={mediaUrl('Media (AAGF)/Images (AAGF)/sunlife-gutters-brandon-fl-front-entry-gutters.webp')}
             alt="Front entry gutters and downspouts on a Brandon, FL home"
             width="640"
             height="480"

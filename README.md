@@ -10,7 +10,7 @@ The Git remote **`sunlife`** still points at the original template (`brightbeams
 - `sanity-studio/` — Sanity Studio (content)
 - `styles.css` — site styling used by Astro layout import
 - `api/lead.js` — serverless lead endpoint (Vercel)
-- `Media (SGT)/` — media assets (paths unchanged; rename later if you want)
+- `Media (AAGF)/` — media assets (paths unchanged; rename later if you want)
 
 ## 1. GitHub
 

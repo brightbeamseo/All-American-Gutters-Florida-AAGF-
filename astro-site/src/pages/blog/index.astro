@@ -37,8 +37,6 @@ const email = asStr(business.email) || 'hello@example.com'
 const address = asStr(business.addressShort) || 'Tampa, Colorado'
 const addressHref = googleBusinessProfileUrl(settings)
 const descriptionShort = asStr(business.descriptionShort)
-const logoWhite = asStr(business.logoHorizontalWhite)
-const logoBlack = asStr(business.logoHorizontalBlack)
 const copyrightHref = asStr(business.copyrightSiteUrl) || '#'
 
 const callLabelNav = applyTemplate(asStr(header.callCtaTemplate), { phoneDisplay }) || phoneDisplay
@@ -90,8 +88,6 @@ const introText =
   address={address}
   addressHref={addressHref}
   descriptionShort={descriptionShort}
-  logoWhite={logoWhite}
-  logoBlack={logoBlack}
   copyrightHref={copyrightHref}
   callLabelNav={callLabelNav}
   heroCallLabel={heroCallLabel}

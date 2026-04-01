@@ -8,6 +8,7 @@ import FooterContactInfo from './FooterContactInfo.astro'
 import FooterHoursRow from './FooterHoursRow.astro'
 import { externalLinkAttrs } from '../lib/external-link.js'
 import { googleBusinessProfileUrl, isContactFooterColumnHeading } from '../lib/footer-contact-heading.js'
+import { aagfSiteLogoUrl } from '../lib/brand-logos.js'
 import { asStr, mediaUrl } from '../lib/sanity-strings.js'
 
 const {
@@ -22,8 +23,6 @@ const {
   address,
   addressHref,
   descriptionShort,
-  logoWhite,
-  logoBlack,
   copyrightHref,
   callLabelNav,
   heroCallLabel,
@@ -50,6 +49,8 @@ const {
   formIdPrefix,
   navDdPrefix = 'blog',
 } = Astro.props
+
+const siteLogoUrl = aagfSiteLogoUrl()
 ---
 
 <BaseLayout
@@ -78,7 +79,7 @@ const {
     <div class="header-nav">
       <div class="header-inner">
         <a href="/" class="logo" aria-label={logoAriaLabel}>
-          {logoBlack ? <img src={mediaUrl(logoBlack)} alt={companyName} class="logo-img" /> : <span class="section-title" style="margin:0; font-size: 1.25rem;">{companyName}</span>}
+          <img src={siteLogoUrl} alt={companyName} class="logo-img" />
         </a>
         <button class="nav-toggle" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -246,7 +247,7 @@ const {
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand-block footer-col">
-          {logoWhite ? <img src={mediaUrl(logoWhite)} alt={companyName} class="footer-logo" /> : null}
+          <img src={siteLogoUrl} alt={companyName} class="footer-logo" />
           <p class="footer-address">{descriptionShort}</p>
           <div class="footer-social" aria-label={asStr(footerBrand?.socialAriaLabel)}>
             {footerBrand?.socialLinks?.map((s) => (

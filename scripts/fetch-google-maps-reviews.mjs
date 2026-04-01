@@ -21,7 +21,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const OUT_DIR = join(__dirname, '..', 'Reviews (SGT)')
+const OUT_DIR = join(__dirname, '..', 'Reviews (AAGF)')
 const OUT_JSON = join(OUT_DIR, 'reviews-from-google-places.json')
 const OUT_MD = join(OUT_DIR, 'reviews-from-google-places.md')
 

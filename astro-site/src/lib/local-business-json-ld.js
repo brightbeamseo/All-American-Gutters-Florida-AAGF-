@@ -2,7 +2,8 @@
  * JSON-LD for schema.org HomeAndConstructionBusiness (LocalBusiness).
  * Data from Site settings → Business + Business listings.
  */
-import { asStr, mediaUrl } from './sanity-strings.js'
+import { aagfSiteLogoUrl } from './brand-logos.js'
+import { asStr } from './sanity-strings.js'
 
 /** Matches astro.config.mjs `site` — absolute URLs for image / @id */
 export const CANONICAL_SITE_ORIGIN =
@@ -41,10 +42,7 @@ export function buildHomeAndConstructionBusinessJsonLd(settings) {
     description = description ? `${description} ${hours}` : hours
   }
 
-  const logoPath = asStr(business.logoHorizontalBlack) || asStr(business.logoHorizontalWhite)
-  const image = logoPath
-    ? `${CANONICAL_SITE_ORIGIN.replace(/\/+$/, '')}${mediaUrl(logoPath)}`
-    : undefined
+  const image = `${CANONICAL_SITE_ORIGIN.replace(/\/+$/, '')}${aagfSiteLogoUrl()}`
 
   const addressLine = asStr(business.addressShort).trim()
   /** @type {Record<string, unknown> | undefined} */
