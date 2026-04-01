@@ -8,35 +8,16 @@
  */
 
 import { createClient } from '@sanity/client'
-import { readFileSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { getSanityPatchCredentials, loadPatchDotEnv } from './patch-env.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dirname, '..')
 
-function loadDotEnv() {
-  const p = resolve(root, '.env')
-  if (!existsSync(p)) return
-  for (const line of readFileSync(p, 'utf8').split('\n')) {
-    const t = line.trim()
-    if (!t || t.startsWith('#')) continue
-    const eq = t.indexOf('=')
-    if (eq === -1) continue
-    const key = t.slice(0, eq).trim()
-    let val = t.slice(eq + 1).trim()
-    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-      val = val.slice(1, -1)
-    }
-    if (process.env[key] === undefined) process.env[key] = val
-  }
-}
+loadPatchDotEnv(root)
 
-loadDotEnv()
-
-const projectId = (process.env.PUBLIC_SANITY_PROJECT_ID || '').trim()
-const dataset = (process.env.PUBLIC_SANITY_DATASET || 'production').trim()
-const token = (process.env.SANITY_API_WRITE_TOKEN || '').trim()
+const { projectId, dataset, token } = getSanityPatchCredentials()
 
 /** Must match applyTemplate() keys in astro-site (see sanity-strings.js). */
 const CALL_CTA_TEMPLATE = 'Call: {{phoneDisplay}}'
@@ -50,7 +31,9 @@ const HERO = {
 
 async function main() {
   if (!projectId || !token) {
-    console.error('Missing PUBLIC_SANITY_PROJECT_ID or SANITY_API_WRITE_TOKEN in astro-site/.env')
+    console.error(
+      'Missing Sanity credentials: set PUBLIC_SANITY_PROJECT_ID or SANITY_PROJECT_ID, and SANITY_API_WRITE_TOKEN or SANITY_API_TOKEN (repo-root or astro-site/.env).',
+    )
     process.exit(1)
   }
 

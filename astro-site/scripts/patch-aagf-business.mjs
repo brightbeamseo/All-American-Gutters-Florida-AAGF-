@@ -3,10 +3,10 @@
  * Writes All American Gutters business copy, contact, meta, keywords, and categories
  * into Sanity Site settings (singleton `siteSettingsSingleton`).
  *
- * Requires astro-site/.env:
- *   PUBLIC_SANITY_PROJECT_ID
- *   PUBLIC_SANITY_DATASET (optional, default production)
- *   SANITY_API_WRITE_TOKEN
+ * Env (repo-root `.env` and/or `astro-site/.env`, merged — astro-site wins on conflicts):
+ *   PUBLIC_SANITY_PROJECT_ID or SANITY_PROJECT_ID
+ *   PUBLIC_SANITY_DATASET or SANITY_DATASET (optional, default production)
+ *   SANITY_API_WRITE_TOKEN or SANITY_API_TOKEN
  *
  * Run: cd astro-site && npm run content:aagf (also runs patch-aagf-home-hero.mjs for Tampa/typo fixes)
  * Or this file only: node scripts/patch-aagf-business.mjs
@@ -14,35 +14,16 @@
  */
 
 import { createClient } from '@sanity/client'
-import { readFileSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { getSanityPatchCredentials, loadPatchDotEnv } from './patch-env.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dirname, '..')
 
-function loadDotEnv() {
-  const p = resolve(root, '.env')
-  if (!existsSync(p)) return
-  for (const line of readFileSync(p, 'utf8').split('\n')) {
-    const t = line.trim()
-    if (!t || t.startsWith('#')) continue
-    const eq = t.indexOf('=')
-    if (eq === -1) continue
-    const key = t.slice(0, eq).trim()
-    let val = t.slice(eq + 1).trim()
-    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-      val = val.slice(1, -1)
-    }
-    if (process.env[key] === undefined) process.env[key] = val
-  }
-}
+loadPatchDotEnv(root)
 
-loadDotEnv()
-
-const projectId = (process.env.PUBLIC_SANITY_PROJECT_ID || '').trim()
-const dataset = (process.env.PUBLIC_SANITY_DATASET || 'production').trim()
-const token = (process.env.SANITY_API_WRITE_TOKEN || '').trim()
+const { projectId, dataset, token } = getSanityPatchCredentials()
 const documentId = 'siteSettingsSingleton'
 
 function stringListItems(values) {
@@ -74,7 +55,9 @@ const MAP_EMBED_SRC =
 
 async function main() {
   if (!projectId || !token) {
-    console.error('Missing PUBLIC_SANITY_PROJECT_ID or SANITY_API_WRITE_TOKEN in astro-site/.env')
+    console.error(
+      'Missing Sanity credentials: set PUBLIC_SANITY_PROJECT_ID or SANITY_PROJECT_ID, and SANITY_API_WRITE_TOKEN or SANITY_API_TOKEN (repo-root or astro-site/.env).',
+    )
     process.exit(1)
   }
 

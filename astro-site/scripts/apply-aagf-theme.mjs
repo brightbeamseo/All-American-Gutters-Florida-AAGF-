@@ -2,46 +2,23 @@
 /**
  * Writes All American Gutters logo-aligned colors into Sanity site settings (singleton).
  *
- * Requires in astro-site/.env:
- *   PUBLIC_SANITY_PROJECT_ID
- *   PUBLIC_SANITY_DATASET (optional, default production)
- *   SANITY_API_WRITE_TOKEN — Editor token from sanity.io/manage → API → Tokens
+ * Env: same as other patch scripts — see `patch-env.mjs` (repo-root + astro-site `.env`, token aliases).
  *
  * Run: cd astro-site && npm run theme:aagf
  * Then open Studio → Site settings → Publish if a draft appears.
  */
 
 import { createClient } from '@sanity/client'
-import { readFileSync, existsSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { getSanityPatchCredentials, loadPatchDotEnv } from './patch-env.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dirname, '..')
 
-function loadDotEnv() {
-  const p = resolve(root, '.env')
-  if (!existsSync(p)) return
-  const text = readFileSync(p, 'utf8')
-  for (const line of text.split('\n')) {
-    const t = line.trim()
-    if (!t || t.startsWith('#')) continue
-    const eq = t.indexOf('=')
-    if (eq === -1) continue
-    const key = t.slice(0, eq).trim()
-    let val = t.slice(eq + 1).trim()
-    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-      val = val.slice(1, -1)
-    }
-    if (process.env[key] === undefined) process.env[key] = val
-  }
-}
+loadPatchDotEnv(root)
 
-loadDotEnv()
-
-const projectId = (process.env.PUBLIC_SANITY_PROJECT_ID || '').trim()
-const dataset = (process.env.PUBLIC_SANITY_DATASET || 'production').trim()
-const token = (process.env.SANITY_API_WRITE_TOKEN || '').trim()
+const { projectId, dataset, token } = getSanityPatchCredentials()
 const documentId = 'siteSettingsSingleton'
 
 /** Logo: US-flag-style red + deep navy (matches placeholder artwork). */
@@ -68,7 +45,9 @@ const COLORS = {
 
 async function main() {
   if (!projectId || !token) {
-    console.error('Missing PUBLIC_SANITY_PROJECT_ID or SANITY_API_WRITE_TOKEN in astro-site/.env')
+    console.error(
+      'Missing Sanity credentials: set PUBLIC_SANITY_PROJECT_ID or SANITY_PROJECT_ID, and SANITY_API_WRITE_TOKEN or SANITY_API_TOKEN (repo-root or astro-site/.env).',
+    )
     process.exit(1)
   }
 
