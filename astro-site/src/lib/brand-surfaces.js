@@ -1,13 +1,13 @@
 /**
- * Hero / services section overlays — navy aligned with logo & theme `primary` (~#0A2351).
+ * Hero / services section overlays — navy aligned with logo & theme `primary` (~#0E407D).
  */
 
 export const HERO_OVERLAY_GRADIENT =
-  'linear-gradient(135deg, rgba(10, 35, 81, 0.88) 0%, rgba(10, 35, 81, 0.84) 50%, rgba(10, 35, 81, 0.88) 100%)'
+  'linear-gradient(135deg, rgba(14, 64, 125, 0.88) 0%, rgba(14, 64, 125, 0.84) 50%, rgba(14, 64, 125, 0.88) 100%)'
 
-const SERVICES_SOLID_BG = '#071a3d'
+const SERVICES_SOLID_BG = '#061a32'
 const SERVICES_OVERLAY_GRADIENT =
-  'linear-gradient(135deg, rgba(10, 35, 81, 0.94) 0%, rgba(8, 50, 110, 0.94) 100%)'
+  'linear-gradient(135deg, rgba(14, 64, 125, 0.94) 0%, rgba(10, 52, 102, 0.94) 100%)'
 
 /**
  * @param {string} imageUrl Result of mediaUrl(...) for the hero image

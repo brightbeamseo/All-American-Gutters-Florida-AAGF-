@@ -21,26 +21,29 @@ loadPatchDotEnv(root)
 const { projectId, dataset, token } = getSanityPatchCredentials()
 const documentId = 'siteSettingsSingleton'
 
-/** Logo: US-flag-style red + deep navy (matches placeholder artwork). */
+/**
+ * Sampled from `public/Media (AAGF)/Logo Suite (AAGF)/all-american-gutters-logo-placeholder.jpg`
+ * (median red stripe + blue field); text/border tuned for contrast on light backgrounds.
+ */
 const COLORS = {
   background: '#f7f9fc',
   backgroundAlt: '#eef2f7',
   surface: '#ffffff',
-  text: '#1a2d4d',
-  textMuted: '#4a5a72',
-  accent: '#c8102e',
-  accentHover: '#a00d25',
+  text: '#142f52',
+  textMuted: '#4a5f7a',
+  accent: '#c8021b',
+  accentHover: '#a00117',
   primaryCtaText: '#ffffff',
   secondaryCtaBg: 'transparent',
-  secondaryCtaBorder: '#0a2351',
-  secondaryCtaText: '#0a2351',
-  secondaryCtaHoverBg: '#0a2351',
+  secondaryCtaBorder: '#0e407d',
+  secondaryCtaText: '#0e407d',
+  secondaryCtaHoverBg: '#0e407d',
   secondaryCtaHoverText: '#ffffff',
-  formButtonBg: '#c8102e',
-  formButtonHover: '#a00d25',
+  formButtonBg: '#c8021b',
+  formButtonHover: '#a00117',
   formButtonText: '#ffffff',
-  primary: '#0a2351',
-  border: '#d8e0ed',
+  primary: '#0e407d',
+  border: '#cdd8e6',
 }
 
 async function main() {
