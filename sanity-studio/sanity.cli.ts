@@ -16,4 +16,7 @@ export default defineCliConfig({
   },
   /** Hosted Studio URL: https://all-american-gutters-florida.sanity.studio */
   studioHost: 'all-american-gutters-florida',
+  deployment: {
+    appId: 'pxihqbvx2bogmrrwxml03lbb',
+  },
 })
