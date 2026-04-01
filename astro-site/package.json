@@ -14,8 +14,9 @@
     "gen:index": "python3 ../scripts/gen-astro-index.py",
     "sync:media": "rm -rf public/'Media (AAGF)' && cp -R ../'Media (AAGF)' public/",
     "theme:aagf": "node scripts/apply-aagf-theme.mjs",
-    "content:aagf": "node scripts/patch-aagf-business.mjs && node scripts/patch-aagf-home-hero.mjs && node scripts/patch-aagf-home-service-hrefs.mjs",
-    "content:aagf:home": "node scripts/patch-aagf-home-hero.mjs"
+    "content:aagf": "node scripts/patch-aagf-business.mjs && node scripts/patch-aagf-home-hero.mjs && node scripts/patch-aagf-home-services.mjs",
+    "content:aagf:home": "node scripts/patch-aagf-home-hero.mjs",
+    "content:aagf:services": "node scripts/patch-aagf-home-services.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
