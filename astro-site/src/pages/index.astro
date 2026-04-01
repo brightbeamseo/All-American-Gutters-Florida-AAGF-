@@ -19,7 +19,6 @@ import { inlineHeroBgStyle, inlineServicesBgStyle } from '../lib/brand-surfaces.
 import { aagfSiteLogoUrl } from '../lib/brand-logos.js'
 import { assertSanityHomepage } from '../lib/assert-sanity-homepage.js'
 import { sanitizeCmsHtml } from '../lib/sanitize-cms-html.js'
-import { southFloridaCopy, isHomeGuttersServiceItem } from '../lib/south-florida-home-copy.js'
 
 const [settings, homePage] = await Promise.all([getSiteSettings(), getHomePage()])
 
@@ -35,7 +34,6 @@ const phoneDisplay = asStr(business?.phoneDisplay)
 const tel = asStr(business?.phoneTel)
 const email = asStr(business?.email)
 const address = asStr(business?.addressShort)
-const sfq = (v) => southFloridaCopy(v, address)
 const addressHref = googleBusinessProfileUrl(settings)
 const descriptionShort = asStr(business?.descriptionShort)
 const copyrightHref = asStr(business?.copyrightSiteUrl)
@@ -55,13 +53,8 @@ const whyChoose = hp.whyChoose
 const whyStamp = whyChoose?.stamp
 const whyCtas = whyChoose?.ctas
 const services = hp.services
-const servicesItemsFiltered = (Array.isArray(services?.items) ? services.items : [])
-  .filter(isHomeGuttersServiceItem)
-  .map((svc, i) => ({
-    ...svc,
-    number: String(i + 1).padStart(2, '0'),
-  }))
-const servicesHeadlineDisplay = 'Gutter services'
+const servicesItems = Array.isArray(services?.items) ? services.items : []
+const servicesHeadlineDisplay = asStr(services?.headline)
 const about = hp.about
 const aboutVideo = about?.video
 const uniquePoints = hp.uniquePoints
@@ -85,46 +78,35 @@ const reviewCount = statLookup(reviewValues, reviewsSummary?.reviewCountKey)
 const reviewCountDisplay = `${asStr(reviewsSummary?.reviewCountPrefix)}${reviewCount}${asStr(reviewsSummary?.reviewCountSuffix)}`
 const reviewsCtaHref = asStr(reviewsSummary?.ctaHref) || '/reviews/'
 
-const callLabelNav = sfq(
-  applyTemplate(asStr(header?.callCtaTemplate), {
-    phoneDisplay,
-  }),
-)
-const callLabelHero = sfq(
-  applyTemplate(asStr(hero?.callCtaTemplate), {
-    phoneDisplay,
-  }),
-)
-const logoAriaLabel = sfq(
-  applyTemplate(asStr(header?.logoAriaLabelTemplate), {
-    companyName,
-  }),
-)
+const callLabelNav = applyTemplate(asStr(header?.callCtaTemplate), {
+  phoneDisplay,
+})
+
+const callLabelHero = applyTemplate(asStr(hero?.callCtaTemplate), {
+  phoneDisplay,
+})
+
+const logoAriaLabel = applyTemplate(asStr(header?.logoAriaLabelTemplate), {
+  companyName,
+})
 
 const telLink = `tel:${tel}`
 
-const homesCountDisplay = sfq(
-  applyTemplate(asStr(whyStamp?.homesCountTemplate), {
-    count: statLookup(statsValues, whyStamp?.homesCountKey),
-  }),
-)
+const homesCountDisplay = applyTemplate(asStr(whyStamp?.homesCountTemplate), {
+  count: statLookup(statsValues, whyStamp?.homesCountKey),
+})
 
-const whyCallLabel = sfq(
-  applyTemplate(asStr(whyCtas?.callTemplate), {
-    phoneDisplay,
-  }),
-)
-const aboutCallLabel = sfq(
-  applyTemplate(asStr(about?.ctas?.callTemplate), {
-    phoneDisplay,
-  }),
-)
+const whyCallLabel = applyTemplate(asStr(whyCtas?.callTemplate), {
+  phoneDisplay,
+})
 
-const mapIframeTitle = sfq(
-  applyTemplate(asStr(serviceArea?.mapIframeTitleTemplate), {
-    companyName,
-  }),
-)
+const aboutCallLabel = applyTemplate(asStr(about?.ctas?.callTemplate), {
+  phoneDisplay,
+})
+
+const mapIframeTitle = applyTemplate(asStr(serviceArea?.mapIframeTitleTemplate), {
+  companyName,
+})
 
 const layoutBg = hp.layoutBackgrounds
 const heroBgSrc = asStr(layoutBg?.hero?.imageSrc)
@@ -137,7 +119,7 @@ const servicesBgStyle = inlineServicesBgStyle(mediaUrl(servicesBgSrc))
 
 const uniquePointsBgStyle = `background: var(--color-surface); background-image: url("${mediaUrl(uniquePointsBgSrc)}"); background-size: cover; background-position: center;`
 
-const typedPhrases = asStrArray(hero?.typedPhrases).map((p) => sfq(p))
+const typedPhrases = asStrArray(hero?.typedPhrases).map((p) => p)
 
 const aboutStillSrc = asStr(aboutVideo?.posterSrc) || asStr(whyChoose?.imageSrc) || ''
 
@@ -153,66 +135,14 @@ const universalFormAction = asStr(formsCfg?.submitPath) || asStr(footerEstimate?
 const universalFormMethod = asStr(footerEstimate?.formMethod)
 const universalFormHeading = asStr(footerEstimate?.headline)
 const universalFormIntro = asStr(footerEstimate?.intro)
-const universalFormHeadingDisplay = sfq(universalFormHeading)
-const universalFormIntroDisplay = sfq(universalFormIntro)
+const universalFormHeadingDisplay = universalFormHeading
+const universalFormIntroDisplay = universalFormIntro
 const universalSubmitLabel = asStr(universalFormFields?.submitButton)
 const universalFormKicker = asStr(formsCfg?.formKicker) || 'Free Estimate'
 const universalFormAriaLabel = asStr(formsCfg?.formAriaLabel) || 'Lead form'
 const universalRequiredIndicator = asStr(formsCfg?.requiredIndicator) || '*'
 
-const normalizeLocationPageHref = (href) => {
-  const value = asStr(href).trim()
-  if (!value) return ''
-  const legacyMap = {
-    '/tampa-florida/': '/locations/tampa-florida/',
-    '/brandon-florida/': '/locations/brandon-florida/',
-    '/gutters-clearwater-fl/': '/locations/gutters-clearwater-fl/',
-    '/gutters-saint-petersburg-fl/': '/locations/gutters-saint-petersburg-fl/',
-    '/gutters-largo-fl/': '/locations/gutters-largo-fl/',
-    '/gutters-plant-city-fl/': '/locations/gutters-plant-city-fl/',
-    '/gutters-seffner-fl/': '/locations/gutters-seffner-fl/',
-    '/apollo-beach-fl/': '/locations/apollo-beach-fl/',
-    '/gutters-riverview-florida/': '/locations/gutters-riverview-florida/',
-  }
-  return legacyMap[value] || value
-}
-
-const normalizeServiceCardHref = (href) => {
-  const value = asStr(href).trim()
-  if (!value) return ''
-  const legacyMap = {
-    '/seamless-gutters/': '/seamless-gutters-tampa-fl/',
-    '/soffit-and-fascias/': '/soffit-fascia-repair-tampa-fl/',
-    '/super-gutters/': '/super-gutters-tampa-fl/',
-    '/screen-rooms-and-lanais/': '/screen-rooms-lanais-tampa-fl/',
-    '/underground-drainage/': '/underground-drainage-tampa-fl/',
-    '/siding/': '/siding-tampa-fl/',
-  }
-  return legacyMap[value] || value
-}
-
-const serviceHref = (svc) => {
-  const explicit = normalizeServiceCardHref(svc?.href)
-  if (explicit) return explicit
-  const title = asStr(svc?.title).toLowerCase().trim()
-  if (!title) return '/seamless-gutters-tampa-fl/'
-  const knownSlugs = {
-    'seamless gutters': 'seamless-gutters-tampa-fl',
-    'soffit & fascia': 'soffit-fascia-repair-tampa-fl',
-    'soffit and fascia': 'soffit-fascia-repair-tampa-fl',
-    'super gutters': 'super-gutters-tampa-fl',
-    'screen rooms & lanais': 'screen-rooms-lanais-tampa-fl',
-    'screen rooms and lanais': 'screen-rooms-lanais-tampa-fl',
-    'underground drainage': 'underground-drainage-tampa-fl',
-    siding: 'siding-tampa-fl',
-  }
-  if (knownSlugs[title]) return `/${knownSlugs[title]}/`
-  const slug = title
-    .replace(/&/g, ' and ')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-  return `/${slug}/`
-}
+const serviceHref = (svc) => asStr(svc?.href).trim()
 ---
 
 <BaseLayout
@@ -227,15 +157,15 @@ const serviceHref = (svc) => {
     <div class="offer-bar">
       <div class="offer-bar-inner">
         <p class="offer-message">
-          {sfq(asStr(offerBar?.textBeforeDiscount))}
-          <strong>{sfq(asStr(offerBar?.discountLabel))}</strong>
-          {sfq(asStr(offerBar?.textAfterDiscount))}
+          {asStr(offerBar?.textBeforeDiscount)}
+          <strong>{asStr(offerBar?.discountLabel)}</strong>
+          {asStr(offerBar?.textAfterDiscount)}
           <a
             href={asStr(offerBar?.ctaHref)}
             class="offer-link"
             {...externalLinkAttrs(asStr(offerBar?.ctaHref))}
           >
-            <strong>{sfq(asStr(offerBar?.ctaText))}</strong>
+            <strong>{asStr(offerBar?.ctaText)}</strong>
           </a>
         </p>
       </div>
@@ -299,12 +229,12 @@ const serviceHref = (svc) => {
       <div class="hero-bg" style={heroBgStyle}></div>
       <div class="container hero-split-inner">
         <div class="hero-copy">
-          <div class="hero-eyebrow">{sfq(asStr(hero?.eyebrow))}</div>
-          <h1>{sfq(asStr(hero?.headline))}</h1>
+          <div class="hero-eyebrow">{asStr(hero?.eyebrow)}</div>
+          <h1>{asStr(hero?.headline)}</h1>
           <p class="hero-typed" aria-live="polite">
             <span id="hero-typed-text"></span><span class="hero-caret" aria-hidden="true">|</span>
           </p>
-          <p class="hero-lead">{sfq(asStr(hero?.lead))}</p>
+          <p class="hero-lead">{asStr(hero?.lead)}</p>
           <div class="hero-actions">
             <a href={telLink} class="btn btn-primary btn-lg cta1-primary-call">{callLabelHero}</a>
           </div>
@@ -372,13 +302,13 @@ const serviceHref = (svc) => {
           <button type="submit" class="btn btn-primary btn-lg">{universalSubmitLabel}</button>
         </form>
       </div>
-      <section class="brands-marquee" aria-label={sfq(asStr(brandsMarquee?.ariaLabel))}>
+      <section class="brands-marquee" aria-label={asStr(brandsMarquee?.ariaLabel)}>
         <div class="brands-track">
           <div class="brands-inner">
             {[0, 1, 2].map((idx) => (
               <div class="brands-group" aria-hidden={idx > 0 ? 'true' : undefined}>
                 {asStrArray(brandsMarquee?.brands).map((b) => (
-                  <span class="brand-pill">{sfq(b)}</span>
+                  <span class="brand-pill">{b}</span>
                 ))}
               </div>
             ))}
@@ -387,19 +317,19 @@ const serviceHref = (svc) => {
       </section>
     </section>
 
-    <section id="process" class="image-scroller" aria-label={sfq(asStr(projects?.sectionAriaLabel))}>
+    <section id="process" class="image-scroller" aria-label={asStr(projects?.sectionAriaLabel)}>
       <div class="container projects-head">
-        <h2 class="section-title">{sfq(asStr(projects?.headline))}</h2>
+        <h2 class="section-title">{asStr(projects?.headline)}</h2>
       </div>
       <div class="projects-carousel" id="projects-carousel">
         {projects?.slides?.map((slide) => {
           const loc = asStr(slide.location)
-          const label = `${sfq(asStr(slide.imageAlt))} — ${loc}`
+          const label = `${asStr(slide.imageAlt)} — ${loc}`
           return (
             <article class="project-slide" data-location={loc} aria-label={label}>
               <img
                 src={mediaUrl(asStr(slide.imageSrc))}
-                alt={sfq(asStr(slide.imageAlt))}
+                alt={asStr(slide.imageAlt)}
                 width="1200"
                 height="800"
                 loading="lazy"
@@ -413,12 +343,12 @@ const serviceHref = (svc) => {
           )
         })}
       </div>
-      <div class="projects-controls projects-controls-bottom" aria-label={sfq(asStr(projects?.controlsAriaLabel))}>
-        <button type="button" class="project-nav" id="projects-prev" aria-label={sfq(asStr(projects?.prevAriaLabel))}>
-          {sfq(asStr(projects?.prevLabel))}
+      <div class="projects-controls projects-controls-bottom" aria-label={asStr(projects?.controlsAriaLabel)}>
+        <button type="button" class="project-nav" id="projects-prev" aria-label={asStr(projects?.prevAriaLabel)}>
+          {asStr(projects?.prevLabel)}
         </button>
-        <button type="button" class="project-nav" id="projects-next" aria-label={sfq(asStr(projects?.nextAriaLabel))}>
-          {sfq(asStr(projects?.nextLabel))}
+        <button type="button" class="project-nav" id="projects-next" aria-label={asStr(projects?.nextAriaLabel)}>
+          {asStr(projects?.nextLabel)}
         </button>
       </div>
     </section>
@@ -428,7 +358,7 @@ const serviceHref = (svc) => {
         <div class="why-choose-image-wrap">
           <img
             src={mediaUrl(asStr(whyChoose?.imageSrc))}
-            alt={sfq(asStr(whyChoose?.imageAlt))}
+            alt={asStr(whyChoose?.imageAlt)}
             class="why-choose-image"
             width="1200"
             height="800"
@@ -437,22 +367,22 @@ const serviceHref = (svc) => {
           />
           <div class="why-choose-stamp">
             <strong>{homesCountDisplay}</strong>
-            <span>{sfq(asStr(whyStamp?.line2))}</span>
-            <span>{sfq(asStr(whyStamp?.line3))}</span>
+            <span>{asStr(whyStamp?.line2)}</span>
+            <span>{asStr(whyStamp?.line3)}</span>
           </div>
         </div>
         <div class="why-choose-content">
-          <div class="why-eyebrow">{sfq(asStr(whyChoose?.eyebrow))}</div>
-          <h2 class="section-title section-title-secondary">{sfq(asStr(whyChoose?.headline))}</h2>
-          <p class="section-lead">{sfq(asStr(whyChoose?.lead))}</p>
+          <div class="why-eyebrow">{asStr(whyChoose?.eyebrow)}</div>
+          <h2 class="section-title section-title-secondary">{asStr(whyChoose?.headline)}</h2>
+          <p class="section-lead">{asStr(whyChoose?.lead)}</p>
           <ul class="why-choose-list">
             {whyChoose?.bullets?.map((b) => (
               <li>
-                <strong>{sfq(asStr(b.title))}</strong> {sfq(asStr(b.text))}
+                <strong>{asStr(b.title)}</strong> {asStr(b.text)}
               </li>
             ))}
           </ul>
-          <p class="why-choose-note">{sfq(asStr(whyChoose?.note))}</p>
+          <p class="why-choose-note">{asStr(whyChoose?.note)}</p>
           <div class="why-choose-actions">
             <a href={telLink} class="btn btn-primary btn-lg">{whyCallLabel}</a>
             <a
@@ -460,7 +390,7 @@ const serviceHref = (svc) => {
               class="btn btn-outline btn-lg request-estimate"
               {...externalLinkAttrs(asStr(whyCtas?.estimateHref))}
             >
-              {sfq(asStr(whyCtas?.estimate))}
+              {asStr(whyCtas?.estimate)}
             </a>
           </div>
         </div>
@@ -471,12 +401,12 @@ const serviceHref = (svc) => {
       <div class="container">
         <h2 class="section-title">{servicesHeadlineDisplay}</h2>
         <div class="services-grid">
-          {servicesItemsFiltered.map((svc) => (
+          {servicesItems.map((svc) => (
             <article class="service-card">
               <a href={serviceHref(svc)} class="service-image-wrap" style="display:block; color:inherit; text-decoration:none;">
                 <span class="service-number">{asStr(svc.number)}</span>
-                <h3 class="service-title">{sfq(asStr(svc.title))}</h3>
-                <p class="service-desc">{sfq(asStr(svc.description))}</p>
+                <h3 class="service-title">{asStr(svc.title)}</h3>
+                <p class="service-desc">{asStr(svc.description)}</p>
               </a>
             </article>
           ))}
@@ -487,12 +417,12 @@ const serviceHref = (svc) => {
     <section class="section about about-video">
       <div class="container about-grid">
         <div class="about-content">
-          <div class="about-eyebrow">{sfq(asStr(about?.eyebrow))}</div>
-          <h2 class="section-title">{sfq(asStr(about?.headline))}</h2>
-          <p class="about-lead">{sfq(asStr(about?.lead))}</p>
+          <div class="about-eyebrow">{asStr(about?.eyebrow)}</div>
+          <h2 class="section-title">{asStr(about?.headline)}</h2>
+          <p class="about-lead">{asStr(about?.lead)}</p>
           <ul class="about-list">
             {asStrArray(about?.bullets).map((line) => (
-              <li>{sfq(line)}</li>
+              <li>{line}</li>
             ))}
           </ul>
           <div class="about-video-actions">
@@ -502,7 +432,7 @@ const serviceHref = (svc) => {
               class="btn btn-outline btn-lg request-estimate"
               {...externalLinkAttrs(asStr(about?.ctas?.estimateHref))}
             >
-              {sfq(asStr(about?.ctas?.estimate))}
+              {asStr(about?.ctas?.estimate)}
             </a>
           </div>
         </div>
@@ -510,7 +440,7 @@ const serviceHref = (svc) => {
           <div class="media-card media-video about-static-visual">
             <img
               src={mediaUrl(aboutStillSrc)}
-              alt={sfq(asStr(about?.headline))}
+              alt={asStr(about?.headline)}
               width="1200"
               height="675"
               loading="lazy"
@@ -523,8 +453,8 @@ const serviceHref = (svc) => {
 
     <section class="section unique-points" style={uniquePointsBgStyle}>
       <div class="container">
-        <div class="why-eyebrow">{sfq(asStr(uniquePoints?.eyebrow))}</div>
-        <h2 class="section-title section-title-secondary">{sfq(asStr(uniquePoints?.headline))}</h2>
+        <div class="why-eyebrow">{asStr(uniquePoints?.eyebrow)}</div>
+        <h2 class="section-title section-title-secondary">{asStr(uniquePoints?.headline)}</h2>
         <div class="unique-grid">
           {uniquePoints?.items?.map((pt) => (
             <article class="result-item">
@@ -532,21 +462,21 @@ const serviceHref = (svc) => {
                 <span class="result-icon" aria-hidden="true">
                   <UniquePointIcon iconId={asStr(pt.iconId)} />
                 </span>
-                {sfq(asStr(pt.title))}
+                {asStr(pt.title)}
               </span>
-              <p>{sfq(asStr(pt.description))}</p>
+              <p>{asStr(pt.description)}</p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="stats-thin" aria-label={sfq(asStr(statsBar?.ariaLabel))}>
+    <section class="stats-thin" aria-label={asStr(statsBar?.ariaLabel)}>
       <div class="container stats-thin-grid">
         {statsBar?.items?.map((row) => (
           <div>
             <strong>{statLookup(statsValues, row.valueKey)}</strong>
-            <span>{sfq(asStr(row.label))}</span>
+            <span>{asStr(row.label)}</span>
           </div>
         ))}
       </div>
@@ -555,9 +485,9 @@ const serviceHref = (svc) => {
     <section class="section contact-banner-split">
       <div class="container contact-banner-grid">
         <div class="contact-banner-copy">
-          <h2 class="section-title">{sfq(asStr(contactBanner?.headline))}</h2>
-          <p class="section-lead">{sfq(asStr(contactBanner?.paragraph1))}</p>
-          <p class="section-lead">{sfq(asStr(contactBanner?.paragraph2))}</p>
+          <h2 class="section-title">{asStr(contactBanner?.headline)}</h2>
+          <p class="section-lead">{asStr(contactBanner?.paragraph1)}</p>
+          <p class="section-lead">{asStr(contactBanner?.paragraph2)}</p>
           <div class="contact-banner-actions">
             <a href={telLink} class="contact-banner-phone">
               <img
@@ -578,9 +508,9 @@ const serviceHref = (svc) => {
 
     <section id="service-area" class="section service-area">
       <div class="container">
-        <div class="why-eyebrow">{sfq(asStr(serviceArea?.eyebrow))}</div>
-        <h2 class="section-title">{sfq(asStr(serviceArea?.headline))}</h2>
-        <p class="section-lead service-area-intro">{sfq(asStr(serviceArea?.intro))}</p>
+        <div class="why-eyebrow">{asStr(serviceArea?.eyebrow)}</div>
+        <h2 class="section-title">{asStr(serviceArea?.headline)}</h2>
+        <p class="section-lead service-area-intro">{asStr(serviceArea?.intro)}</p>
         <div class="service-area-grid">
           <div class="map-wrap">
             <iframe
@@ -595,10 +525,10 @@ const serviceHref = (svc) => {
             ></iframe>
           </div>
           <div class="cities-list">
-            <p class="cities-label">{sfq(asStr(serviceArea?.citiesLabel))}</p>
-            <nav class="cities-nav" aria-label={sfq(asStr(serviceArea?.citiesNavAriaLabel))}>
+            <p class="cities-label">{asStr(serviceArea?.citiesLabel)}</p>
+            <nav class="cities-nav" aria-label={asStr(serviceArea?.citiesNavAriaLabel)}>
               {serviceArea?.cities?.map((c) => (
-                <a href={normalizeLocationPageHref(c.href)} {...externalLinkAttrs(normalizeLocationPageHref(c.href))}>
+                <a href={asStr(c.href)} {...externalLinkAttrs(asStr(c.href))}>
                   {asStr(c.name)}
                 </a>
               ))}
@@ -610,7 +540,7 @@ const serviceHref = (svc) => {
 
     <section id="team" class="section our-team">
       <div class="container">
-        <h2 class="section-title">{sfq(asStr(team?.headline))}</h2>
+        <h2 class="section-title">{asStr(team?.headline)}</h2>
         <div class="team-grid">
           {team?.members?.map((m) => {
             const memLoc = asStr(m.location)
@@ -618,15 +548,15 @@ const serviceHref = (svc) => {
             <article class="team-card">
               <img
                 src={mediaUrl(asStr(m.imageSrc))}
-                alt={sfq(asStr(m.imageAlt))}
+                alt={asStr(m.imageAlt)}
                 width="640"
                 height="480"
                 loading="lazy"
                 decoding="async"
               />
               <h3>{asStr(m.name)}</h3>
-              {memLoc ? <p class="team-location">{sfq(memLoc)}</p> : null}
-              <p>{sfq(asStr(m.bio))}</p>
+              {memLoc ? <p class="team-location">{memLoc}</p> : null}
+              <p>{asStr(m.bio)}</p>
             </article>
             )
           })}
@@ -638,7 +568,7 @@ const serviceHref = (svc) => {
       <div class="container">
         <div class="faq-panel">
           <h2 class="section-title section-title-secondary" id={asStr(faq?.headingId)}>
-            {sfq(asStr(faq?.headline))}
+            {asStr(faq?.headline)}
           </h2>
           <div class="faq-list" data-faq-accordion>
             {faq?.items?.map((item, idx) => {
@@ -654,7 +584,7 @@ const serviceHref = (svc) => {
                     aria-expanded="false"
                     aria-controls={panelId}
                   >
-                    <span class="faq-question">{sfq(asStr(item.question))}</span>
+                    <span class="faq-question">{asStr(item.question)}</span>
                     <span class="faq-chevron" aria-hidden="true"></span>
                   </button>
                   <div
@@ -664,7 +594,7 @@ const serviceHref = (svc) => {
                     aria-labelledby={btnId}
                     aria-hidden="true"
                   >
-                    <div class="faq-answer" set:html={sanitizeCmsHtml(sfq(asStr(item.answerHtml)))} />
+                    <div class="faq-answer" set:html={sanitizeCmsHtml(asStr(item.answerHtml))} />
                   </div>
                 </div>
               )
@@ -680,8 +610,8 @@ const serviceHref = (svc) => {
       <div class="container">
         <div class="contact-wrapper">
           <div class="contact-info">
-            <h2 class="section-title" id="footer-estimate-heading">{sfq(asStr(footerEstimate?.headline))}</h2>
-            <p>{sfq(asStr(footerEstimate?.intro))}</p>
+            <h2 class="section-title" id="footer-estimate-heading">{asStr(footerEstimate?.headline)}</h2>
+            <p>{asStr(footerEstimate?.intro)}</p>
             <FooterContactInfo
               variant="estimate"
               phoneTel={tel}
@@ -810,7 +740,7 @@ const serviceHref = (svc) => {
   <script
     type="application/json"
     id="homepage-typed-phrases"
-    data-fallback-phrase={sfq(asStr(hero?.typedFallbackPhrase))}
+    data-fallback-phrase={asStr(hero?.typedFallbackPhrase)}
     set:html={JSON.stringify(typedPhrases)}
   />
   <style is:global>

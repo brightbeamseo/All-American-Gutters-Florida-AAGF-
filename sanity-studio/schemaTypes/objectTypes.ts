@@ -435,7 +435,8 @@ export const serviceItem = defineType({
       name: 'href',
       title: 'Service Page Link',
       type: 'string',
-      description: 'Optional. If empty, the site auto-generates a /products-services/.../ link from the title.',
+      description:
+        'Canonical URL path on this site (e.g. /seamless-gutters-tampa-fl/). The homepage uses this verbatim—no app-side rewriting.',
     }),
   ],
 })
