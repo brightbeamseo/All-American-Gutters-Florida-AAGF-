@@ -53,6 +53,16 @@ const GBP_MAPS_APP_URL = 'https://maps.app.goo.gl/chvzb34juJicorxQA'
 const MAP_EMBED_SRC =
   'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d228781.12808711547!2d-80.2606203!3d26.3683978!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d91d7bfe8eb891%3A0x51b7528a70761df5!2sAll%20American!5e0!3m2!1sen!2sus!4v1775072455539!5m2!1sen!2sus'
 
+const FOOTER_TAGLINE =
+  'Seamless gutters, honest estimates, and crews that respect your yard—serving homeowners across South Florida from our Deerfield Beach base.'
+
+const FOOTER_ESTIMATE_HEADLINE = 'Tell Us About Your South Florida Project'
+
+const FORMS_FORM_ARIA_LABEL = 'Request a gutter estimate for your South Florida property'
+
+const BLOG_AUTHOR_BIO_FALLBACK =
+  'All American Gutters is a family-owned South Florida gutter company with decades of experience in installation, repair, replacement, and gutter guards across the region.'
+
 async function main() {
   if (!projectId || !token) {
     console.error(
@@ -98,6 +108,10 @@ async function main() {
     businessCategories,
     'businessListings.googleMaps': GBP_MAPS_APP_URL,
     mapEmbedUrl: MAP_EMBED_SRC,
+    'footerBrand.tagline': FOOTER_TAGLINE,
+    'footerEstimate.headline': FOOTER_ESTIMATE_HEADLINE,
+    'forms.formAriaLabel': FORMS_FORM_ARIA_LABEL,
+    blogAuthorBio: BLOG_AUTHOR_BIO_FALLBACK,
   }
 
   await client.patch(documentId).set(patch).commit()

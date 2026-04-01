@@ -101,13 +101,13 @@ const primaryGalleryPage =
 const pageTitle = cleanProjectText(primaryGalleryPage?.headline, 'Projects | SGT')
 const pageDescription = cleanProjectText(
   primaryGalleryPage?.lead,
-  'Project gallery of completed gutter work across Tampa Bay.'
+  'Project gallery of completed gutter work across South Florida.'
 )
 const heroEyebrow = 'Projects'
 const heroHeadline = cleanProjectText(primaryGalleryPage?.headline, 'Recent Jobs')
 const heroLead = cleanProjectText(
   primaryGalleryPage?.lead,
-  'Simple gallery of completed gutter work across Tampa Bay.'
+  'Simple gallery of completed gutter work across South Florida.'
 )
 const galleryImages = allGalleryPages.flatMap((p) => (Array.isArray(p?.images) ? p.images : []))
 const homeProjectSlides = Array.isArray(homePage?.projects?.slides) ? homePage.projects.slides : []
@@ -128,7 +128,7 @@ const images = allProjectImages.filter((img) => {
 const galleryItems = images.map((img) => ({
   src: mediaUrl(asStr(img.imageSrc)),
   alt: cleanProjectText(img.imageAlt, 'Project photo'),
-  caption: cleanProjectText(img.location, 'Tampa Bay area'),
+  caption: cleanProjectText(img.location, 'South Florida'),
 }))
 
 const universalFormFields = footerEstimateFields
@@ -230,7 +230,7 @@ const universalRequiredIndicator = asStr(formsCfg?.requiredIndicator) || '*'
     <section class="section secondary-page-section" aria-labelledby="projects-intro-heading">
       <div class="container page-split page-split--media-end">
         <div class="secondary-prose">
-          <h2 class="section-title section-title-secondary" id="projects-intro-heading">Projects across Tampa Bay</h2>
+          <h2 class="section-title section-title-secondary" id="projects-intro-heading">Projects across South Florida</h2>
           <p>
             Browse a rotating set of installs from our crews—seamless aluminum, super gutters, copper accents, and downspout runs tied into drainage systems. Every photo is a completed job after final walkthrough and cleanup.
           </p>
