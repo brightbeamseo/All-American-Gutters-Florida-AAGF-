@@ -1,5 +1,4 @@
-# Replace with your live domain and uncomment when the site is on production:
-# Sitemap: https://www.example.com/sitemap-index.xml
+Sitemap: https://aaguttersflorida.com/sitemap-index.xml
 
 User-agent: *
 Allow: /
