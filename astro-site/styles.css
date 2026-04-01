@@ -10,10 +10,12 @@
   --color-dark: #0e407d;
   --color-primary-cta-text: #fff;
   --color-secondary-cta-bg: transparent;
-  --color-secondary-cta-border: var(--color-dark);
-  --color-secondary-cta-text: var(--color-dark);
-  --color-secondary-cta-hover-bg: var(--color-dark);
-  --color-secondary-cta-hover-text: #fff;
+  /* Outline / “Request estimate” — neutral slate (primary CTA stays brand red) */
+  --color-secondary-cta-border: #94a3b8;
+  --color-secondary-cta-text: #475569;
+  --color-secondary-cta-hover-bg: #f1f5f9;
+  --color-secondary-cta-hover-text: #334155;
+  --color-secondary-cta-hover-border: #cbd5e1;
   --color-form-button-bg: var(--color-accent);
   --color-form-button-hover: var(--color-accent-hover);
   --color-form-button-text: #fff;
@@ -562,12 +564,12 @@ a.btn-primary[href^="tel:"]:hover {
 .btn-outline:hover {
   background: var(--color-secondary-cta-hover-bg);
   color: var(--color-secondary-cta-hover-text);
-  border-color: var(--color-secondary-cta-hover-bg);
+  border-color: var(--color-secondary-cta-hover-border);
 }
 
 .request-estimate:hover {
   background: var(--color-secondary-cta-hover-bg);
-  border-color: var(--color-secondary-cta-hover-bg);
+  border-color: var(--color-secondary-cta-hover-border);
   color: var(--color-secondary-cta-hover-text);
 }
 
