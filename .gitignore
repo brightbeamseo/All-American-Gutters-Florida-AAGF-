@@ -15,6 +15,10 @@ dist/
 .sanity/
 .vercel/
 
+# Sanity dataset exports (large / sensitive)
+tmp-sanity-*.tar.gz
+tmp-*-production.tar.gz
+
 # Misc
 .DS_Store
 *.log
