@@ -14,6 +14,7 @@ import { sanity } from '../lib/sanity.js'
 import { getSiteSettings, getHomePage, mergeHeaderFromSettings } from '../lib/site-settings.js'
 import { heroBackgroundFor } from '../lib/hero-backgrounds.js'
 import { sanitizeCmsHtml } from '../lib/sanitize-cms-html.js'
+import { inlineHeroBgStyle } from '../lib/brand-surfaces.js'
 import { aagfSiteLogoUrl } from '../lib/brand-logos.js'
 import { asStr, applyTemplate, mediaUrl } from '../lib/sanity-strings.js'
 
@@ -95,9 +96,7 @@ const universalFormIntro = asStr(footerEstimate?.intro) || 'Short placeholder fo
 
 const heroBgSrc =
   asStr(post?.layoutBackgrounds?.hero?.imageSrc) || heroBackgroundFor(`blog-${slug}`)
-const heroBgStyle = heroBgSrc
-  ? `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
-  : undefined
+const heroBgStyle = heroBgSrc ? inlineHeroBgStyle(mediaUrl(heroBgSrc)) : undefined
 
 const heroHeadline = asStr(post?.headline) || 'Article'
 const postCategory = asStr(post?.category)

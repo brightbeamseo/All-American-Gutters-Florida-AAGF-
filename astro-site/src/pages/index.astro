@@ -15,6 +15,7 @@ import {
   mediaUrl,
   statLookup,
 } from '../lib/sanity-strings.js'
+import { inlineHeroBgStyle, inlineServicesBgStyle } from '../lib/brand-surfaces.js'
 import { aagfSiteLogoUrl } from '../lib/brand-logos.js'
 import { assertSanityHomepage } from '../lib/assert-sanity-homepage.js'
 import { sanitizeCmsHtml } from '../lib/sanitize-cms-html.js'
@@ -130,9 +131,9 @@ const heroBgSrc = asStr(layoutBg?.hero?.imageSrc)
 const servicesBgSrc = asStr(layoutBg?.services?.imageSrc)
 const uniquePointsBgSrc = asStr(layoutBg?.uniquePoints?.imageSrc)
 
-const heroBgStyle = `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
+const heroBgStyle = inlineHeroBgStyle(mediaUrl(heroBgSrc))
 
-const servicesBgStyle = `background-color: #143980; background-image: linear-gradient(135deg, rgba(20, 57, 128, 0.94) 0%, rgba(26, 74, 158, 0.94) 100%), url("${mediaUrl(servicesBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
+const servicesBgStyle = inlineServicesBgStyle(mediaUrl(servicesBgSrc))
 
 const uniquePointsBgStyle = `background: var(--color-surface); background-image: url("${mediaUrl(uniquePointsBgSrc)}"); background-size: cover; background-position: center;`
 

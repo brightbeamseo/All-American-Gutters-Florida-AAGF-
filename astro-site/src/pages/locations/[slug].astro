@@ -12,6 +12,7 @@ import { sanity } from '../../lib/sanity.js'
 import { getSiteSettings, getHomePage, mergeHeaderFromSettings } from '../../lib/site-settings.js'
 import { heroBackgroundFor } from '../../lib/hero-backgrounds.js'
 import { sanitizeCmsHtml } from '../../lib/sanitize-cms-html.js'
+import { inlineHeroBgStyle, inlineServicesBgStyle } from '../../lib/brand-surfaces.js'
 import { aagfSiteLogoUrl } from '../../lib/brand-logos.js'
 import { asStr, applyTemplate, mediaUrl } from '../../lib/sanity-strings.js'
 
@@ -86,12 +87,8 @@ const universalFormHeading = asStr(footerEstimate?.headline) || 'Get Started Tod
 const universalFormIntro = asStr(footerEstimate?.intro) || 'Short placeholder form for layout testing.'
 const heroBgSrc = asStr(locPage?.layoutBackgrounds?.hero?.imageSrc) || heroBackgroundFor(`location-${slug}`)
 const servicesBgSrc = asStr(locPage?.layoutBackgrounds?.services?.imageSrc)
-const heroBgStyle = heroBgSrc
-  ? `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
-  : undefined
-const servicesBgStyle = servicesBgSrc
-  ? `background-color: #143980; background-image: linear-gradient(135deg, rgba(20, 57, 128, 0.94) 0%, rgba(26, 74, 158, 0.94) 100%), url("${mediaUrl(servicesBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
-  : undefined
+const heroBgStyle = heroBgSrc ? inlineHeroBgStyle(mediaUrl(heroBgSrc)) : undefined
+const servicesBgStyle = servicesBgSrc ? inlineServicesBgStyle(mediaUrl(servicesBgSrc)) : undefined
 const sharedReviews = settings?.reviews ?? homePage?.reviews ?? {}
 const reviewsToRender = sharedReviews
 const cityContentSections = Array.isArray(locPage?.contentSections) ? locPage.contentSections : []

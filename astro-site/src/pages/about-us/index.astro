@@ -6,6 +6,7 @@ import FooterContactInfo from '../../components/FooterContactInfo.astro'
 import { externalLinkAttrs } from '../../lib/external-link.js'
 import { googleBusinessProfileUrl, isContactFooterColumnHeading } from '../../lib/footer-contact-heading.js'
 import { getSiteSettings, getHomePage, mergeHeaderFromSettings } from '../../lib/site-settings.js'
+import { inlineHeroBgStyle } from '../../lib/brand-surfaces.js'
 import { heroBackgroundFor } from '../../lib/hero-backgrounds.js'
 import { aagfSiteLogoUrl } from '../../lib/brand-logos.js'
 import { asStr, applyTemplate, asStrArray, mediaUrl } from '../../lib/sanity-strings.js'
@@ -44,9 +45,7 @@ const navItems = Array.isArray(header.navItems) ? header.navItems : []
 
 const about = homePage?.about ?? {}
 const heroBgSrc = heroBackgroundFor('about-us')
-const heroBgStyle = heroBgSrc
-  ? `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
-  : undefined
+const heroBgStyle = heroBgSrc ? inlineHeroBgStyle(mediaUrl(heroBgSrc)) : undefined
 
 const pageTitle = 'About Us | SGT'
 const pageDescription = asStr(about?.lead) || 'Learn more about SGT.'

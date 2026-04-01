@@ -12,7 +12,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "gen:index": "python3 ../scripts/gen-astro-index.py",
-    "sync:media": "rm -rf public/'Media (AAGF)' && cp -R ../'Media (AAGF)' public/"
+    "sync:media": "rm -rf public/'Media (AAGF)' && cp -R ../'Media (AAGF)' public/",
+    "theme:aagf": "node scripts/apply-aagf-theme.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",

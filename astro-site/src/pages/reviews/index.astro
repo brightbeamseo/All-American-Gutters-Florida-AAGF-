@@ -7,6 +7,7 @@ import { externalLinkAttrs } from '../../lib/external-link.js'
 import { googleBusinessProfileUrl, isContactFooterColumnHeading } from '../../lib/footer-contact-heading.js'
 import { sanity } from '../../lib/sanity.js'
 import { getSiteSettings, getHomePage, mergeHeaderFromSettings } from '../../lib/site-settings.js'
+import { inlineHeroBgStyle } from '../../lib/brand-surfaces.js'
 import { heroBackgroundFor } from '../../lib/hero-backgrounds.js'
 import { aagfSiteLogoUrl } from '../../lib/brand-logos.js'
 import { asStr, applyTemplate, mediaUrl, statLookup } from '../../lib/sanity-strings.js'
@@ -54,9 +55,7 @@ const heroEyebrow = asStr(reviewsPage?.eyebrow) || 'Reviews'
 const heroHeadline = asStr(reviewsPage?.headline) || 'Customer Reviews'
 const heroLead = asStr(reviewsPage?.lead) || 'See what homeowners and businesses say about our gutter services.'
 const heroBgSrc = heroBackgroundFor('reviews')
-const heroBgStyle = heroBgSrc
-  ? `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
-  : undefined
+const heroBgStyle = heroBgSrc ? inlineHeroBgStyle(mediaUrl(heroBgSrc)) : undefined
 
 const reviewsData = settings?.reviews ?? homePage?.reviews ?? {}
 const reviewSummary = reviewsData?.summary ?? {}

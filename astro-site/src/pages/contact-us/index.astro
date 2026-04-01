@@ -7,6 +7,7 @@ import { externalLinkAttrs } from '../../lib/external-link.js'
 import { googleBusinessProfileUrl, isContactFooterColumnHeading } from '../../lib/footer-contact-heading.js'
 import { sanity } from '../../lib/sanity.js'
 import { getSiteSettings, getHomePage, mergeHeaderFromSettings } from '../../lib/site-settings.js'
+import { inlineHeroBgStyle } from '../../lib/brand-surfaces.js'
 import { heroBackgroundFor } from '../../lib/hero-backgrounds.js'
 import { aagfSiteLogoUrl } from '../../lib/brand-logos.js'
 import { asStr, applyTemplate, mediaUrl } from '../../lib/sanity-strings.js'
@@ -54,9 +55,7 @@ const heroEyebrow = asStr(contactPage?.eyebrow) || 'Contact'
 const heroHeadline = asStr(contactPage?.headline) || 'Contact Us'
 const heroLead = asStr(contactPage?.lead) || 'Get in touch for a fast, free estimate.'
 const heroBgSrc = heroBackgroundFor('contact-us')
-const heroBgStyle = heroBgSrc
-  ? `background-image: linear-gradient(135deg, rgba(56, 69, 85, 0.88) 0%, rgba(56, 69, 85, 0.84) 50%, rgba(56, 69, 85, 0.88) 100%), url("${mediaUrl(heroBgSrc)}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
-  : undefined
+const heroBgStyle = heroBgSrc ? inlineHeroBgStyle(mediaUrl(heroBgSrc)) : undefined
 
 const universalFormFields = footerEstimateFields
 const universalFormAction = asStr(formsCfg?.submitPath) || asStr(footerEstimate?.formAction) || '#'

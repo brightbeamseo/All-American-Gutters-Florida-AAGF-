@@ -36,7 +36,8 @@ export const siteSettings = defineType({
       name: 'theme',
       type: 'theme',
       title: 'Theme',
-      description: 'Overrides :root CSS variables (same shape as shared/homepage-content.json theme).',
+      description:
+        'Site-wide colors & fonts. All American Gutters: red CTAs (accent), navy brand (primary). From repo: `cd astro-site && npm run theme:aagf` (needs SANITY_API_WRITE_TOKEN in .env) to apply logo-aligned hex values.',
     }),
     defineField({name: 'statsValues', type: 'statsValues'}),
     defineField({

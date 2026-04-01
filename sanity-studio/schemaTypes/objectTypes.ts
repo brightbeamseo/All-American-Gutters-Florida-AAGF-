@@ -44,6 +44,8 @@ export const meta = defineType({
 export const themeColors = defineType({
   name: 'themeColors',
   title: 'Theme colors',
+  description:
+    'Logo palette: accent / accentHover / formButton* = flag red (~#c8102e); primary = deep navy (~#0a2351). Secondary CTAs use primary for border & text.',
   type: 'object',
   fields: [
     defineField({ name: 'background', type: 'string', title: 'background → --color-bg' }),
@@ -147,6 +149,8 @@ export const theme = defineType({
       name: 'note',
       type: 'text',
       title: 'note',
+      description:
+        'Optional internal note. Suggested AAGF fills: accent #c8102e, accentHover #a00d25, primary #0a2351, form buttons same red as accent.',
       rows: 2,
     }),
     defineField({ name: 'colors', type: 'themeColors' }),
