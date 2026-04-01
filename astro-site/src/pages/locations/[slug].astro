@@ -1,6 +1,7 @@
 ---
 /**
- * Local SEO landing pages: /locations/{slug}/ (Sanity `locationPage`).
+ * Local SEO landing pages: canonical `/locations/{slug}/` (Sanity `locationPage`).
+ * City slugs use `gutters-{city}-fl`; public short URLs `/gutters-...-fl/` rewrite or redirect here.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import FooterSocialIcon from '../../components/FooterSocialIcon.astro'
@@ -95,7 +96,8 @@ const cityContentSections = Array.isArray(locPage?.contentSections) ? locPage.co
 const mapEmbedUrl = asStr(locPage?.mapEmbedUrl) || asStr(settings?.mapEmbedUrl)
 const estimateCtaText = 'Request Estimate'
 const estimateCtaHref = '#contact'
-const pageH1 = asStr(locPage?.headline) || asStr(hero?.headline) || 'Gutter Services in Tampa, FL'
+const pageH1 =
+  asStr(locPage?.headline) || asStr(hero?.headline) || 'Best Gutter Company in South Florida'
 const pageTitle = `${pageH1} | All American Gutters`
 
 const normalizeServiceCardHref = (href) => {

@@ -62,7 +62,8 @@ const universalRequiredIndicator = asStr(formsCfg?.requiredIndicator) || '*'
 
 const serviceArea = homePage?.serviceArea ?? {}
 const pageTitle = 'Service Area | All American Gutters'
-const pageDescription = asStr(serviceArea?.intro) || 'Cities and counties we serve across the Tampa metro.'
+const pageDescription =
+  asStr(serviceArea?.intro) || 'Cities and counties we serve across Broward and Palm Beach counties.'
 const mapEmbedUrl =
   asStr(settings?.mapEmbedUrl) ||
   'https://maps.google.com/maps?q=1502+Lenna+Ave,+Seffner,+FL+33584&t=&z=10&ie=UTF8&iwloc=&output=embed'
@@ -72,40 +73,18 @@ const mapIframeTitle =
 const serviceCities = Array.isArray(serviceArea?.cities) ? serviceArea.cities : []
 const locationRows = Array.isArray(locationPages) ? locationPages : []
 
+/** Counties for South Florida `gutters-*-fl` location slugs (see patch-aagf-home-service-area.mjs). */
 const countyBySlug = {
-  'anna-maria-island-florida': 'Manatee County',
-  'apollo-beach-fl': 'Hillsborough County',
-  'bradenton-florida': 'Manatee County',
-  'brandon-florida': 'Hillsborough County',
-  'cortez-florida': 'Manatee County',
-  'dade-city-florida': 'Pasco County',
-  'dover-florida': 'Hillsborough County',
-  'ellenton-florida': 'Manatee County',
-  'gibsonton-florida': 'Hillsborough County',
-  'gutters-clearwater-fl': 'Pinellas County',
-  'gutters-largo-fl': 'Pinellas County',
-  'gutters-odessa-fl': 'Hillsborough County',
-  'gutters-plant-city-fl': 'Hillsborough County',
-  'gutters-riverview-florida': 'Hillsborough County',
-  'gutters-ruskin-fl': 'Hillsborough County',
-  'gutters-saint-petersburg-fl': 'Pinellas County',
-  'gutters-san-antonio-fl': 'Pasco County',
-  'gutters-seffner-fl': 'Hillsborough County',
-  'gutters-sun-city-center-fl': 'Hillsborough County',
-  'gutters-thonotosassa-fl': 'Hillsborough County',
-  'gutters-valrico-fl': 'Hillsborough County',
-  'gutters-wimauma-fl': 'Hillsborough County',
-  'lakewood-ranch-florida': 'Manatee County',
-  'land-o-lakes-florida': 'Pasco County',
-  'lithia-florida': 'Hillsborough County',
-  'longboat-key-florida': 'Sarasota County',
-  'lutz-florida': 'Hillsborough County',
-  'parrish-florida': 'Manatee County',
-  'sarasota-fl': 'Sarasota County',
-  'tampa-florida': 'Hillsborough County',
-  'wesley-chapel-florida': 'Pasco County',
-  'zephyrhills-florida': 'Pasco County',
-  'gutters-mulberry-florida': 'Polk County',
+  'gutters-deerfield-beach-fl': 'Broward County',
+  'gutters-boca-raton-fl': 'Palm Beach County',
+  'gutters-fort-lauderdale-fl': 'Broward County',
+  'gutters-pompano-beach-fl': 'Broward County',
+  'gutters-delray-beach-fl': 'Palm Beach County',
+  'gutters-boynton-beach-fl': 'Palm Beach County',
+  'gutters-coral-springs-fl': 'Broward County',
+  'gutters-west-palm-beach-fl': 'Palm Beach County',
+  'gutters-hollywood-fl': 'Broward County',
+  'gutters-palm-beach-gardens-fl': 'Palm Beach County',
 }
 
 function slugToCityName(slug) {
@@ -135,7 +114,7 @@ const cityPages = locationRows
     if (!slug || !name) return null
     return {
       name,
-      href: `/locations/${slug}/`,
+      href: slug.startsWith('gutters-') && slug.endsWith('-fl') ? `/${slug}/` : `/locations/${slug}/`,
       county: countyForLocation(row),
     }
   })

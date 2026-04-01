@@ -11,19 +11,11 @@ function normalizeHref(href) {
     '/underground-drainage/': '/underground-drainage-tampa-fl/',
     '/siding/': '/siding-tampa-fl/',
   }
-  const legacyLocationHrefMap = {
-    '/tampa-florida/': '/locations/tampa-florida/',
-    '/brandon-florida/': '/locations/brandon-florida/',
-    '/gutters-clearwater-fl/': '/locations/gutters-clearwater-fl/',
-    '/gutters-saint-petersburg-fl/': '/locations/gutters-saint-petersburg-fl/',
-    '/gutters-largo-fl/': '/locations/gutters-largo-fl/',
-    '/gutters-plant-city-fl/': '/locations/gutters-plant-city-fl/',
-    '/gutters-seffner-fl/': '/locations/gutters-seffner-fl/',
-    '/apollo-beach-fl/': '/locations/apollo-beach-fl/',
-    '/gutters-riverview-florida/': '/locations/gutters-riverview-florida/',
+  const guttersLoc = trimmed.match(/^\/(gutters-[a-z0-9-]+-fl)\/?$/)
+  if (guttersLoc) {
+    return `/locations/${guttersLoc[1]}/`
   }
   if (legacyServiceHrefMap[trimmed]) return legacyServiceHrefMap[trimmed]
-  if (legacyLocationHrefMap[trimmed]) return legacyLocationHrefMap[trimmed]
   if (trimmed === '/services/' || trimmed === '/services') return '/seamless-gutters-tampa-fl/'
   const servicesPrefixMatch = trimmed.match(/^\/services\/([^/]+)\/?$/)
   if (servicesPrefixMatch) return `/${servicesPrefixMatch[1]}/`
