@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Fetches reviews for the SunLife Gutters Tampa Maps listing using Google Places API (New).
+ * Fetches reviews for the All American Gutters (Deerfield Beach) Maps listing using Google Places API (New).
  *
  * Limits (Google):
  * - Place Details returns at most 5 reviews per request, sorted by relevance — not a full dump
@@ -13,7 +13,7 @@
  *  3. export GOOGLE_PLACES_API_KEY="your-key"
  *  4. From repo root: node scripts/fetch-google-maps-reviews.mjs
  *
- * Optional: GOOGLE_PLACES_TEXT_QUERY override (default targets Seffner address).
+ * Optional: GOOGLE_PLACES_TEXT_QUERY override (default targets Deerfield Beach address).
  */
 
 import { writeFileSync, mkdirSync } from 'node:fs'
@@ -28,7 +28,7 @@ const OUT_MD = join(OUT_DIR, 'reviews-from-google-places.md')
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY || ''
 const TEXT_QUERY =
   process.env.GOOGLE_PLACES_TEXT_QUERY ||
-  'SunLife Gutters 1502 Lenna Ave Seffner FL 33584'
+  'All American Gutters 36 SW 8th Ct Deerfield Beach FL 33441'
 
 const PLACES_BASE = 'https://places.googleapis.com/v1'
 
@@ -38,8 +38,8 @@ async function searchPlaceId() {
     textQuery: TEXT_QUERY,
     locationBias: {
       circle: {
-        center: { latitude: 27.9829373, longitude: -82.2753381 },
-        radius: 8000,
+        center: { latitude: 26.318, longitude: -80.099 },
+        radius: 25000,
       },
     },
   }

@@ -63,7 +63,7 @@ const footerBrand = settings?.footerBrand ?? homePage?.footerBrand ?? {}
 const footerColumns = settings?.footerColumns ?? homePage?.footerColumns ?? []
 const footerSupport = settings?.footerSupport ?? homePage?.footerSupport ?? {}
 
-const companyName = asStr(business.companyName) || 'SGT'
+const companyName = asStr(business.companyName) || 'All American Gutters'
 const phoneDisplay = asStr(business.phoneDisplay) || '(303) 000-0000'
 const phoneTel = asStr(business.phoneTel) || '3030000000'
 const email = asStr(business.email) || 'hello@example.com'
@@ -96,7 +96,7 @@ const mapEmbedUrl = asStr(locPage?.mapEmbedUrl) || asStr(settings?.mapEmbedUrl)
 const estimateCtaText = 'Request Estimate'
 const estimateCtaHref = '#contact'
 const pageH1 = asStr(locPage?.headline) || asStr(hero?.headline) || 'Gutter Services in Tampa, FL'
-const pageTitle = `${pageH1} | SGT`
+const pageTitle = `${pageH1} | All American Gutters`
 
 const normalizeServiceCardHref = (href) => {
   const value = asStr(href).trim()

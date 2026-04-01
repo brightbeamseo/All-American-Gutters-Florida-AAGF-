@@ -41,7 +41,7 @@ const footerBrand = settings?.footerBrand ?? homePage?.footerBrand ?? {}
 const footerColumns = settings?.footerColumns ?? homePage?.footerColumns ?? []
 const footerSupport = settings?.footerSupport ?? homePage?.footerSupport ?? {}
 
-const companyName = asStr(business.companyName) || 'SGT'
+const companyName = asStr(business.companyName) || 'All American Gutters'
 const phoneDisplay = asStr(business.phoneDisplay) || '(303) 000-0000'
 const phoneTel = asStr(business.phoneTel) || '3030000000'
 const email = asStr(business.email) || 'hello@example.com'
@@ -69,7 +69,8 @@ const looksLegacyColorado = (value) => {
   )
 }
 
-const isSunLifeProjectImage = (src) => {
+/** Portfolio images under AAGF media (legacy filenames may still contain “sunlife-”). */
+const isProjectGalleryImage = (src) => {
   const value = asStr(src).toLowerCase()
   if (!value) return false
   return (
@@ -98,7 +99,7 @@ const primaryGalleryPage =
   allGalleryPages[0] ??
   {}
 
-const pageTitle = cleanProjectText(primaryGalleryPage?.headline, 'Projects | SGT')
+const pageTitle = cleanProjectText(primaryGalleryPage?.headline, 'Projects | All American Gutters')
 const pageDescription = cleanProjectText(
   primaryGalleryPage?.lead,
   'Project gallery of completed gutter work across South Florida.'
@@ -118,7 +119,7 @@ const images = allProjectImages.filter((img) => {
   const alt = asStr(img?.imageAlt)
   const location = asStr(img?.location)
   if (!src || seenImageSrc.has(src)) return false
-  if (!isSunLifeProjectImage(src)) return false
+  if (!isProjectGalleryImage(src)) return false
   if (looksLegacyColorado(src) || looksLegacyColorado(alt) || looksLegacyColorado(location)) return false
   seenImageSrc.add(src)
   return true

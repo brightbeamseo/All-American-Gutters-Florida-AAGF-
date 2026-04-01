@@ -68,7 +68,7 @@ const footerBrand = settings?.footerBrand ?? homePage?.footerBrand ?? {}
 const footerColumns = settings?.footerColumns ?? homePage?.footerColumns ?? []
 const footerSupport = settings?.footerSupport ?? homePage?.footerSupport ?? {}
 
-const companyName = asStr(business.companyName) || 'SGT'
+const companyName = asStr(business.companyName) || 'All American Gutters'
 const phoneDisplay = asStr(business.phoneDisplay) || '(303) 000-0000'
 const phoneTel = asStr(business.phoneTel) || '3030000000'
 const email = asStr(business.email) || 'hello@example.com'
@@ -79,8 +79,9 @@ const logoBlack = asStr(business.logoHorizontalBlack)
 const copyrightHref = asStr(business.copyrightSiteUrl) || '#'
 const siteLogoUrl = aagfSiteLogoUrl()
 
-const pageTitle = asStr(post?.meta?.title) || `${asStr(post?.headline)} | SGT`
-const pageDescription = asStr(post?.meta?.description) || asStr(post?.lead) || 'Article from SGT.'
+const pageTitle = asStr(post?.meta?.title) || `${asStr(post?.headline)} | All American Gutters`
+const pageDescription =
+  asStr(post?.meta?.description) || asStr(post?.lead) || 'Article from All American Gutters.'
 const callLabelNav = applyTemplate(asStr(header.callCtaTemplate), { phoneDisplay }) || phoneDisplay
 const logoAriaLabel = applyTemplate(asStr(header.logoAriaLabelTemplate), { companyName }) || companyName
 const navItems = Array.isArray(header.navItems) ? header.navItems : []

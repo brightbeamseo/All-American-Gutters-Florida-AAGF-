@@ -43,7 +43,7 @@ We serve homeowners and property managers across the region from 36 SW 8th Ct, D
 
 Choose All American Gutters when you want dependable workmanship, materials suited to Florida weather, and a local team that stands behind its work. Contact us today to schedule your free estimate and keep your home drier, safer, and better protected year-round.`
 
-/** Google Business Profile share link (footer / address link) */
+/** Google Business Profile share link (footer social, address link, maps button) */
 const GBP_MAPS_APP_URL = 'https://maps.app.goo.gl/chvzb34juJicorxQA'
 
 /**
@@ -52,6 +52,23 @@ const GBP_MAPS_APP_URL = 'https://maps.app.goo.gl/chvzb34juJicorxQA'
  */
 const MAP_EMBED_SRC =
   'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d228781.12808711547!2d-80.2606203!3d26.3683978!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d91d7bfe8eb891%3A0x51b7528a70761df5!2sAll%20American!5e0!3m2!1sen!2sus!4v1775072455539!5m2!1sen!2sus'
+
+/** Studio logo paths — same asset until separate horizontal/white PNGs exist */
+const LOGO_HORIZONTAL_PATH = 'Media (AAGF)/Logo Suite (AAGF)/all-american-gutters-logo-placeholder.jpg'
+
+/**
+ * Footer social row: Google Business Profile only (add Facebook/Instagram in Studio when you have URLs).
+ * Replaces legacy SunLife / wrong map links.
+ */
+const FOOTER_SOCIAL_LINKS = [
+  {
+    _type: 'socialLink',
+    _key: 'aagf-social-google-maps',
+    platform: 'Google Business Profile',
+    href: GBP_MAPS_APP_URL,
+    ariaLabel: 'All American Gutters on Google Maps',
+  },
+]
 
 const FOOTER_TAGLINE =
   'Seamless gutters, honest estimates, and crews that respect your yard—serving homeowners across South Florida from our Deerfield Beach base.'
@@ -102,12 +119,20 @@ async function main() {
     'business.descriptionShort': DESCRIPTION_SHORT,
     'business.descriptionLong': DESCRIPTION_LONG,
     'business.hoursText': 'Open 24/7',
+    'business.logoHorizontalBlack': LOGO_HORIZONTAL_PATH,
+    'business.logoHorizontalWhite': LOGO_HORIZONTAL_PATH,
+    'business.logoHorizontalBlackLocation': 'All American Gutters — Deerfield Beach, FL',
+    'business.logoHorizontalWhiteLocation': 'All American Gutters — horizontal logo',
     'meta.title': 'All American Gutters | Seamless Gutters & Repair | South Florida',
     'meta.description': DESCRIPTION_SHORT,
     keywords,
     businessCategories,
     'businessListings.googleMaps': GBP_MAPS_APP_URL,
+    'businessListings.facebook': 'https://aaguttersflorida.com/',
+    'businessListings.instagram': 'https://aaguttersflorida.com/',
     mapEmbedUrl: MAP_EMBED_SRC,
+    'footerBrand.socialAriaLabel': 'All American Gutters listings and social',
+    'footerBrand.socialLinks': FOOTER_SOCIAL_LINKS,
     'footerBrand.tagline': FOOTER_TAGLINE,
     'footerEstimate.headline': FOOTER_ESTIMATE_HEADLINE,
     'forms.formAriaLabel': FORMS_FORM_ARIA_LABEL,

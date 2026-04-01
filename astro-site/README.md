@@ -1,4 +1,4 @@
-# SGT — Astro site
+# All American Gutters — Astro site
 
 - **`src/pages/index.astro`** — homepage content comes from Sanity via **`getSiteSettings()`** (prefers **`siteSettingsSingleton`**) and **`getHomePage()`** (**only** `homePageSingleton`; no fallback/merge). If required fields are missing on the singleton, **`assertSanityHomepage()`** fails the build. **`siteSettings.forms.submitPath`** is required for the lead form.
 - **Regenerate markup from static HTML (optional):** from repo root, `python3 scripts/gen-astro-index.py` (or `npm run gen:index` from `astro-site/`).
