@@ -5,7 +5,9 @@
 import { asStr, mediaUrl } from './sanity-strings.js'
 
 /** Matches astro.config.mjs `site` — absolute URLs for image / @id */
-export const CANONICAL_SITE_ORIGIN = 'https://sunlifegutters.com'
+export const CANONICAL_SITE_ORIGIN =
+  (typeof import.meta !== 'undefined' && import.meta.env?.PUBLIC_SITE_URL?.replace(/\/+$/, '')) ||
+  'http://localhost:4321'
 
 /**
  * @param {string} raw

@@ -166,7 +166,7 @@ export default {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          'User-Agent': 'SGT-Lead-Form/1.0 (Vercel)',
+          'User-Agent': 'AAGF-Lead-Form/1.0 (Vercel)',
         },
         body: JSON.stringify(payload),
       });

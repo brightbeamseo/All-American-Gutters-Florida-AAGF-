@@ -7,17 +7,6 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "sunlifegutterstampa.com"
-        }
-      ],
-      "destination": "https://www.sunlifegutterstampa.com/$1",
-      "permanent": true
-    },
-    {
       "source": "/city-service-base/",
       "destination": "/services/gutter-repair-tampa-fl/",
       "permanent": true

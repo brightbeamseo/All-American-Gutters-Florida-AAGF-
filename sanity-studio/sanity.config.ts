@@ -11,12 +11,21 @@ const HOME_PAGE_SINGLETON_ID = 'homePageSingleton'
 const SINGLETON_SCHEMA_TYPES = new Set(['siteSettings', 'homePage'])
 const PINNED_SCHEMA_TYPES = new Set(['locationPage'])
 
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID
+const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
+
+if (!projectId) {
+  throw new Error(
+    'Missing SANITY_STUDIO_PROJECT_ID. Copy sanity-studio/.env.example to .env and set your Sanity project ID.',
+  )
+}
+
 export default defineConfig({
   name: 'default',
-  title: 'SGT Website',
+  title: 'All American Gutters Florida',
 
-  projectId: '04s0hjml',
-  dataset: 'production',
+  projectId,
+  dataset,
 
   plugins: [
     structureTool({

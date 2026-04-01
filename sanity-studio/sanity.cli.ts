@@ -1,11 +1,17 @@
 import {defineCliConfig} from 'sanity/cli'
 
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID
+const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
+
+if (!projectId) {
+  throw new Error(
+    'Missing SANITY_STUDIO_PROJECT_ID. Copy sanity-studio/.env.example to .env and set your Sanity project ID.',
+  )
+}
+
 export default defineCliConfig({
   api: {
-    projectId: '04s0hjml',
-    dataset: 'production'
+    projectId,
+    dataset,
   },
-  deployment: {
-    appId: 'ke2b9y5572pt7a2m1n5l14nz',
-  }
 })
