@@ -14,4 +14,6 @@ export default defineCliConfig({
     projectId,
     dataset,
   },
+  /** Hosted Studio URL: https://all-american-gutters-florida.sanity.studio */
+  studioHost: 'all-american-gutters-florida',
 })
