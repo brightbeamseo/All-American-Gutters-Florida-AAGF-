@@ -61,9 +61,15 @@ We serve homeowners and property managers across the region from 36 SW 8th Ct, D
 
 Choose All American Gutters when you want dependable workmanship, materials suited to Florida weather, and a local team that stands behind its work. Contact us today to schedule your free estimate and keep your home drier, safer, and better protected year-round.`
 
-const GOOGLE_MAPS_SEARCH =
-  'https://www.google.com/maps/search/?api=1&query=' +
-  encodeURIComponent('36 SW 8th Ct, Deerfield Beach, FL 33441')
+/** Google Business Profile share link (footer / address link) */
+const GBP_MAPS_APP_URL = 'https://maps.app.goo.gl/chvzb34juJicorxQA'
+
+/**
+ * iframe src only — from Google Maps → Share → Embed a map (not the full <iframe> tag).
+ * Used by homepage / service-area iframes as `src={mapEmbedUrl}`.
+ */
+const MAP_EMBED_SRC =
+  'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d228781.12808711547!2d-80.2606203!3d26.3683978!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d91d7bfe8eb891%3A0x51b7528a70761df5!2sAll%20American!5e0!3m2!1sen!2sus!4v1775072455539!5m2!1sen!2sus'
 
 async function main() {
   if (!projectId || !token) {
@@ -106,13 +112,13 @@ async function main() {
     'meta.description': DESCRIPTION_SHORT,
     keywords,
     businessCategories,
-    'businessListings.googleMaps': GOOGLE_MAPS_SEARCH,
+    'businessListings.googleMaps': GBP_MAPS_APP_URL,
+    mapEmbedUrl: MAP_EMBED_SRC,
   }
 
   await client.patch(documentId).set(patch).commit()
 
-  console.log(`Patched ${documentId} with AAGF business, meta, keywords, categories, and Maps search link.`)
-  console.log('Replace businessListings.googleMaps in Studio with your real Google Business Profile URL when you have it.')
+  console.log(`Patched ${documentId} with AAGF business, meta, keywords, GBP link, and mapEmbedUrl.`)
   console.log('Publish Site settings in Studio if a draft was created.')
 }
 

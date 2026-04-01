@@ -79,8 +79,10 @@ export const siteSettings = defineType({
     defineField({
       name: 'mapEmbedUrl',
       type: 'text',
-      title: 'mapEmbedUrl',
-      rows: 2,
+      title: 'Google Maps embed URL',
+      description:
+        'Paste only the iframe src URL from Google Maps → Share → Embed a map (not the full <iframe> tag). Used on the homepage and service area map.',
+      rows: 3,
     }),
     defineField({
       name: 'productsServicesIntro',
